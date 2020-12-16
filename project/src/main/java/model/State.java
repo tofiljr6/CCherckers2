@@ -1,15 +1,8 @@
 package model;
 
+// not needed class
 public enum State {
 
-	FREE;
-	enum TAKEN{
-		BLUE,
-		RED,
-		YELLOW,
-		GREEN,
-		CYAN,
-		MAGENTA;
-	}
-	
+	FREE,
+	TAKEN;
 }

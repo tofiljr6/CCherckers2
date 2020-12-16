@@ -83,7 +83,7 @@ public class SixArmBoardGUI extends BoardGUI {
 			frame.getContentPane().add(container);
 		
 		}
-		setUpBoardFor4Players();
+		setUpBoardFor2Players();
 	}
 
 	public void setOut(PrintWriter out) {
