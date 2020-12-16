@@ -6,10 +6,13 @@ import java.util.Map.Entry;
 
 import GUI.Coordinates;
 
+import Server2.CCPlayer;
 import settings.SixArmBoard;
 
 public class SixArmBoardModel extends BoardModel {
 
+
+	public CCPlayer currentPlayer;
 	HashMap<Coordinates,FieldModel> hashMap;
 	
 	//add number of players in constructor->solution for problem in fieldModel
@@ -126,8 +129,29 @@ public class SixArmBoardModel extends BoardModel {
 	    }
 	    return null;
 	}
-	
-	
+
+	public boolean hasWinner() {
+		// todo winner cases
+		return hashMap.get(new Coordinates(7, 7)).getColor() == ColorsFor2Players.GREEN;
+	}
+
+	public synchronized void move(int xLoc, int yLoc, CCPlayer ccPlayer) {
+		if (ccPlayer != currentPlayer) {
+			throw new IllegalStateException("NOT your turn");
+		}
+		else if (ccPlayer.opponent == null) {
+			throw new IllegalStateException("You don't have an opponent yet");
+		}
+//		else if (states[xLoc][yLoc] != State.FREE) {
+//			throw new IllegalStateException("This cell is ocpcupied by opponent");
+//		} else if (colors[xLoc][yLoc] != Color.NULL) {
+//			throw new IllegalStateException("Cell already occupied");
+//		}
+
+		hashMap.get(new Coordinates(xLoc, yLoc)).setFieldColor(ccPlayer.color);
+
+		currentPlayer = currentPlayer.opponent;
+	}
 	
 	
 

@@ -1,6 +1,10 @@
 package Server2;
+import GUI.Coordinates;
 import model.Color;
+import model.FieldModel;
 import model.State;
+
+import java.util.HashMap;
 
 public class CCGame {
     public Color[][] colors = {{Color.NULL, Color.BLUE, Color.NULL},
@@ -12,6 +16,9 @@ public class CCGame {
                         {State.FREE, State.FREE, State.FREE}};
 
     CCPlayer currentPlayer;
+
+
+
 
     public boolean hasWinner() {
         // todo winner cases
@@ -29,8 +36,8 @@ public class CCGame {
             throw new IllegalStateException("Cell already occupied");
         }
 
-        colors[xLoc][yLoc] = currentPlayer.color;
-        states[xLoc][yLoc] = State.TAKEN;
-        currentPlayer = currentPlayer.opponent;
+//        colors[xLoc][yLoc] = currentPlayer.color;
+//        states[xLoc][yLoc] = State.TAKEN;
+//        currentPlayer = currentPlayer.opponent;
     }
 }

@@ -1,8 +1,11 @@
 package settings;
 
+import Server.Player;
+import Server2.CCPlayer;
+
 public class SixArmBoard extends Board {
 
-	
+	public CCPlayer currentPlayer;
 	
 	public SixArmBoard() {
 		

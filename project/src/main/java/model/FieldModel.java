@@ -25,7 +25,15 @@ public class FieldModel {
 		this.state = State.FREE;
 		synchronizeEnums();
 	}
-	
+
+	public State getState() {
+		return state;
+	}
+
+	public Colors getColor() {
+		return color;
+	}
+
 	//TO DO make it easy to change(diffrent number of players)
 	public void synchronizeEnums() {
 		

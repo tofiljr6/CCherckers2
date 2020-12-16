@@ -1,6 +1,9 @@
 package Server2;
 
 import model.Color;
+import model.ColorsFor2Players;
+import model.SixArmBoardModel;
+import settings.SixArmBoard;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,14 +12,14 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class CCPlayer implements Runnable {
-    CCGame ccGame;
-    Color color;
-    CCPlayer opponent;
+    public SixArmBoardModel ccGame;
+    public ColorsFor2Players color;
+    public CCPlayer opponent;
     Socket socket;
     Scanner input;
     PrintWriter output;
 
-    public CCPlayer(CCGame ccGame, Color color, Socket socket) {
+    public CCPlayer(SixArmBoardModel ccGame, ColorsFor2Players color, Socket socket) {
         this.ccGame = ccGame;
         this.color = color;
         this.socket = socket;
@@ -48,7 +51,7 @@ public class CCPlayer implements Runnable {
         input = new Scanner(socket.getInputStream());
         output = new PrintWriter(socket.getOutputStream(), true);
         output.println("WELCOME " + color.toString());
-        if (color == Color.BLUE) {
+        if (color == ColorsFor2Players.BLUE) {
             ccGame.currentPlayer = this;
             output.println("MESSAGE Waiting for opponent to connect");
         } else {
@@ -83,7 +86,7 @@ public class CCPlayer implements Runnable {
                 opponent.output.println("DEFEAT");
             }
 
-            output.println("BOARD" + Arrays.deepToString(ccGame.states) + "\n" + Arrays.deepToString(ccGame.colors)); // todo finish to check
+//            output.println("BOARD" + Arrays.deepToString(ccGame.states) + "\n" + Arrays.deepToString(ccGame.colors)); // todo finish to check
 
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
