@@ -12,15 +12,15 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class CCPlayer implements Runnable {
-    public SixArmBoardModel ccGame;
+    public SixArmBoardModel sixArmBoardModel;
     public ColorsFor2Players color;
     public CCPlayer opponent;
     Socket socket;
     Scanner input;
     PrintWriter output;
 
-    public CCPlayer(SixArmBoardModel ccGame, ColorsFor2Players color, Socket socket) {
-        this.ccGame = ccGame;
+    public CCPlayer(SixArmBoardModel sixArmBoardModel, ColorsFor2Players color, Socket socket) {
+        this.sixArmBoardModel = sixArmBoardModel;
         this.color = color;
         this.socket = socket;
     }
@@ -52,10 +52,10 @@ public class CCPlayer implements Runnable {
         output = new PrintWriter(socket.getOutputStream(), true);
         output.println("WELCOME " + color.toString());
         if (color == ColorsFor2Players.BLUE) {
-            ccGame.currentPlayer = this;
+            sixArmBoardModel.currentPlayer = this;
             output.println("MESSAGE Waiting for opponent to connect");
         } else {
-            opponent = ccGame.currentPlayer;
+            opponent = sixArmBoardModel.currentPlayer;
             opponent.opponent = this;
             opponent.output.println("MESSAGE your move");
         }
@@ -77,16 +77,16 @@ public class CCPlayer implements Runnable {
 
     private void processMoveCommand(int xLoc, int yLoc) {
         try {
-            ccGame.move(xLoc, yLoc, this);
+            sixArmBoardModel.move(xLoc, yLoc, this);
             output.println("VALID_MOVE");
-            opponent.output.println("OPPONENT_MOVED " + xLoc + "" + yLoc);
+            opponent.output.println("OPPONENT_MOVED " + xLoc + " " + yLoc);
 
-            if (ccGame.hasWinner()) {
+            if (sixArmBoardModel.hasWinner()) {
                 output.println("VICTORY");
                 opponent.output.println("DEFEAT");
             }
 
-//            output.println("BOARD" + Arrays.deepToString(ccGame.states) + "\n" + Arrays.deepToString(ccGame.colors)); // todo finish to check
+//            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n" + Arrays.deepToString(sixArmBoardModel.colors)); // todo finish to check
 
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());

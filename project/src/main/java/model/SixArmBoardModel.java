@@ -13,7 +13,7 @@ public class SixArmBoardModel extends BoardModel {
 
 
 	public CCPlayer currentPlayer;
-	HashMap<Coordinates,FieldModel> hashMap;
+	HashMap<Coordinates,FieldModel> hashMap = new HashMap<Coordinates, FieldModel>();
 	
 	//add number of players in constructor->solution for problem in fieldModel
 	public SixArmBoardModel(SixArmBoard board) {
@@ -24,6 +24,7 @@ public class SixArmBoardModel extends BoardModel {
 					
 					FieldModel field = new FieldModel();
 					Coordinates coordinates = new Coordinates(i,j);
+
 					hashMap.put(coordinates, field);
 				}
 			}
@@ -141,6 +142,8 @@ public class SixArmBoardModel extends BoardModel {
 		}
 		else if (ccPlayer.opponent == null) {
 			throw new IllegalStateException("You don't have an opponent yet");
+		} else if (hashMap.get(new Coordinates(xLoc, yLoc)).getState() != State.FREE) {
+			throw new IllegalStateException("This cell is occupied by other players");
 		}
 //		else if (states[xLoc][yLoc] != State.FREE) {
 //			throw new IllegalStateException("This cell is ocpcupied by opponent");
