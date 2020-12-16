@@ -4,11 +4,17 @@ public class FieldModel {
 
 	private State state;
 	private Colors color;
+	
 	public FieldModel() {
 		
 		state= State.FREE;
 	}
 	
+	
+	public boolean isTaken(){
+		
+		return this.state==State.TAKEN;
+	}
 	
 	public void setFieldColor(Colors color) {
 		this.state = State.TAKEN;
