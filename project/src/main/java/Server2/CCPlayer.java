@@ -1,7 +1,9 @@
 package Server2;
 
+import GUI.Coordinates;
 import model.Color;
 import model.ColorsFor2Players;
+import model.FieldModel;
 import model.SixArmBoardModel;
 import settings.SixArmBoard;
 
@@ -9,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class CCPlayer implements Runnable {
@@ -86,7 +89,14 @@ public class CCPlayer implements Runnable {
                 opponent.output.println("DEFEAT");
             }
 
-//            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n" + Arrays.deepToString(sixArmBoardModel.colors)); // todo finish to check
+//            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n"
+//            + Arrays.deepToString(sixArmBoardModel.colors)); // todo finish to check
+
+            HashMap<Coordinates, FieldModel> board = sixArmBoardModel.getHashMap();
+            String btest = board.get(new Coordinates(xLoc, yLoc)).getColor().toString();
+
+            output.println("BOARD" + btest);
+
 
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());

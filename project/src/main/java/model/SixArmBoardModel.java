@@ -133,7 +133,7 @@ public class SixArmBoardModel extends BoardModel {
 
 	public boolean hasWinner() {
 		// todo winner cases
-		return hashMap.get(new Coordinates(7, 7)).getColor() == ColorsFor2Players.GREEN;
+		return hashMap.get(new Coordinates(8, 14)).getColor() == ColorsFor2Players.GREEN;
 	}
 
 	public synchronized void move(int xLoc, int yLoc, CCPlayer ccPlayer) {
@@ -151,11 +151,14 @@ public class SixArmBoardModel extends BoardModel {
 //			throw new IllegalStateException("Cell already occupied");
 //		}
 
+		// setting new color
 		hashMap.get(new Coordinates(xLoc, yLoc)).setFieldColor(ccPlayer.color);
 
+		// setting to next opponent
 		currentPlayer = currentPlayer.opponent;
 	}
-	
-	
 
+	public HashMap<Coordinates, FieldModel> getHashMap() {
+		return hashMap;
+	}
 }
