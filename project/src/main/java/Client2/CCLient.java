@@ -33,21 +33,40 @@ public class CCLient {
     public void play() throws Exception {
         try {
             var response = in.nextLine();
-            var color = response.substring(5);
+//            var color = response.substring(6);
+            String c = response.substring(8);
+
+
+//            String col[] = response.split(" ");
+
             //Color opponentColor = color.startsWith("BLUE") ? java.awt.Color.green : java.awt.Color.BLUE;
             Color opponentColor;
-            if (color.startsWith("BLUE")) {
-                opponentColor = Color.green;
-            } else {
+            Color noopponentColor;
+            if (c.equals("GREEN")) {
+                noopponentColor = Color.green;
                 opponentColor = Color.blue;
+            } else {
+                noopponentColor = Color.blue;
+                opponentColor = Color.green;
             }
 
             while (in.hasNextLine()) {
                 response = in.nextLine();
                 if (response.startsWith("VALID_MOVE")) {
-                    g.setColorRe(12 , 8, opponentColor);
+                    // rewrite VALID_MODE signal
+                    String cmd[] = response.split(" ");
+                    int xLoc = Integer.parseInt(cmd[1]);
+                    int yLoc = Integer.parseInt(cmd[2]);
+
+                    g.setColorRe(xLoc , yLoc, noopponentColor);
                     g.re();
                 } else if (response.startsWith("OPPONENT_MOVED")) {
+                    String cmd[] = response.split(" ");
+                    int xLoc = Integer.parseInt(cmd[1]);
+                    int yLoc = Integer.parseInt(cmd[2]);
+
+                    g.setColorRe(xLoc,yLoc, opponentColor);
+
                     g.re();
 
                 } else if (response.startsWith("MESSAGE")) {

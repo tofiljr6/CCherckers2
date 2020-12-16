@@ -81,7 +81,7 @@ public class CCPlayer implements Runnable {
     private void processMoveCommand(int xLoc, int yLoc) {
         try {
             sixArmBoardModel.move(xLoc, yLoc, this);
-            output.println("VALID_MOVE");
+            output.println("VALID_MOVE " + xLoc + " " + yLoc);
             opponent.output.println("OPPONENT_MOVED " + xLoc + " " + yLoc);
 
             if (sixArmBoardModel.hasWinner()) {
@@ -95,7 +95,7 @@ public class CCPlayer implements Runnable {
             HashMap<Coordinates, FieldModel> board = sixArmBoardModel.getHashMap();
             String btest = board.get(new Coordinates(xLoc, yLoc)).getColor().toString();
 
-            output.println("BOARD" + btest);
+            output.println("BOARD " + btest);
 
 
         } catch (IllegalStateException e) {

@@ -108,9 +108,10 @@ public class SixArmBoardGUI extends BoardGUI {
 	public void setColorRe(int x, int y, Color colorRe) {
 		hashMap.get(new Coordinates(x, y)).changeColor(colorRe);
 	}
-	
+
+
 	public void setUpBoardFor2Players() {
-		
+
 		//blue player
 		hashMap.get(new Coordinates(3,9)).changeColor(Color.blue);
 		hashMap.get(new Coordinates(3,11)).changeColor(Color.blue);
@@ -122,7 +123,7 @@ public class SixArmBoardGUI extends BoardGUI {
 		hashMap.get(new Coordinates(1,13)).changeColor(Color.blue);
 		hashMap.get(new Coordinates(1,11)).changeColor(Color.blue);
 		hashMap.get(new Coordinates(0,12)).changeColor(Color.blue);
-		
+
 		//Green player
 		hashMap.get(new Coordinates(13,9)).changeColor(Color.green);
 		hashMap.get(new Coordinates(13,11)).changeColor(Color.green);
@@ -135,7 +136,7 @@ public class SixArmBoardGUI extends BoardGUI {
 		hashMap.get(new Coordinates(15,13)).changeColor(Color.green);
 		hashMap.get(new Coordinates(16,12)).changeColor(Color.green);
 	}
-	
+
 	public void setUpBoardFor4Players(){
 		
 		//yellow player
