@@ -1,6 +1,10 @@
 package Client;
 
 import javax.swing.*;
+
+import GUI.SixArmBoardGUI;
+import settings.SixArmBoard;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,29 +32,10 @@ public class ChineseCheckersClient {
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
 
-        var boardPanel = new JPanel();
-        boardPanel.setBackground(Color.BLACK);
-        boardPanel.setLayout(new GridLayout(5,5,2,2));
-
-        for (int i = 0; i < board.length; i++) {
-            final int j = i;
-            board[i] = new Square();
-
-            if (i != 0 && i != 4 && i != 20 && i != 24) { // not narrows so squares with listener
-                board[i].addMouseListener(new MouseAdapter() {
-                    public void mousePressed(MouseEvent e) {
-                        currentSquare = board[j];
-                        out.println("MOVE " + j);
-                    }
-                });
-            } else { // narrows
-                board[i].setBackground(Color.BLACK);
-            }
-
-
-            boardPanel.add(board[i]);
-        }
-        frame.getContentPane().add(boardPanel, BorderLayout.CENTER);
+        SixArmBoard board = new SixArmBoard();
+        SixArmBoardGUI guiBoard = new SixArmBoardGUI(board);
+        guiBoard.setOut(out);
+        
     }
 
 

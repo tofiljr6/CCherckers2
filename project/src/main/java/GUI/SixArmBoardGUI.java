@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -19,6 +20,9 @@ public class SixArmBoardGUI extends BoardGUI {
 	
 	JFrame frame;
 	HashMap<Coordinates,FieldGUI> hashMap;
+	private PrintWriter out;
+	
+	
 	
 	public SixArmBoardGUI(SixArmBoard board) {
 		
@@ -51,7 +55,7 @@ public class SixArmBoardGUI extends BoardGUI {
 						 //TO DO define out
 						 //out.println("MOVE " + getKeyByValue(hashMap, field).toString());
 						System.out.println("MOVE " + getKeyByValue(hashMap, field).toString());
-						field.changeColor(Color.blue);
+						out.println("MOVE " + 5);
 						}
 
 						public void mouseEntered(MouseEvent arg0) {
@@ -82,6 +86,10 @@ public class SixArmBoardGUI extends BoardGUI {
 		setUpBoardFor4Players();
 	}
 
+	public void setOut(PrintWriter out) {
+		
+		this.out = out;
+	}
 	
 	public void setUpBoardFor2Players() {
 		
