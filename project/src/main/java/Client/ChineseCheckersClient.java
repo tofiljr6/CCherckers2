@@ -33,7 +33,7 @@ public class ChineseCheckersClient {
         out = new PrintWriter(socket.getOutputStream(), true);
 
         SixArmBoard board = new SixArmBoard();
-        SixArmBoardGUI guiBoard = new SixArmBoardGUI(board);
+        SixArmBoardGUI guiBoard = new SixArmBoardGUI(board,2 , out);
   
         
     }

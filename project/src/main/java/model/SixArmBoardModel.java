@@ -156,7 +156,8 @@ public class SixArmBoardModel extends BoardModel {
 
 	public boolean hasWinner() {
 		// todo winner cases
-		return hashMap.get(new Coordinates(14, 8)).getColor() == ColorsFor2Players.GREEN;
+		return (hashMap.get(new Coordinates(14, 8)).getColor() == ColorsFor2Players.GREEN ||
+				hashMap.get(new Coordinates(14, 8)).getColor() == ColorsFor2Players.BLUE);
 	}
 
 	public synchronized void move(int xLoc, int yLoc, CCPlayer ccPlayer) {

@@ -68,6 +68,9 @@ public class CCLient {
                     g.setColorRe(xEnd , yEnd, noopponentColor);
                     g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
+
+                    g.setMessageLabel("Valid move, please wait");
+
                     
                     
                 } else if (response.startsWith("OPPONENT_MOVED")) {
@@ -82,19 +85,24 @@ public class CCLient {
                     g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
 
+                    g.setMessageLabel("Opponent moved, your turn");
+
                 } else if (response.startsWith("MESSAGE")) {
                     out.println(response.substring(8));
                 } else if (response.startsWith("VICTORY")) {
                     out.println( "Winner Winner");
+                    g.setMessageLabel("YOU ARE WINNER");
                     return;
                 } else if (response.startsWith("DEFEAT")) {
                     out.println("Sorry you lost");
+                    g.setMessageLabel("YOU ARE LOSER");
                     return;
                 } else if (response.startsWith("TIE")) {
                     out.println("Tie");
                     break;
                 } else if (response.startsWith("OTHER_PLAYER_LEFT")) {
                     out.append("Other player left");
+                    g.setMessageLabel("Other player left");
                     break;
                 }
                 else if (response.startsWith("BOARD")) { // for visualization only

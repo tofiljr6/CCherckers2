@@ -1,8 +1,6 @@
 package GUI;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.PrintWriter;
@@ -25,8 +23,12 @@ public class SixArmBoardGUI extends BoardGUI {
 	String msg;
 	int counter =0;
 	public SixArmBoardGUI(SixArmBoard board, int numberOfPlayers, PrintWriter out) throws Exception {
-		
-		frame.getContentPane().setLayout(new GridLayout(board.getYSize(),1));
+		// information about games process
+		messageLabel.setForeground(Color.BLACK);
+		frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
+
+
+		frame.getContentPane().setLayout(new GridLayout(board.getYSize() + 1,1));
 		hashMap = new HashMap<Coordinates,FieldGUI>();
 		msg="";
 		this.out = out;
@@ -95,8 +97,7 @@ public class SixArmBoardGUI extends BoardGUI {
 					container.add(field);
 				}
 			}
-			frame.getContentPane().add(container);
-		
+			frame.getContentPane().add(container, BorderLayout.CENTER);
 		}
 		
 		switch (numberOfPlayers) {
