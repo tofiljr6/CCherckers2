@@ -74,15 +74,21 @@ public class CCPlayer implements Runnable {
                 int xLoc = Integer.parseInt(cmd[1]);
                 int yLoc = Integer.parseInt(cmd[2]);
                 processMoveCommand(xLoc, yLoc);
-            }
-            else if (command.startsWith("JUMP")) {
+            } else if (command.startsWith("JUMP")) {
 
                 String cmd[] = command.split(" ");
                 int xStart = Integer.parseInt(cmd[1]);
                 int yStart = Integer.parseInt(cmd[2]);
                 int xEnd = Integer.parseInt(cmd[3]);
                 int yEnd = Integer.parseInt(cmd[4]);
+
                 processJumpCommand(xStart, yStart,xEnd, yEnd);
+            } else if (command.startsWith("CHOOSE")) {
+                // sends to model coords and decided is field is your
+                String cmd[] = command.split(" ");
+                int xStart = Integer.parseInt(cmd[1]);
+                int yStart = Integer.parseInt(cmd[2]);
+                processInfoCommand(xStart, yStart);
             }
         }
     }
@@ -130,12 +136,21 @@ public class CCPlayer implements Runnable {
             String btest1 = board.get(new Coordinates(xStart, yStart)).getColor().toString();
             String btest2 = board.get(new Coordinates(xEnd, yEnd)).getColor().toString();
             output.println("BOARD " + btest1+ " " +btest2);
-            
 
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
         }
     }
-    
 
+    private void processInfoCommand(int xStart, int yStart) {
+        try {
+            // aks model is that field you have chosen is your
+            if (sixArmBoardModel.choose(xStart, yStart, this)) {
+                // yes, chosen field is your so confirm move
+                output.println("CONFIRM_MOVE " + xStart + " " + yStart);
+            }
+        } catch (IllegalStateException e) {
+            output.println("MESSAGE " + e.getMessage());
+        }
+    }
 }

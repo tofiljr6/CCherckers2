@@ -21,7 +21,7 @@ public class SixArmBoardGUI extends BoardGUI {
 	//connection variable
 	private PrintWriter out;
 	String msg;
-	int counter =0;
+//	int counter = 0; // in BoardGUI extended class
 	public SixArmBoardGUI(SixArmBoard board, int numberOfPlayers, PrintWriter out) throws Exception {
 		// information about games process
 		messageLabel.setForeground(Color.BLACK);
@@ -59,17 +59,19 @@ public class SixArmBoardGUI extends BoardGUI {
 							
 							//out.println("MOVE " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
 							System.out.println("CLICKED " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
-							
-							
-						
+
 							if(counter == 0) {
 								msg = "JUMP " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY();
-								counter++;
+
+								// connection to the server and sends coords to checking yur fields
+								out.println("CHOOSE " + getKeyByValue(hashMap, field).getX() + " " + getKeyByValue(hashMap, field).getY());
+
 							}
 							else if(counter ==1) {
-								
+								// continue build response with confirmed move
 								msg = msg +" "+ getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY();
 								out.println(msg);
+								// resent state
 								counter = 0;
 							}
 							

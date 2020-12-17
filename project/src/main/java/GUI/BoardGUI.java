@@ -10,10 +10,12 @@ public class BoardGUI {
 	public JFrame frame;
 	public JLabel messageLabel;
 	HashMap<Coordinates,FieldGUI> hashMap;
+	public int counter;
 	
 	public BoardGUI() {
 //		messageLabel.setBackground(Color.lightGray);
 //		frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
+		counter = 0;
 
 		messageLabel = new JLabel("...");
 		frame = new JFrame("Chinese Checkers");
@@ -36,5 +38,12 @@ public class BoardGUI {
 		messageLabel.setText(text);
 	}
 
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
 }
 

@@ -104,10 +104,17 @@ public class CCLient {
                     out.append("Other player left");
                     g.setMessageLabel("Other player left");
                     break;
+                } else if (response.startsWith("CONFIRM_MOVE")) { // changing info games process label
+                    String cmd[] = response.split(" ");
+                    // and your field you have chosen is your so next click on field is field where your will jump
+                    g.setMessageLabel("You choose field with coords " + cmd[1] + " " + cmd[2]);
+                    g.counter = 1;
                 }
                 else if (response.startsWith("BOARD")) { // for visualization only
                     System.out.println(response.substring(5));
                     out.println(response.substring(5));
+//                } else if (response.startsWith("WELCOME")) { // greeting label // it is not work
+//                    g.setMessageLabel(response);
                 }
             }
         } catch (Exception e) {

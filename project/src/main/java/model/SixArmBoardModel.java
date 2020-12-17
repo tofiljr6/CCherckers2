@@ -185,8 +185,7 @@ public class SixArmBoardModel extends BoardModel {
 	public synchronized void jump(int xStart, int yStart, int xEnd, int yEnd, CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
-		}
-		else if (ccPlayer.opponent == null) {
+		} else if (ccPlayer.opponent == null) {
 			throw new IllegalStateException("You don't have an opponent yet");
 		} else if (hashMap.get(new Coordinates(xEnd, yEnd)).getState() != State.FREE) {
 			throw new IllegalStateException("This cell is occupied by other players");
@@ -206,7 +205,19 @@ public class SixArmBoardModel extends BoardModel {
 		// setting to next opponent
 		currentPlayer = currentPlayer.opponent;
 	}
-	
+
+	public synchronized boolean choose(int xStart, int yStart, CCPlayer ccPlayer) {
+		if (ccPlayer != currentPlayer) {
+			throw new IllegalStateException("NOT your turn");
+		} else if (hashMap.get(new Coordinates(xStart, yStart)).getColor() != currentPlayer.color) {
+//			throw new IllegalStateException("Not your field");
+			return false;
+		}
+
+		// increment counter if pass tests
+		return true;
+
+	}
 
 	public HashMap<Coordinates, FieldModel> getHashMap() {
 		return hashMap;
