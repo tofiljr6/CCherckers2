@@ -25,9 +25,9 @@ public class CCLient {
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
 
-//        board = new SixArmBoard();
-        g = new SixArmBoardGUI(board);
-        g.setOut(out);
+//      board = new SixArmBoard();
+        g = new SixArmBoardGUI(board,2,out);
+      
     }
 
     public void play() throws Exception {
@@ -35,7 +35,7 @@ public class CCLient {
         	
         	
             var response = in.nextLine();
-//            var color = response.substring(6);
+//          var color = response.substring(6);
             String c = response.substring(8);
 
 
@@ -44,6 +44,8 @@ public class CCLient {
             //Color opponentColor = color.startsWith("BLUE") ? java.awt.Color.green : java.awt.Color.BLUE;
             Color opponentColor;
             Color noopponentColor;
+            
+            
             if (c.equals("GREEN")) {
                 noopponentColor = Color.green;
                 opponentColor = Color.blue;
@@ -69,7 +71,6 @@ public class CCLient {
                     int yLoc = Integer.parseInt(cmd[2]);
 
                     g.setColorRe(xLoc,yLoc, opponentColor);
-
                     g.re();
 
                 } else if (response.startsWith("MESSAGE")) {

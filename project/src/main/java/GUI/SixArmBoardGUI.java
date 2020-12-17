@@ -20,27 +20,14 @@ import settings.SixArmBoard;
 public class SixArmBoardGUI extends BoardGUI {
 
 	
-	public JFrame frame;
-	HashMap<Coordinates,FieldGUI> hashMap;
-
 	//connection variable
-	private Socket socket;
 	private PrintWriter out;
-	private Scanner in;
 	
-	
-	
-	public SixArmBoardGUI(SixArmBoard board) {
+	public SixArmBoardGUI(SixArmBoard board, int numberOfPlayers, PrintWriter out) throws Exception {
 		
-		frame = new JFrame("Chinese Checkers");
 		frame.getContentPane().setLayout(new GridLayout(board.getYSize(),1));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.setSize(700, 700);
-	    frame.setVisible(true);
-	    frame.setResizable(true);
-		
 		hashMap = new HashMap<Coordinates,FieldGUI>();
-		
+		this.out = out;
 		for(int i=0;i<board.getYSize(); i++) {
 			JPanel container = new JPanel();
 			
@@ -95,23 +82,34 @@ public class SixArmBoardGUI extends BoardGUI {
 			frame.getContentPane().add(container);
 		
 		}
-		setUpBoardFor2Players();
-	}
-
-	public void setOut(PrintWriter out) {
 		
-		this.out = out;
+		switch (numberOfPlayers) {
+		
+		case 2:{
+			
+			setUpBoardFor2Players();
+			break;
+		}
+		case 4:{
+			
+			setUpBoardFor4Players();
+			break;
+		}
+		
+		case 6:{
+			
+			setUpBoardFor6Players();
+			break;
+		}
+		
+		default: {
+			
+			System.out.println("Invalid input...");
+            throw new IllegalArgumentException();
+		}
+		}
 	}
-
-	public void re() {
-		frame.repaint();
-	}
-
-	public void setColorRe(int x, int y, Color colorRe) {
-		hashMap.get(new Coordinates(x, y)).changeColor(colorRe);
-	}
-
-
+	
 	public void setUpBoardFor2Players() {
 
 		//blue player

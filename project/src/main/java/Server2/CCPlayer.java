@@ -1,6 +1,7 @@
 package Server2;
 
 import GUI.Coordinates;
+import model.Colors;
 import model.ColorsFor2Players;
 import model.FieldModel;
 import model.SixArmBoardModel;
@@ -15,13 +16,13 @@ import java.util.Scanner;
 
 public class CCPlayer implements Runnable {
     public SixArmBoardModel sixArmBoardModel;
-    public ColorsFor2Players color;
+    public Colors color;
     public CCPlayer opponent;
     Socket socket;
     Scanner input;
     PrintWriter output;
 
-    public CCPlayer(SixArmBoardModel sixArmBoardModel, ColorsFor2Players color, Socket socket) {
+    public CCPlayer(SixArmBoardModel sixArmBoardModel, Colors color, Socket socket) {
         this.sixArmBoardModel = sixArmBoardModel;
         this.color = color;
         this.socket = socket;
@@ -65,11 +66,12 @@ public class CCPlayer implements Runnable {
 
     private void processCommands() {
         while (input.hasNextLine()) {
+        	
             var command = input.nextLine();
             if (command.startsWith("QUIT")) {
                 return;
             } else if (command.startsWith("MOVE")) {
-            	System.out.print("A");
+
                 String cmd[] = command.split(" ");
                 int xLoc = Integer.parseInt(cmd[1]);
                 int yLoc = Integer.parseInt(cmd[2]);
