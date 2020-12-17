@@ -17,7 +17,7 @@ public class SixArmBoardModel extends BoardModel {
 	HashMap<Coordinates,FieldModel> hashMap = new HashMap<Coordinates, FieldModel>();
 	
 	//add number of players in constructor->solution for problem in fieldModel
-	public SixArmBoardModel(SixArmBoard board) {
+	public SixArmBoardModel(SixArmBoard board, int numberOfPlayers) {
 		
 		for(int i=0;i<board.getYSize(); i++) {
 			for(int j=0; j< board.getXSize(); j++) {
@@ -30,7 +30,32 @@ public class SixArmBoardModel extends BoardModel {
 				}
 			}
 		}
-		setUpBoardFor2Players();
+		
+		switch (numberOfPlayers) {
+			
+			case 2:{
+				
+				setUpBoardFor2Players();
+				break;
+			}
+			case 4:{
+				
+				setUpBoardFor4Players();
+				break;
+			}
+			
+			case 6:{
+				
+				setUpBoardFor6Players();
+				break;
+			}
+			
+			default: {
+				
+				System.out.println("Invalid input...");
+	            throw new IllegalArgumentException();
+			}
+		}
 	}
 	
 	public void setUpBoardFor2Players() {
@@ -112,6 +137,13 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.CYAN);
 		hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.CYAN);
 	}
+	
+	public void setUpBoardFor6Players(){
+		
+		setUpBoardFor2Players();
+		setUpBoardFor4Players();
+	}
+	
 	//where should be this class located
 	public static <T, E> T getKeyByValue(HashMap<T, E> map, E value) {
 	    for (Entry<T, E> entry : map.entrySet()) {

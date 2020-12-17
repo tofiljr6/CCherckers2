@@ -22,7 +22,7 @@ public class CCServer {
             while (true) {
 //                CCGame ccGame = new CCGame();
                 SixArmBoard sixArmBoard = new SixArmBoard();
-                SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard);
+                SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
 
                 pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
                 pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));

@@ -5,12 +5,10 @@ import model.Colors;
 import model.ColorsFor2Players;
 import model.FieldModel;
 import model.SixArmBoardModel;
-import settings.SixArmBoard;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
