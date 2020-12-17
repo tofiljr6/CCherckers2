@@ -4,7 +4,6 @@ import Server.Player;
 import model.ColorsFor2Players;
 import model.SixArmBoardModel;
 import model.State;
-import model.Color;
 import settings.Board;
 import settings.SixArmBoard;
 

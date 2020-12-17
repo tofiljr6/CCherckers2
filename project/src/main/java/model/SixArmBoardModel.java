@@ -23,7 +23,7 @@ public class SixArmBoardModel extends BoardModel {
 				if(board.getDimensions()[i][j] == 1) {
 					
 					FieldModel field = new FieldModel();
-					Coordinates coordinates = new Coordinates(i,j);
+					Coordinates coordinates = new Coordinates(j,i);
 
 					hashMap.put(coordinates, field);
 				}
@@ -35,28 +35,28 @@ public class SixArmBoardModel extends BoardModel {
 	public void setUpBoardFor2Players() {
 		
 		//blue player
-		hashMap.get(new Coordinates(3,9)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(3,13)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(3,15)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(2,14)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(1,13)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(9,3)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(11,3)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(13,3)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(15,3)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(14,2)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(12,2)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(10,2)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(13,1)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(11,1)).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(12,0)).setFieldColor(ColorsFor2Players.BLUE);
 		
 		//Green player
-		hashMap.get(new Coordinates(13,9)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(13,11)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(9,13)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(11,13)).setFieldColor(ColorsFor2Players.GREEN);
 		hashMap.get(new Coordinates(13,13)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(13,15)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(14,14)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(14,10)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(14,12)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(15,11)).setFieldColor(ColorsFor2Players.GREEN);
 		hashMap.get(new Coordinates(15,13)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(16,12)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(14,14)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(10,14)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(12,14)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(11,15)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(13,15)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(12,16)).setFieldColor(ColorsFor2Players.GREEN);
 	}
 	
 	
@@ -133,7 +133,7 @@ public class SixArmBoardModel extends BoardModel {
 
 	public boolean hasWinner() {
 		// todo winner cases
-		return hashMap.get(new Coordinates(8, 14)).getColor() == ColorsFor2Players.GREEN;
+		return hashMap.get(new Coordinates(14, 8)).getColor() == ColorsFor2Players.GREEN;
 	}
 
 	public synchronized void move(int xLoc, int yLoc, CCPlayer ccPlayer) {

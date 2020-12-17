@@ -32,6 +32,8 @@ public class CCLient {
 
     public void play() throws Exception {
         try {
+        	
+        	
             var response = in.nextLine();
 //            var color = response.substring(6);
             String c = response.substring(8);
@@ -54,6 +56,7 @@ public class CCLient {
                 response = in.nextLine();
                 if (response.startsWith("VALID_MOVE")) {
                     // rewrite VALID_MODE signal
+                	
                     String cmd[] = response.split(" ");
                     int xLoc = Integer.parseInt(cmd[1]);
                     int yLoc = Integer.parseInt(cmd[2]);

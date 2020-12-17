@@ -1,7 +1,6 @@
 package Server2;
 
 import GUI.Coordinates;
-import model.Color;
 import model.ColorsFor2Players;
 import model.FieldModel;
 import model.SixArmBoardModel;
@@ -70,6 +69,7 @@ public class CCPlayer implements Runnable {
             if (command.startsWith("QUIT")) {
                 return;
             } else if (command.startsWith("MOVE")) {
+            	System.out.print("A");
                 String cmd[] = command.split(" ");
                 int xLoc = Integer.parseInt(cmd[1]);
                 int yLoc = Integer.parseInt(cmd[2]);

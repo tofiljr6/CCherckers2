@@ -34,7 +34,7 @@ public class ChineseCheckersClient {
 
         SixArmBoard board = new SixArmBoard();
         SixArmBoardGUI guiBoard = new SixArmBoardGUI(board);
-        guiBoard.setOut(out);
+  
         
     }
 
