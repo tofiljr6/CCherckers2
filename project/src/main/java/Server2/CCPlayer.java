@@ -75,6 +75,15 @@ public class CCPlayer implements Runnable {
                 int yLoc = Integer.parseInt(cmd[2]);
                 processMoveCommand(xLoc, yLoc);
             }
+            else if (command.startsWith("JUMP")) {
+
+                String cmd[] = command.split(" ");
+                int xStart = Integer.parseInt(cmd[1]);
+                int yStart = Integer.parseInt(cmd[2]);
+                int xEnd = Integer.parseInt(cmd[3]);
+                int yEnd = Integer.parseInt(cmd[4]);
+                processJumpCommand(xStart, yStart,xEnd, yEnd);
+            }
         }
     }
 
@@ -103,5 +112,30 @@ public class CCPlayer implements Runnable {
         }
     }
 
+    private void processJumpCommand(int xStart, int yStart, int xEnd, int yEnd) {
+        try {
+            sixArmBoardModel.jump(xStart, yStart, xEnd, yEnd, this);
+            output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd +" " + yEnd);
+            opponent.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " +xEnd +" " +yEnd);
+
+            if (sixArmBoardModel.hasWinner()) {
+                output.println("VICTORY");
+                opponent.output.println("DEFEAT");
+            }
+
+//            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n"
+//            + Arrays.deepToString(sixArmBoardModel.colors)); // todo finish to check
+
+            HashMap<Coordinates, FieldModel> board = sixArmBoardModel.getHashMap();
+            String btest1 = board.get(new Coordinates(xStart, yStart)).getColor().toString();
+            String btest2 = board.get(new Coordinates(xEnd, yEnd)).getColor().toString();
+            output.println("BOARD " + btest1+ " " +btest2);
+            
+
+        } catch (IllegalStateException e) {
+            output.println("MESSAGE " + e.getMessage());
+        }
+    }
+    
 
 }

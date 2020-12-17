@@ -180,6 +180,32 @@ public class SixArmBoardModel extends BoardModel {
 		// setting to next opponent
 		currentPlayer = currentPlayer.opponent;
 	}
+	
+	public synchronized void jump(int xStart, int yStart, int xEnd, int yEnd, CCPlayer ccPlayer) {
+		if (ccPlayer != currentPlayer) {
+			throw new IllegalStateException("NOT your turn");
+		}
+		else if (ccPlayer.opponent == null) {
+			throw new IllegalStateException("You don't have an opponent yet");
+		} else if (hashMap.get(new Coordinates(xEnd, yEnd)).getState() != State.FREE) {
+			throw new IllegalStateException("This cell is occupied by other players");
+		}else if (hashMap.get(new Coordinates(xStart, yStart)).getState() != State.TAKEN  ) {
+			throw new IllegalStateException("This cell is free");
+		}
+//		else if (states[xLoc][yLoc] != State.FREE) {
+//			throw new IllegalStateException("This cell is ocpcupied by opponent");
+//		} else if (colors[xLoc][yLoc] != Color.NULL) {
+//			throw new IllegalStateException("Cell already occupied");
+//		}
+
+		// setting new color
+		hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
+		hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
+		
+		// setting to next opponent
+		currentPlayer = currentPlayer.opponent;
+	}
+	
 
 	public HashMap<Coordinates, FieldModel> getHashMap() {
 		return hashMap;

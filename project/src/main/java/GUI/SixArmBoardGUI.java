@@ -22,11 +22,13 @@ public class SixArmBoardGUI extends BoardGUI {
 	
 	//connection variable
 	private PrintWriter out;
-	
+	String msg;
+	int counter =0;
 	public SixArmBoardGUI(SixArmBoard board, int numberOfPlayers, PrintWriter out) throws Exception {
 		
 		frame.getContentPane().setLayout(new GridLayout(board.getYSize(),1));
 		hashMap = new HashMap<Coordinates,FieldGUI>();
+		msg="";
 		this.out = out;
 		for(int i=0;i<board.getYSize(); i++) {
 			JPanel container = new JPanel();
@@ -53,8 +55,22 @@ public class SixArmBoardGUI extends BoardGUI {
 							//System.out.println("MOVE " + getKeyByValue(hashMap, field).toString());
 //							out.println("MOVE " + xcor + " "+ ycor);
 							
-							out.println("MOVE " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
-							System.out.println("CLICKED " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY() );
+							//out.println("MOVE " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
+							System.out.println("CLICKED " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
+							
+							
+						
+							if(counter == 0) {
+								msg = "JUMP " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY();
+								counter++;
+							}
+							else if(counter ==1) {
+								
+								msg = msg +" "+ getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY();
+								out.println(msg);
+								counter = 0;
+							}
+							
 						}
 
 						public void mouseEntered(MouseEvent arg0) {

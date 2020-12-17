@@ -60,17 +60,26 @@ public class CCLient {
                     // rewrite VALID_MODE signal
                 	
                     String cmd[] = response.split(" ");
-                    int xLoc = Integer.parseInt(cmd[1]);
-                    int yLoc = Integer.parseInt(cmd[2]);
-
-                    g.setColorRe(xLoc , yLoc, noopponentColor);
+                    int xStart = Integer.parseInt(cmd[1]);
+                    int yStart = Integer.parseInt(cmd[2]);
+                    int xEnd = Integer.parseInt(cmd[3]);
+                    int yEnd = Integer.parseInt(cmd[4]);
+                    
+                    g.setColorRe(xEnd , yEnd, noopponentColor);
+                    g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
+                    
+                    
                 } else if (response.startsWith("OPPONENT_MOVED")) {
                     String cmd[] = response.split(" ");
-                    int xLoc = Integer.parseInt(cmd[1]);
-                    int yLoc = Integer.parseInt(cmd[2]);
-
-                    g.setColorRe(xLoc,yLoc, opponentColor);
+                    
+                    int xStart = Integer.parseInt(cmd[1]);
+                    int yStart = Integer.parseInt(cmd[2]);
+                    int xEnd = Integer.parseInt(cmd[3]);
+                    int yEnd = Integer.parseInt(cmd[4]);
+                    
+                    g.setColorRe(xEnd , yEnd, opponentColor);
+                    g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
 
                 } else if (response.startsWith("MESSAGE")) {
