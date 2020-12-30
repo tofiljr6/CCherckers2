@@ -56,7 +56,7 @@ public class CCLient {
 
             while (in.hasNextLine()) {
                 response = in.nextLine();
-                if (response.startsWith("VALID_MOVE")) {
+                if (response.startsWith("VALID_MOVE") ) {
                     // rewrite VALID_MODE signal
                 	
                     String cmd[] = response.split(" ");
@@ -115,6 +115,13 @@ public class CCLient {
                     out.println(response.substring(5));
 //                } else if (response.startsWith("WELCOME")) { // greeting label // it is not work
 //                    g.setMessageLabel(response);
+                } else if (response.startsWith("YOU_SKIP")) {
+//                    System.out.println(response);
+                    out.println("you skipped, please wait");
+                    g.setMessageLabel("you skipped");
+                } else if (response.startsWith("OPPONENT_SKIP")) {
+                    out.println("opponent skipped");
+                    g.setMessageLabel("opponent skipped, your tern");
                 }
             }
         } catch (Exception e) {

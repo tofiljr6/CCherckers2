@@ -89,6 +89,8 @@ public class CCPlayer implements Runnable {
                 int xStart = Integer.parseInt(cmd[1]);
                 int yStart = Integer.parseInt(cmd[2]);
                 processInfoCommand(xStart, yStart);
+            } else if (command.startsWith("SKIP")) {
+                processSkipCommand();
             }
         }
     }
@@ -149,6 +151,18 @@ public class CCPlayer implements Runnable {
                 // yes, chosen field is your so confirm move
                 output.println("CONFIRM_MOVE " + xStart + " " + yStart);
             }
+        } catch (IllegalStateException e) {
+            output.println("MESSAGE " + e.getMessage());
+        }
+    }
+
+    private void processSkipCommand() {
+        try {
+            sixArmBoardModel.skip(this);
+
+            output.println("YOU_SKIPPED");
+            opponent.output.println("OPPONENT_SKIP");
+
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
         }

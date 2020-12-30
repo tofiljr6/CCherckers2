@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.PrintWriter;
@@ -10,8 +12,7 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import settings.SixArmBoard;
 
@@ -26,9 +27,20 @@ public class SixArmBoardGUI extends BoardGUI {
 		// information about games process
 		messageLabel.setForeground(Color.BLACK);
 		frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
+//
+//		skipButton.add(new JButton("SKIP"));
+
+		skipButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				System.out.println("SKIP");
+				out.println("SKIP kurde no");
+			}
+		});
+		frame.getContentPane().add(skipButton, BorderLayout.NORTH);
 
 
-		frame.getContentPane().setLayout(new GridLayout(board.getYSize() + 1,1));
+		frame.getContentPane().setLayout(new GridLayout(board.getYSize() + 2,1));
 		hashMap = new HashMap<Coordinates,FieldGUI>();
 		msg="";
 		this.out = out;
@@ -103,29 +115,28 @@ public class SixArmBoardGUI extends BoardGUI {
 		}
 		
 		switch (numberOfPlayers) {
-		
-		case 2:{
-			
-			setUpBoardFor2Players();
-			break;
-		}
-		case 4:{
-			
-			setUpBoardFor4Players();
-			break;
-		}
-		
-		case 6:{
-			
-			setUpBoardFor6Players();
-			break;
-		}
-		
-		default: {
-			
-			System.out.println("Invalid input...");
-            throw new IllegalArgumentException();
-		}
+			case 2:{
+
+				setUpBoardFor2Players();
+				break;
+			}
+			case 4:{
+
+				setUpBoardFor4Players();
+				break;
+			}
+
+			case 6:{
+
+				setUpBoardFor6Players();
+				break;
+			}
+
+			default: {
+
+				System.out.println("Invalid input...");
+				throw new IllegalArgumentException();
+			}
 		}
 	}
 	

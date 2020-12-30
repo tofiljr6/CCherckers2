@@ -11,13 +11,17 @@ public class BoardGUI {
 	public JLabel messageLabel;
 	HashMap<Coordinates,FieldGUI> hashMap;
 	public int counter;
-	
+
+	public JButton skipButton;
+
+
 	public BoardGUI() {
 //		messageLabel.setBackground(Color.lightGray);
 //		frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
 		counter = 0;
 
 		messageLabel = new JLabel("...");
+		skipButton =  new JButton("skip");
 		frame = new JFrame("Chinese Checkers");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setSize(700, 700);

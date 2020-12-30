@@ -219,6 +219,15 @@ public class SixArmBoardModel extends BoardModel {
 
 	}
 
+	public synchronized void skip(CCPlayer ccPlayer) {
+		if (ccPlayer != currentPlayer) {
+			throw new IllegalStateException("NOT your turn");
+		}
+
+		// setting to next opponent
+		currentPlayer = currentPlayer.opponent;
+	}
+
 	public HashMap<Coordinates, FieldModel> getHashMap() {
 		return hashMap;
 	}
