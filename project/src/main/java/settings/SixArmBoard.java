@@ -1,7 +1,7 @@
 package settings;
 
-import Server.Player;
-		import Server2.CCPlayer;
+
+import Server2.CCPlayer;
 
 public class SixArmBoard extends Board {
 
@@ -9,7 +9,7 @@ public class SixArmBoard extends Board {
 
 	public SixArmBoard() {
 
-		dimensions = new int[][] {
+		fields = new int[][] {
 
 				{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0},
@@ -34,12 +34,12 @@ public class SixArmBoard extends Board {
 	//we assume that board is rectangual size
 	public int getXSize() {
 
-		return dimensions[0].length;
+		return fields[0].length;
 	}
 
 	public int getYSize() {
 
-		return dimensions.length;
+		return fields.length;
 	}
 
 }

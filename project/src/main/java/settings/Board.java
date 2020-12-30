@@ -2,10 +2,10 @@ package settings;
 
 public class Board {
 	
-	protected int [][] dimensions;
+	protected int [][] fields;
 	
-	public int[][] getDimensions(){
+	public int[][] getFields(){
 		
-		return dimensions;
+		return fields;
 	}
 }

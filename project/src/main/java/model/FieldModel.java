@@ -8,6 +8,7 @@ public class FieldModel {
 	public FieldModel() {
 		
 		state= State.FREE;
+		color =null;
 	}
 	
 	
@@ -19,6 +20,7 @@ public class FieldModel {
 	public void setFieldColor(Colors color) {
 		this.state = State.TAKEN;
 		this.color =color;
+		synchronizeEnums();
 	}
 	
 	public void setFieldFree() {
@@ -38,7 +40,9 @@ public class FieldModel {
 	public void synchronizeEnums() {
 		
 		if(state == State.FREE) {
-			color = ColorsFor2Players.NULL;
+			color = null;
+		} else if (color == null) {
+			state = State.FREE;
 		}
 	}
 }

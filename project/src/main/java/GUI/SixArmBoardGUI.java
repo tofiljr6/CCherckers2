@@ -48,7 +48,7 @@ public class SixArmBoardGUI extends BoardGUI {
 			JPanel container = new JPanel();
 			
 			for(int j=0; j<board.getXSize(); j++) {
-				if(board.getDimensions()[i][j] == 1) {
+				if(board.getFields()[i][j] == 1) {
 					
 					final FieldGUI field = new FieldGUI();
 					field.setPreferredSize(new Dimension(30,30));
