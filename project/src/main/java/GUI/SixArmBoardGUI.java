@@ -186,7 +186,7 @@ public class SixArmBoardGUI extends BoardGUI {
 		hashMap.get(new Coordinates(20,4)).changeColor(Color.red);
 		hashMap.get(new Coordinates(22,4)).changeColor(Color.red);
 		hashMap.get(new Coordinates(24,4)).changeColor(Color.red);
-		hashMap.get(new Coordinates(19,20)).changeColor(Color.red);
+		hashMap.get(new Coordinates(19,5)).changeColor(Color.red);
 		hashMap.get(new Coordinates(21,5)).changeColor(Color.red);
 		hashMap.get(new Coordinates(23,5)).changeColor(Color.red);
 		hashMap.get(new Coordinates(20,6)).changeColor(Color.red);
@@ -213,7 +213,7 @@ public class SixArmBoardGUI extends BoardGUI {
 		hashMap.get(new Coordinates(6,12)).changeColor(Color.cyan);
 		hashMap.get(new Coordinates(2,10)).changeColor(Color.cyan);
 		hashMap.get(new Coordinates(3,11)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(4,11)).changeColor(Color.cyan);
+		hashMap.get(new Coordinates(4,12)).changeColor(Color.cyan);
 		hashMap.get(new Coordinates(1,11)).changeColor(Color.cyan);
 		hashMap.get(new Coordinates(2,12)).changeColor(Color.cyan);
 		hashMap.get(new Coordinates(0,12)).changeColor(Color.cyan);

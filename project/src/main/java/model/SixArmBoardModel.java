@@ -105,7 +105,7 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get(new Coordinates(20,4)).setFieldColor(ColorsFor4Players.RED);
 		hashMap.get(new Coordinates(22,4)).setFieldColor(ColorsFor4Players.RED);
 		hashMap.get(new Coordinates(24,4)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(19,20)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(19,5)).setFieldColor(ColorsFor4Players.RED);
 		hashMap.get(new Coordinates(21,5)).setFieldColor(ColorsFor4Players.RED);
 		hashMap.get(new Coordinates(23,5)).setFieldColor(ColorsFor4Players.RED);
 		hashMap.get(new Coordinates(20,6)).setFieldColor(ColorsFor4Players.RED);
@@ -132,7 +132,7 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get(new Coordinates(6,12)).setFieldColor(ColorsFor4Players.CYAN);
 		hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor4Players.CYAN);
 		hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(4,11)).setFieldColor(ColorsFor4Players.CYAN);
+		hashMap.get(new Coordinates(4,12)).setFieldColor(ColorsFor4Players.CYAN);
 		hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor4Players.CYAN);
 		hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.CYAN);
 		hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.CYAN);
