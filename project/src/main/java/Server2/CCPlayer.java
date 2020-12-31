@@ -25,6 +25,7 @@ public class CCPlayer implements Runnable {
     // hints fields coords
     private ArrayList<Integer> xList = new ArrayList<>();
     private ArrayList<Integer> yList = new ArrayList<>();
+    private boolean oneMoreMove = false;
 
     public CCPlayer(SixArmBoardModel sixArmBoardModel, Colors color, Socket socket) {
         this.sixArmBoardModel = sixArmBoardModel;
@@ -165,6 +166,9 @@ public class CCPlayer implements Runnable {
                 String cmd[] = command.split(" ");
                 int xStart = Integer.parseInt(cmd[1]);
                 int yStart = Integer.parseInt(cmd[2]);
+                xList.clear();
+                yList.clear();
+                output.println("CLEAR_HINTS");
                 processInfoCommand(xStart, yStart);
             } else if (command.startsWith("SKIP")) {
                 processSkipCommand();

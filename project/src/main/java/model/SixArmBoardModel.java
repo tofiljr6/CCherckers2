@@ -303,10 +303,8 @@ public class SixArmBoardModel extends BoardModel {
 	}
 
 	public synchronized int hints(int xStart, int xDestination, int yStart, int yDestination, CCPlayer ccPlayer) {
-		// return false -> 1;
-		// return true -> 2;
 		// 1 -> return false info
-		// 2 -> return true info
+		// 2 -> return true info - > normal move - not jump over opponent
 		// 3 -> return that recursion right R
 		// 4 -> return that recursion left L
 		// 5 -> return that recursion upper right UR
@@ -338,8 +336,10 @@ public class SixArmBoardModel extends BoardModel {
 			return 1;
 		}
 
-		hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).setFieldColorHint(ColorsFor2Players.GREEN);
+		// i don't need it
+//		hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).setFieldColorHint(ColorsFor2Players.GREEN);
 
+		// no neighborhood
 		return 2;
 	}
 

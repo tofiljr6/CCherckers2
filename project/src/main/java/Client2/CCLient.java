@@ -149,6 +149,12 @@ public class CCLient {
 
                         g.setColorRe(xS, yS, Color.GRAY);
                     }
+                } else if (response.startsWith("CLEAR_HINTS")) {
+                    // clean a hints
+                    // so gray fields comes to black again
+                    for (int i = 0; i < xList.size(); i++) {
+                        g.setColorRe(xList.get(i), yList.get(i), Color.BLACK);
+                    }
                 }
             }
         } catch (Exception e) {
