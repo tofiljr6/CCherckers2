@@ -85,6 +85,13 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get(new Coordinates(11,15)).setFieldColor(ColorsFor2Players.GREEN);
 		hashMap.get(new Coordinates(13,15)).setFieldColor(ColorsFor2Players.GREEN);
 		hashMap.get(new Coordinates(12,16)).setFieldColor(ColorsFor2Players.GREEN);
+
+
+		// easy test for jump through opponent - todo DELETE after
+		hashMap.get(new Coordinates(6,6 )).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(3,5 )).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(8,6 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(10,6 )).setFieldColor(ColorsFor2Players.GREEN);
 	}
 	
 	
@@ -206,8 +213,13 @@ public class SixArmBoardModel extends BoardModel {
 
 		// check all surrounding fields
 		for (int i = 0; i < xNeighborhood.length; i++) {
-			if (hints(xStart + xNeighborhood[i], yStart + yNeighborhood[i], ccPlayer)) {
+			if (2 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
 				xm = xStart + xNeighborhood[i];
+				ym = yStart + yNeighborhood[i];
+			}
+
+			if (3 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
+				xm = xStart + xNeighborhood[i] + 2;
 				ym = yStart + yNeighborhood[i];
 			}
 
@@ -217,6 +229,7 @@ public class SixArmBoardModel extends BoardModel {
 				hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
 				hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
 			}
+
 
 		}
 
@@ -262,23 +275,35 @@ public class SixArmBoardModel extends BoardModel {
 		this.currentPlayer = ccplayer;
 	}
 
-	public synchronized boolean hints(int xStart, int yStart, CCPlayer ccPlayer) {
+	public synchronized int hints(int xStart, int xDestination, int yStart, int yDestination, CCPlayer ccPlayer) {
+		// return false -> 1;
+		// return true -> 2;
+		// 1 -> return false info
+		// 2 -> return true info
+		// 3 -> return that recursion right
+
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
-		}
-		else if (hashMap.get(new Coordinates(xStart, yStart)) == null) {
-			return false;
-		}
-		else if (hashMap.get(new Coordinates(xStart, yStart)).getState() == State.TAKEN) {
-			return false;
+		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)) == null) {
+			return 1;
+		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN &&
+				   hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getColor() != ccPlayer.color &&
+				   xDestination == 2 && yDestination == 0) {
+			return 3;
+		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN) {
+			return 1;
 		}
 
-		hashMap.get(new Coordinates(xStart, yStart)).setFieldColorHint(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).setFieldColorHint(ColorsFor2Players.GREEN);
 
-		return true;
+		return 2;
 	}
 
 	public HashMap<Coordinates, FieldModel> getHashMap() {
 		return hashMap;
+	}
+
+	public Colors getHashMapCordColor(int x, int y) {
+		return hashMap.get(new Coordinates(x, y)).getColor();
 	}
 }

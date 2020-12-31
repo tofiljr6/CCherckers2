@@ -165,6 +165,14 @@ public class SixArmBoardGUI extends BoardGUI {
 		hashMap.get(new Coordinates(11,15)).changeColor(Color.green);
 		hashMap.get(new Coordinates(13,15)).changeColor(Color.green);
 		hashMap.get(new Coordinates(12,16)).changeColor(Color.green);
+
+
+		// easy test for jump through opponent - todo DELETE after
+		hashMap.get(new Coordinates(6,6 )).changeColor(Color.BLUE);
+		hashMap.get(new Coordinates(3,5 )).changeColor(Color.BLUE);
+		hashMap.get(new Coordinates(8,6 )).changeColor(Color.GREEN);
+		hashMap.get(new Coordinates(10,6 )).changeColor(Color.GREEN);
+
 	}
 
 	public void setUpBoardFor4Players(){

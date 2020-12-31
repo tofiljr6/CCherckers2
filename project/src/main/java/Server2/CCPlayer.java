@@ -22,6 +22,7 @@ public class CCPlayer implements Runnable {
     Socket socket;
     Scanner input;
     PrintWriter output;
+    // hints fields coords
     private ArrayList<Integer> xList = new ArrayList<>();
     private ArrayList<Integer> yList = new ArrayList<>();
 
@@ -265,13 +266,34 @@ public class CCPlayer implements Runnable {
                 int yNeighborhood[] = {1 , 1, -1, -1, 0,  0};
 
                 for (int i = 0; i < xNeighborhood.length; i++) {
-                    if (sixArmBoardModel.hints(xStart + xNeighborhood[i], yStart + yNeighborhood[i], this)) {
+                    // see what hints method returns
+//                    int i = 4; // todo - delete - only for tests
+                    int decision = sixArmBoardModel.hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], this);
+                    if (decision == 2) { // no opponents around you
                         int xm = xStart + xNeighborhood[i];
                         int ym = yStart + yNeighborhood[i];
                         output.println("HINT_TO " + xm + " " + ym);
 
+                        // add params to hints fields
                         xList.add(xm);
                         yList.add(ym);
+                    }
+                    else if ( decision == 3) { // opponent on your right
+//                        processInfoCommand(xStart + xNeighborhood[i], yStart + yNeighborhood[i]);
+                        int xx = xStart + xNeighborhood[i];
+                        int yy = yStart + yNeighborhood[i];
+
+                        System.out.println("HMCORDS: " + sixArmBoardModel.getHashMapCordColor(xx, yy));
+
+
+                        int xm = xStart + xNeighborhood[i] + 2;
+                        int ym = yStart + yNeighborhood[i];
+                        output.println("HINT_TO " + xm + " " + ym);
+
+                        // add params to hints fields
+                        xList.add(xm);
+                        yList.add(ym);
+
                     }
                 }
             }

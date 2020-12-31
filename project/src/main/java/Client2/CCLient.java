@@ -18,6 +18,7 @@ public class CCLient {
 
     public SixArmBoard board = new SixArmBoard(); // signleton pattern ?? xd
     public SixArmBoardGUI g;
+    // hints fields coords
     private ArrayList<Integer> xList = new ArrayList<>();
     private ArrayList<Integer> yList = new ArrayList<>();
 
