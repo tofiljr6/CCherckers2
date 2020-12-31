@@ -21,25 +21,24 @@ public class CCServer {
             var pool = Executors.newFixedThreadPool(20);
 
             while (true) {
-//              CCGame ccGame = new CCGame();
+//                CCGame ccGame = new CCGame();
                 SixArmBoard sixArmBoard = new SixArmBoard();
+
+                // game to two players
                 SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
 
-                int numberOfPlayers = sixArmBoardModel.getNumberOfPlayers();
-                
-                switch(numberOfPlayers) {
-                case 2:
-                	 pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
-                     pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
-                     break;
-                case 4:
-                	 pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.CYAN, listener.accept()));
-                     pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.RED, listener.accept()));
-                     pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.YELLOW, listener.accept()));
-                     pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.MAGENTA, listener.accept()));
-                }
-                	
-         
+                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
+                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
+
+                // game to four players
+//                SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,4);
+//
+//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.YELLOW, listener.accept()));
+//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.RED, listener.accept()));
+//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.MAGENTA, listener.accept()));
+//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.CYAN, listener.accept()));
+
+
             }
 
         } catch (IOException e) {

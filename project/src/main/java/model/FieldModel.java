@@ -22,6 +22,11 @@ public class FieldModel {
 		this.color =color;
 		synchronizeEnums();
 	}
+
+	public void setFieldColorHint(Colors color) {
+		this.color = color;
+//		synchronizeEnums();
+	}
 	
 	public void setFieldFree() {
 		this.state = State.FREE;

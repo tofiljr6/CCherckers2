@@ -242,6 +242,28 @@ public class SixArmBoardModel extends BoardModel {
 		this.currentPlayer = ccplayer;
 	}
 
+	public synchronized boolean hints(int xStart, int yStart, CCPlayer ccPlayer) {
+		if (ccPlayer != currentPlayer) {
+			throw new IllegalStateException("NOT your turn");
+		}
+//		else if (hashMap.get(new Coordinates(xStart, yStart)).getColor() != currentPlayer.color) {
+//			throw new IllegalStateException("Not your field");
+//		}
+//		else if (hashMap.get(new Coordinates(xStart, yStart)).isTaken()) {
+//			return false;
+		else if (hashMap.get(new Coordinates(xStart, yStart)) == null) {
+			return false;
+		}
+		else if (hashMap.get(new Coordinates(xStart, yStart)).getState() == State.TAKEN) {
+			return false;
+		}
+
+
+		hashMap.get(new Coordinates(xStart, yStart)).setFieldColor(ColorsFor2Players.GREEN);
+
+		return true;
+	}
+
 	public HashMap<Coordinates, FieldModel> getHashMap() {
 		return hashMap;
 	}

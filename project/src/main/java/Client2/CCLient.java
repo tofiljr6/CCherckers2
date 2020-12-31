@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CCLient {
@@ -17,6 +18,8 @@ public class CCLient {
 
     public SixArmBoard board = new SixArmBoard(); // signleton pattern ?? xd
     public SixArmBoardGUI g;
+    private ArrayList<Integer> xList = new ArrayList<>();
+    private ArrayList<Integer> yList = new ArrayList<>();
 
 
 
@@ -41,7 +44,11 @@ public class CCLient {
 
             Color opponentColor;
             Color noopponentColor;
-            
+
+            // center neighborhood
+            int xHint = -1;
+            int yHint = -1;
+            boolean firstHint = true;
             
             if (c.equals("GREEN")) {
                 noopponentColor = Color.green;
@@ -61,7 +68,11 @@ public class CCLient {
                     int yStart = Integer.parseInt(cmd[2]);
                     int xEnd = Integer.parseInt(cmd[3]);
                     int yEnd = Integer.parseInt(cmd[4]);
-                    
+
+                    for (int i = 0; i < xList.size(); i++) {
+                        g.setColorRe(xList.get(i), yList.get(i), Color.BLACK);
+                    }
+
                     g.setColorRe(xEnd , yEnd, noopponentColor);
                     g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
@@ -106,8 +117,7 @@ public class CCLient {
                     // and your field you have chosen is your so next click on field is field where your will jump
                     g.setMessageLabel("You choose field with coords " + cmd[1] + " " + cmd[2]);
                     g.counter = 1;
-                }
-                else if (response.startsWith("BOARD")) { // for visualization only
+                } else if (response.startsWith("BOARD")) { // for visualization only
                     System.out.println(response.substring(5));
                     out.println(response.substring(5));
 //                } else if (response.startsWith("WELCOME")) { // greeting label // it is not work
@@ -119,6 +129,21 @@ public class CCLient {
                 } else if (response.startsWith("OPPONENT_SKIP")) {
                     out.println("opponent skipped");
                     g.setMessageLabel("opponent skipped, your tern");
+                } else if (response.startsWith("HINT_TO")) {
+
+//                    for (int i = 0; i < xList.size(); i++) {
+//                        g.setColorRe(xList.get(i), yList.get(i), Color.BLACK);
+//                    }
+
+                    String cmd[] = response.split(" ");
+
+                    int xS = Integer.parseInt(cmd[1]);
+                    int yS = Integer.parseInt(cmd[2]);
+
+                    xList.add(xS);
+                    yList.add(yS);
+
+                    g.setColorRe(xS, yS, Color.GRAY);
                 }
             }
         } catch (Exception e) {

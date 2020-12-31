@@ -238,16 +238,36 @@ public class CCPlayer implements Runnable {
 
     private void processInfoCommand(int xStart, int yStart) {
         try {
+
+//            sixArmBoardModel.hints(xStart, yStart, this);
+
             // aks model is that field you have chosen is your
             if (sixArmBoardModel.choose(xStart, yStart, this)) {
                 // yes, chosen field is your so confirm move
             	
                 output.println("CONFIRM_MOVE " + xStart + " " + yStart);
+
+                int xNeighborhood[] = {-1, 1,  1, -1, 2, -2};
+                int yNeighborhood[] = {1 , 1, -1, -1, 0,  0};
+
+                for (int i = 0; i < xNeighborhood.length; i++) {
+                    if (sixArmBoardModel.hints(xStart + xNeighborhood[i], yStart + yNeighborhood[i], this)) {
+                        int xm = xStart + xNeighborhood[i];
+                        int ym = yStart + yNeighborhood[i];
+                        output.println("HINT_TO " + xm + " " + ym);
+                    }
+                }
             }
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
         }
     }
+
+//    private void processHintsCommand(int xStart, int yStart) {
+//        try {
+//            if (s)
+//        }
+//    }
 
     private void processSkipCommand() {
         try {
