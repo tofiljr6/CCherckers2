@@ -45,11 +45,6 @@ public class CCLient {
             Color opponentColor;
             Color noopponentColor;
 
-            // center neighborhood
-            int xHint = -1;
-            int yHint = -1;
-            boolean firstHint = true;
-            
             if (c.equals("GREEN")) {
                 noopponentColor = Color.green;
                 opponentColor = Color.blue;
@@ -69,6 +64,8 @@ public class CCLient {
                     int xEnd = Integer.parseInt(cmd[3]);
                     int yEnd = Integer.parseInt(cmd[4]);
 
+                    // clean a hints
+                    // so gray fields comes to black again
                     for (int i = 0; i < xList.size(); i++) {
                         g.setColorRe(xList.get(i), yList.get(i), Color.BLACK);
                     }
@@ -77,9 +74,12 @@ public class CCLient {
                     g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
 
+                    // coordinates system - checking
                     System.out.println(xList);
                     System.out.println(yList);
 
+                    // clear coords hints
+                    // to next hits we must sure we have emoty list
                     xList.clear();
                     yList.clear();
 
@@ -134,16 +134,13 @@ public class CCLient {
                     out.println("opponent skipped");
                     g.setMessageLabel("opponent skipped, your tern");
                 } else if (response.startsWith("HINT_TO")) {
-
-//                    for (int i = 0; i < xList.size(); i++) {
-//                        g.setColorRe(xList.get(i), yList.get(i), Color.BLACK);
-//                    }
-
                     String cmd[] = response.split(" ");
 
+                    // this is coords correct fields
                     int xS = Integer.parseInt(cmd[1]);
                     int yS = Integer.parseInt(cmd[2]);
 
+                    // append to list
                     xList.add(xS);
                     yList.add(yS);
 

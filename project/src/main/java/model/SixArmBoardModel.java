@@ -191,18 +191,38 @@ public class SixArmBoardModel extends BoardModel {
 			throw new IllegalStateException("You don't have an opponent yet");
 		} else if (hashMap.get(new Coordinates(xEnd, yEnd)).getState() != State.FREE) {
 			throw new IllegalStateException("This cell is occupied by other players");
-		}else if (hashMap.get(new Coordinates(xStart, yStart)).getState() != State.TAKEN  ) {
+		} else if (hashMap.get(new Coordinates(xStart, yStart)).getState() != State.TAKEN  ) {
 			throw new IllegalStateException("This cell is free");
 		}
-//		else if (states[xLoc][yLoc] != State.FREE) {
-//			throw new IllegalStateException("This cell is ocpcupied by opponent");
-//		} else if (colors[xLoc][yLoc] != Color.NULL) {
-//			throw new IllegalStateException("Cell already occupied");
-//		}
 
-		// setting new color
-		hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
-		hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
+		// this is a coords from selected fields
+		int xNeighborhood[] = {-1, 1,  1, -1, 2, -2};
+		int yNeighborhood[] = {1 , 1, -1, -1, 0,  0};
+
+		// init - incredible value to start
+		// this value is never minus
+		int xm = -1;
+		int ym = -1;
+
+		// check all surrounding fields
+		for (int i = 0; i < xNeighborhood.length; i++) {
+			if (hints(xStart + xNeighborhood[i], yStart + yNeighborhood[i], ccPlayer)) {
+				xm = xStart + xNeighborhood[i];
+				ym = yStart + yNeighborhood[i];
+			}
+
+			// this movement is accepted according rules
+			if (xm == xEnd && ym == yEnd) {
+				// setting new color
+				hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
+				hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
+			}
+
+		}
+
+//		// setting new color
+//		hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
+//		hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
 		
 		// setting to next opponent
 		currentPlayer = currentPlayer.nextPlayer;
@@ -246,18 +266,12 @@ public class SixArmBoardModel extends BoardModel {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
 		}
-//		else if (hashMap.get(new Coordinates(xStart, yStart)).getColor() != currentPlayer.color) {
-//			throw new IllegalStateException("Not your field");
-//		}
-//		else if (hashMap.get(new Coordinates(xStart, yStart)).isTaken()) {
-//			return false;
 		else if (hashMap.get(new Coordinates(xStart, yStart)) == null) {
 			return false;
 		}
 		else if (hashMap.get(new Coordinates(xStart, yStart)).getState() == State.TAKEN) {
 			return false;
 		}
-
 
 		hashMap.get(new Coordinates(xStart, yStart)).setFieldColorHint(ColorsFor2Players.GREEN);
 

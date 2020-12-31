@@ -22,6 +22,8 @@ public class CCPlayer implements Runnable {
     Socket socket;
     Scanner input;
     PrintWriter output;
+    private ArrayList<Integer> xList = new ArrayList<>();
+    private ArrayList<Integer> yList = new ArrayList<>();
 
     public CCPlayer(SixArmBoardModel sixArmBoardModel, Colors color, Socket socket) {
         this.sixArmBoardModel = sixArmBoardModel;
@@ -205,22 +207,31 @@ public class CCPlayer implements Runnable {
 
     private void processJumpCommand(int xStart, int yStart, int xEnd, int yEnd) {
         try {
-            sixArmBoardModel.jump(xStart, yStart, xEnd, yEnd, this);
-            output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd +" " + yEnd);
-            
-            
-            for(CCPlayer ccplayer: opponents) {
-                
-            	ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " +xEnd +" " +yEnd);
-            }
-            if (sixArmBoardModel.hasWinner()) {
-                output.println("VICTORY");
-                
-                for(CCPlayer ccplayer: opponents) {
-                    
-                	ccplayer.output.println("DEFEAT");
+            // we must check all surrounding field,
+            // xList and yList are a coordinates correct fields
+            for (int i = 0; i < xList.size(); i++) {
+                // if this move (jump) is correct with game rules
+                if (xEnd == xList.get(i) && yEnd == yList.get(i)) {
+                    // jump to destination
+                    sixArmBoardModel.jump(xStart, yStart, xEnd, yEnd, this);
+
+                    // sends communication to client - player
+                    output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd);
+
+                    // sends communication to client - opponents
+                    for (CCPlayer ccplayer : opponents) {
+                        ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd);
+                    }
+
+                    // winner case
+                    if (sixArmBoardModel.hasWinner()) {
+                        output.println("VICTORY");
+
+                        for (CCPlayer ccplayer : opponents) {
+                            ccplayer.output.println("DEFEAT");
+                        }
+                    }
                 }
-               
             }
 
 //            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n"
@@ -241,6 +252,9 @@ public class CCPlayer implements Runnable {
 
 //            sixArmBoardModel.hints(xStart, yStart, this);
 
+            xList.clear();
+            yList.clear();
+
             // aks model is that field you have chosen is your
             if (sixArmBoardModel.choose(xStart, yStart, this)) {
                 // yes, chosen field is your so confirm move
@@ -251,13 +265,13 @@ public class CCPlayer implements Runnable {
                 int yNeighborhood[] = {1 , 1, -1, -1, 0,  0};
 
                 for (int i = 0; i < xNeighborhood.length; i++) {
-                    if (sixArmBoardModel.hints(
-                            xStart + xNeighborhood[i],
-                            yStart + yNeighborhood[i],
-                            this)) {
+                    if (sixArmBoardModel.hints(xStart + xNeighborhood[i], yStart + yNeighborhood[i], this)) {
                         int xm = xStart + xNeighborhood[i];
                         int ym = yStart + yNeighborhood[i];
                         output.println("HINT_TO " + xm + " " + ym);
+
+                        xList.add(xm);
+                        yList.add(ym);
                     }
                 }
             }
@@ -266,11 +280,6 @@ public class CCPlayer implements Runnable {
         }
     }
 
-//    private void processHintsCommand(int xStart, int yStart) {
-//        try {
-//            if (s)
-//        }
-//    }
 
     private void processSkipCommand() {
         try {
