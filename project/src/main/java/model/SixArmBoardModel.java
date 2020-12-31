@@ -91,7 +91,7 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get(new Coordinates(6,6 )).setFieldColor(ColorsFor2Players.BLUE);
 		hashMap.get(new Coordinates(16,6 )).setFieldColor(ColorsFor2Players.BLUE);
 
-		hashMap.get(new Coordinates(18,6 )).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(20,6 )).setFieldColor(ColorsFor2Players.BLUE);
 
 
 		hashMap.get(new Coordinates(8,6 )).setFieldColor(ColorsFor2Players.GREEN);
@@ -102,7 +102,10 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get(new Coordinates(5,5 )).setFieldColor(ColorsFor2Players.GREEN);
 		hashMap.get(new Coordinates(7,5 )).setFieldColor(ColorsFor2Players.GREEN);
 
-		hashMap.get(new Coordinates(12,8 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(14,6 )).setFieldColor(ColorsFor2Players.GREEN);
+
+		hashMap.get(new Coordinates(16,4 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(15,5 )).setFieldColor(ColorsFor2Players.GREEN);
 	}
 	
 	
@@ -248,7 +251,7 @@ public class SixArmBoardModel extends BoardModel {
 			}
 
 			// this movement is accepted according rules
-			if (xm == xEnd && ym == yEnd) {
+			if (xm == xEnd && ym == yEnd && hashMap.get(new Coordinates(xEnd, yEnd)).getColor() != ccPlayer.color) {
 				// setting new color
 				hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
 				hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
@@ -268,8 +271,7 @@ public class SixArmBoardModel extends BoardModel {
 	public synchronized boolean choose(int xStart, int yStart, CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
-		} else if (hashMap.get(new Coordinates(xStart, yStart)).getColor() != currentPlayer.color) {
-//			throw new IllegalStateException("Not your field");
+		} else if (hashMap.get(new Coordinates(xStart, yStart)).getState() != State.TAKEN) {
 			return false;
 		}
 
@@ -343,7 +345,13 @@ public class SixArmBoardModel extends BoardModel {
 		return hashMap;
 	}
 
-	public Colors getHashMapCordColor(int x, int y) {
-		return hashMap.get(new Coordinates(x, y)).getColor();
+	public int getHashMapCordColor(int x, int y) {
+		if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.GREEN) {
+			return 1; // green
+		} else if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.BLUE) {
+			return 2; // blue
+		} else {
+			return 3;
+		}
 	}
 }

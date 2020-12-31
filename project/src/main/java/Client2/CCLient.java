@@ -140,12 +140,15 @@ public class CCLient {
                     // this is coords correct fields
                     int xS = Integer.parseInt(cmd[1]);
                     int yS = Integer.parseInt(cmd[2]);
+                    int col = Integer.parseInt(cmd[3]);
 
-                    // append to list
-                    xList.add(xS);
-                    yList.add(yS);
+                    if (col == 3) {
+                        // append to list
+                        xList.add(xS);
+                        yList.add(yS);
 
-                    g.setColorRe(xS, yS, Color.GRAY);
+                        g.setColorRe(xS, yS, Color.GRAY);
+                    }
                 }
             }
         } catch (Exception e) {

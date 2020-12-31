@@ -262,8 +262,9 @@ public class CCPlayer implements Runnable {
             	
                 output.println("CONFIRM_MOVE " + xStart + " " + yStart);
 
+                // hints logic starts here
                 int xNeighborhood[] = {-1, 1,  1, -1, 2, -2};
-                int yNeighborhood[] = {1 , 1, -1, -1, 0,  0};
+                int yNeighborhood[] = { 1, 1, -1, -1, 0,  0};
 
                 for (int i = 0; i < xNeighborhood.length; i++) {
                     // see what hints method returns
@@ -275,49 +276,49 @@ public class CCPlayer implements Runnable {
                         case 2:
                             xm = xStart + xNeighborhood[i];
                             ym = yStart + yNeighborhood[i];
-                            output.println("HINT_TO " + xm + " " + ym);
+                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
                             xList.add(xm);
                             yList.add(ym);
                             break;
                         case 3:
                             xm = xStart + xNeighborhood[i] + 2;
                             ym = yStart + yNeighborhood[i];
-                            output.println("HINT_TO " + xm + " " + ym);
+                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
                             xList.add(xm);
                             yList.add(ym);
                             break;
                         case 4:
                             xm = xStart + xNeighborhood[i] - 2;
                             ym = yStart + yNeighborhood[i];
-                            output.println("HINT_TO " + xm + " " + ym);
+                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
                             xList.add(xm);
                             yList.add(ym);
                             break;
                         case 5:
                             xm = xStart + xNeighborhood[i] - 1;
                             ym = yStart + yNeighborhood[i] + 1;
-                            output.println("HINT_TO " + xm + " " + ym);
+                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
                             xList.add(xm);
                             yList.add(ym);
                             break;
                         case 6:
                             xm = xStart + xNeighborhood[i] + 1;
                             ym = yStart + yNeighborhood[i] + 1;
-                            output.println("HINT_TO " + xm + " " + ym);
+                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
                             xList.add(xm);
                             yList.add(ym);
                             break;
                         case 7:
                             xm = xStart + xNeighborhood[i] + 1;
                             ym = yStart + yNeighborhood[i] - 1;
-                            output.println("HINT_TO " + xm + " " + ym);
+                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
                             xList.add(xm);
                             yList.add(ym);
                             break;
                         case 8:
                             xm = xStart + xNeighborhood[i] - 1;
                             ym = yStart + yNeighborhood[i] - 1;
-                            output.println("HINT_TO " + xm + " " + ym);
+                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
                             xList.add(xm);
                             yList.add(ym);
                             break;

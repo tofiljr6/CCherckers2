@@ -170,7 +170,7 @@ public class SixArmBoardGUI extends BoardGUI {
 		// easy test for jump through opponent - todo DELETE after
 		hashMap.get(new Coordinates(6,6 )).changeColor(Color.BLUE);
 		hashMap.get(new Coordinates(16,6 )).changeColor(Color.BLUE);
-		hashMap.get(new Coordinates(18,6 )).changeColor(Color.BLUE);
+		hashMap.get(new Coordinates(20,6 )).changeColor(Color.BLUE);
 
 		hashMap.get(new Coordinates(8,6 )).changeColor(Color.GREEN);
 //		hashMap.get(new Coordinates(10,6 )).changeColor(Color.GREEN);
@@ -180,8 +180,12 @@ public class SixArmBoardGUI extends BoardGUI {
 		hashMap.get(new Coordinates(5,5 )).changeColor(Color.GREEN);
 		hashMap.get(new Coordinates(7,5 )).changeColor(Color.GREEN);
 
-		hashMap.get(new Coordinates(12,8 )).changeColor(Color.GREEN);
+		hashMap.get(new Coordinates(14,6 )).changeColor(Color.GREEN);
 
+
+
+		hashMap.get(new Coordinates(16,4 )).changeColor(Color.GREEN);
+		hashMap.get(new Coordinates(15,5 )).changeColor(Color.BLUE);
 	}
 
 	public void setUpBoardFor4Players(){
