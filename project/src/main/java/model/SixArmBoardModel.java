@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Map.Entry;
@@ -272,6 +271,8 @@ public class SixArmBoardModel extends BoardModel {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
 		} else if (hashMap.get(new Coordinates(xStart, yStart)).getState() != State.TAKEN) {
+			return false;
+		} else if (hashMap.get(new Coordinates(xStart, yStart)).getColor() != ccPlayer.color) {
 			return false;
 		}
 
