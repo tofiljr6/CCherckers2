@@ -216,8 +216,8 @@ public class SixArmBoardModel extends BoardModel {
 		}
 
 		// this is a coords from selected fields
-		int xNeighborhood[] = {-1, 1,  1, -1, 2, -2};
-		int yNeighborhood[] = {1 , 1, -1, -1, 0,  0};
+		int[] xNeighborhood = {-1, 1,  1, -1, 2, -2};
+		int[] yNeighborhood = {1 , 1, -1, -1, 0,  0};
 
 		// init - incredible value to start
 		// this value is never minus
@@ -318,7 +318,7 @@ public class SixArmBoardModel extends BoardModel {
 			throw new IllegalStateException("NOT your turn");
 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)) == null) {
 			return 1;
-		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN &&
+ 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN &&
 				   hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getColor() != ccPlayer.color) {
 			if (xDestination == 2 && yDestination == 0) {
 				return 3;
@@ -333,7 +333,8 @@ public class SixArmBoardModel extends BoardModel {
 			} else if (xDestination == -1 && yDestination == -1) {
 				return 8;
 			}
-		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN) {
+		}
+		else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN) {
 			return 1;
 		}
 
@@ -347,12 +348,17 @@ public class SixArmBoardModel extends BoardModel {
 	}
 
 	public int getHashMapCordColor(int x, int y) {
-		if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.GREEN) {
-			return 1; // green
-		} else if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.BLUE) {
-			return 2; // blue
-		} else {
-			return 3;
-		}
+//		try {
+			if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.GREEN) {
+				return 1; // green
+			} else if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.BLUE) {
+				return 2; // blue
+			} else {
+				return 3;
+			}
+//		} catch (NullPointerException nullPtrExce) {
+//			System.out.println("nullptr" + nullPtrExce);
+//		}
+//		return 0;
 	}
 }

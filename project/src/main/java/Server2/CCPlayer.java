@@ -263,8 +263,8 @@ public class CCPlayer implements Runnable {
                 output.println("CONFIRM_MOVE " + xStart + " " + yStart);
 
                 // hints logic starts here
-                int xNeighborhood[] = {-1, 1,  1, -1, 2, -2};
-                int yNeighborhood[] = { 1, 1, -1, -1, 0,  0};
+                int[] xNeighborhood = {-1, 1,  1, -1, 2, -2};
+                int[] yNeighborhood = { 1, 1, -1, -1, 0,  0};
 
                 for (int i = 0; i < xNeighborhood.length; i++) {
                     // see what hints method returns
