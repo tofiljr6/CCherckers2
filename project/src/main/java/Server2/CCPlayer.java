@@ -267,34 +267,62 @@ public class CCPlayer implements Runnable {
 
                 for (int i = 0; i < xNeighborhood.length; i++) {
                     // see what hints method returns
-//                    int i = 4; // todo - delete - only for tests
                     int decision = sixArmBoardModel.hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], this);
-                    if (decision == 2) { // no opponents around you
-                        int xm = xStart + xNeighborhood[i];
-                        int ym = yStart + yNeighborhood[i];
-                        output.println("HINT_TO " + xm + " " + ym);
+                    int xm = -1;
+                    int ym = -1;
 
-                        // add params to hints fields
-                        xList.add(xm);
-                        yList.add(ym);
+                    switch (decision) {
+                        case 2:
+                            xm = xStart + xNeighborhood[i];
+                            ym = yStart + yNeighborhood[i];
+                            output.println("HINT_TO " + xm + " " + ym);
+                            xList.add(xm);
+                            yList.add(ym);
+                            break;
+                        case 3:
+                            xm = xStart + xNeighborhood[i] + 2;
+                            ym = yStart + yNeighborhood[i];
+                            output.println("HINT_TO " + xm + " " + ym);
+                            xList.add(xm);
+                            yList.add(ym);
+                            break;
+                        case 4:
+                            xm = xStart + xNeighborhood[i] - 2;
+                            ym = yStart + yNeighborhood[i];
+                            output.println("HINT_TO " + xm + " " + ym);
+                            xList.add(xm);
+                            yList.add(ym);
+                            break;
+                        case 5:
+                            xm = xStart + xNeighborhood[i] - 1;
+                            ym = yStart + yNeighborhood[i] + 1;
+                            output.println("HINT_TO " + xm + " " + ym);
+                            xList.add(xm);
+                            yList.add(ym);
+                            break;
+                        case 6:
+                            xm = xStart + xNeighborhood[i] + 1;
+                            ym = yStart + yNeighborhood[i] + 1;
+                            output.println("HINT_TO " + xm + " " + ym);
+                            xList.add(xm);
+                            yList.add(ym);
+                            break;
+                        case 7:
+                            xm = xStart + xNeighborhood[i] + 1;
+                            ym = yStart + yNeighborhood[i] - 1;
+                            output.println("HINT_TO " + xm + " " + ym);
+                            xList.add(xm);
+                            yList.add(ym);
+                            break;
+                        case 8:
+                            xm = xStart + xNeighborhood[i] - 1;
+                            ym = yStart + yNeighborhood[i] - 1;
+                            output.println("HINT_TO " + xm + " " + ym);
+                            xList.add(xm);
+                            yList.add(ym);
+                            break;
                     }
-                    else if ( decision == 3) { // opponent on your right
-//                        processInfoCommand(xStart + xNeighborhood[i], yStart + yNeighborhood[i]);
-                        int xx = xStart + xNeighborhood[i];
-                        int yy = yStart + yNeighborhood[i];
 
-                        System.out.println("HMCORDS: " + sixArmBoardModel.getHashMapCordColor(xx, yy));
-
-
-                        int xm = xStart + xNeighborhood[i] + 2;
-                        int ym = yStart + yNeighborhood[i];
-                        output.println("HINT_TO " + xm + " " + ym);
-
-                        // add params to hints fields
-                        xList.add(xm);
-                        yList.add(ym);
-
-                    }
                 }
             }
         } catch (IllegalStateException e) {

@@ -89,9 +89,20 @@ public class SixArmBoardModel extends BoardModel {
 
 		// easy test for jump through opponent - todo DELETE after
 		hashMap.get(new Coordinates(6,6 )).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(3,5 )).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(16,6 )).setFieldColor(ColorsFor2Players.BLUE);
+
+		hashMap.get(new Coordinates(18,6 )).setFieldColor(ColorsFor2Players.BLUE);
+
+
 		hashMap.get(new Coordinates(8,6 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(10,6 )).setFieldColor(ColorsFor2Players.GREEN);
+//		hashMap.get(new Coordinates(10,6 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(7,7 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(5,7 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(4,6 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(5,5 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(7,5 )).setFieldColor(ColorsFor2Players.GREEN);
+
+		hashMap.get(new Coordinates(12,8 )).setFieldColor(ColorsFor2Players.GREEN);
 	}
 	
 	
@@ -216,11 +227,24 @@ public class SixArmBoardModel extends BoardModel {
 			if (2 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
 				xm = xStart + xNeighborhood[i];
 				ym = yStart + yNeighborhood[i];
-			}
-
-			if (3 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
+			} else if (3 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
 				xm = xStart + xNeighborhood[i] + 2;
 				ym = yStart + yNeighborhood[i];
+			} else if (4 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
+				xm = xStart + xNeighborhood[i] - 2;
+				ym = yStart + yNeighborhood[i];
+			} else if (5 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
+				xm = xStart + xNeighborhood[i] - 1;
+				ym = yStart + yNeighborhood[i] + 1;
+			} else if (6 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
+				xm = xStart + xNeighborhood[i] + 1;
+				ym = yStart + yNeighborhood[i] + 1;
+			} else if (7 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
+				xm = xStart + xNeighborhood[i] + 1;
+				ym = yStart + yNeighborhood[i] - 1;
+			} else if (8 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
+				xm = xStart + xNeighborhood[i] - 1;
+				ym = yStart + yNeighborhood[i] - 1;
 			}
 
 			// this movement is accepted according rules
@@ -280,16 +304,32 @@ public class SixArmBoardModel extends BoardModel {
 		// return true -> 2;
 		// 1 -> return false info
 		// 2 -> return true info
-		// 3 -> return that recursion right
+		// 3 -> return that recursion right R
+		// 4 -> return that recursion left L
+		// 5 -> return that recursion upper right UR
+		// 6 -> return that recursion bottom right BR
+		// 7 -> return that recursion bottom left BL
+		// 8 -> return that recursion upper left UL
 
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)) == null) {
 			return 1;
 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN &&
-				   hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getColor() != ccPlayer.color &&
-				   xDestination == 2 && yDestination == 0) {
-			return 3;
+				   hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getColor() != ccPlayer.color) {
+			if (xDestination == 2 && yDestination == 0) {
+				return 3;
+			} else if (xDestination == -2 && yDestination == 0) {
+				return 4;
+			} else if (xDestination == -1 && yDestination == 1) {
+				return 5;
+			} else if (xDestination == 1 && yDestination == 1) {
+				return 6;
+			} else if (xDestination == 1 && yDestination == -1) {
+				return 7;
+			} else if (xDestination == -1 && yDestination == -1) {
+				return 8;
+			}
 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN) {
 			return 1;
 		}
