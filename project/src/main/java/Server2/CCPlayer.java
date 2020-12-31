@@ -251,7 +251,10 @@ public class CCPlayer implements Runnable {
                 int yNeighborhood[] = {1 , 1, -1, -1, 0,  0};
 
                 for (int i = 0; i < xNeighborhood.length; i++) {
-                    if (sixArmBoardModel.hints(xStart + xNeighborhood[i], yStart + yNeighborhood[i], this)) {
+                    if (sixArmBoardModel.hints(
+                            xStart + xNeighborhood[i],
+                            yStart + yNeighborhood[i],
+                            this)) {
                         int xm = xStart + xNeighborhood[i];
                         int ym = yStart + yNeighborhood[i];
                         output.println("HINT_TO " + xm + " " + ym);

@@ -77,10 +77,14 @@ public class CCLient {
                     g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
 
-                    g.setMessageLabel("Valid move, please wait");
+                    System.out.println(xList);
+                    System.out.println(yList);
 
-                    
-                    
+                    xList.clear();
+                    yList.clear();
+
+
+                    g.setMessageLabel("Valid move, please wait");
                 } else if (response.startsWith("OPPONENT_MOVED")) {
                     String cmd[] = response.split(" ");
                     

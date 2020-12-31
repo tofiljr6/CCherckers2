@@ -259,7 +259,7 @@ public class SixArmBoardModel extends BoardModel {
 		}
 
 
-		hashMap.get(new Coordinates(xStart, yStart)).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(xStart, yStart)).setFieldColorHint(ColorsFor2Players.GREEN);
 
 		return true;
 	}
