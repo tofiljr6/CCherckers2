@@ -13,12 +13,14 @@ import settings.SixArmBoard;
 public class SixArmBoardModel extends BoardModel {
 
 
-	public CCPlayer currentPlayer;
+	private CCPlayer currentPlayer;
 	HashMap<Coordinates,FieldModel> hashMap = new HashMap<Coordinates, FieldModel>();
+	private  int numberOfPlayers;
 	
 	//add number of players in constructor->solution for problem in fieldModel
 	public SixArmBoardModel(SixArmBoard board, int numberOfPlayers) {
 		
+		this.numberOfPlayers = numberOfPlayers;
 		for(int i=0;i<board.getYSize(); i++) {
 			for(int j=0; j< board.getXSize(); j++) {
 				if(board.getFields()[i][j] == 1) {
@@ -164,7 +166,7 @@ public class SixArmBoardModel extends BoardModel {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
 		}
-		else if (ccPlayer.opponent == null) {
+		else if (ccPlayer.opponents == null) {
 			throw new IllegalStateException("You don't have an opponent yet");
 		} else if (hashMap.get(new Coordinates(xLoc, yLoc)).getState() != State.FREE) {
 			throw new IllegalStateException("This cell is occupied by other players");
@@ -179,13 +181,13 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get(new Coordinates(xLoc, yLoc)).setFieldColor(ccPlayer.color);
 
 		// setting to next opponent
-		currentPlayer = currentPlayer.opponent;
+		currentPlayer = currentPlayer.nextPlayer;
 	}
 	
 	public synchronized void jump(int xStart, int yStart, int xEnd, int yEnd, CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
-		} else if (ccPlayer.opponent == null) {
+		} else if (ccPlayer.opponents == null) {
 			throw new IllegalStateException("You don't have an opponent yet");
 		} else if (hashMap.get(new Coordinates(xEnd, yEnd)).getState() != State.FREE) {
 			throw new IllegalStateException("This cell is occupied by other players");
@@ -203,7 +205,7 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
 		
 		// setting to next opponent
-		currentPlayer = currentPlayer.opponent;
+		currentPlayer = currentPlayer.nextPlayer;
 	}
 
 	public synchronized boolean choose(int xStart, int yStart, CCPlayer ccPlayer) {
@@ -225,7 +227,19 @@ public class SixArmBoardModel extends BoardModel {
 		}
 
 		// setting to next opponent
-		currentPlayer = currentPlayer.opponent;
+		currentPlayer = currentPlayer.nextPlayer;
+	}
+	
+	public int getNumberOfPlayers() {
+		return numberOfPlayers;
+	}
+	
+	public CCPlayer getCurrentPlayer() {
+		return currentPlayer;
+	}
+	
+	public void setCurrentPlayer(CCPlayer ccplayer) {
+		this.currentPlayer = ccplayer;
 	}
 
 	public HashMap<Coordinates, FieldModel> getHashMap() {

@@ -3,19 +3,22 @@ package Server2;
 import GUI.Coordinates;
 import model.Colors;
 import model.ColorsFor2Players;
+import model.ColorsFor4Players;
 import model.FieldModel;
 import model.SixArmBoardModel;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class CCPlayer implements Runnable {
     public SixArmBoardModel sixArmBoardModel;
     public Colors color;
-    public CCPlayer opponent;
+    public ArrayList<CCPlayer> opponents;
+    public CCPlayer nextPlayer;
     Socket socket;
     Scanner input;
     PrintWriter output;
@@ -34,16 +37,18 @@ public class CCPlayer implements Runnable {
             processCommands();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (opponent != null && opponent.output != null) {
-                opponent.output.println("OTHER_PLAYER_LEFT");
-            }
+       } 
+        //TO-DO
+			finally {
+//				if (opponents.get(0) != null && opponents.get(0).output != null) {
+//	            opponents.get(0).output.println("OTHER_PLAYER_LEFT");
+//           }
 
-            try {
-                socket.close();
-            } catch (IOException e) {
+           try {
+               socket.close();
+           } catch (IOException e) {
 
-            }
+           }
         }
     }
 
@@ -52,14 +57,83 @@ public class CCPlayer implements Runnable {
         input = new Scanner(socket.getInputStream());
         output = new PrintWriter(socket.getOutputStream(), true);
         output.println("WELCOME " + color.toString());
-        if (color == ColorsFor2Players.BLUE) {
-            sixArmBoardModel.currentPlayer = this;
-            output.println("MESSAGE Waiting for opponent to connect");
-        } else {
-            opponent = sixArmBoardModel.currentPlayer;
-            opponent.opponent = this;
-            opponent.output.println("MESSAGE your move");
-        }
+        
+        int numberOfPlayers = sixArmBoardModel.getNumberOfPlayers();
+        
+        
+        switch(numberOfPlayers) {
+        	case 2:
+        		
+        		 if (color == ColorsFor2Players.BLUE) {
+        	            sixArmBoardModel.setCurrentPlayer(this);
+        	            output.println("MESSAGE Waiting for opponent to connect");
+        	        } else {
+        	        	sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
+        	        	sixArmBoardModel.getCurrentPlayer().opponents = new ArrayList<CCPlayer>();
+        	        	sixArmBoardModel.getCurrentPlayer().opponents.add(this);
+        	        	
+        	        	
+        	            this.opponents = new ArrayList<CCPlayer>();
+        	            this.opponents.add(sixArmBoardModel.getCurrentPlayer());
+        	            this.nextPlayer = sixArmBoardModel.getCurrentPlayer();
+        	         
+        	            this.nextPlayer.output.println("MESSAGE your move");
+        	        }
+        		 break;
+        		 
+        	case 4:
+        		 if (color == ColorsFor4Players.CYAN) {
+     	            sixArmBoardModel.setCurrentPlayer(this);
+     	            this.opponents = new ArrayList<CCPlayer>();
+     	            output.println("MESSAGE Waiting for opponent to connect");
+     	        } else if (color == ColorsFor4Players.RED){
+     	        	
+     	        	
+     	        	sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
+     	        	sixArmBoardModel.setCurrentPlayer(this);
+     	        	
+     	        	this.opponents = new ArrayList<CCPlayer>();
+     	        	 
+     	        } else if( color == ColorsFor4Players.YELLOW) {
+     	        	
+     	        	sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
+     	        	sixArmBoardModel.setCurrentPlayer(this);
+     	        	
+     	        	this.opponents = new ArrayList<CCPlayer>();
+     	        	
+        		}else if(color == ColorsFor4Players.MAGENTA) {
+        			
+        			sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
+     	        	sixArmBoardModel.setCurrentPlayer(this);
+        			
+     	        	sixArmBoardModel.getCurrentPlayer().nextPlayer.nextPlayer.nextPlayer.nextPlayer=this;
+     	        	
+     	        	this.opponents = new ArrayList<CCPlayer>();
+     	        	this.opponents.add(this.nextPlayer);
+     	        	this.opponents.add(this.nextPlayer.nextPlayer);
+     	        	this.opponents.add(this.nextPlayer.nextPlayer.nextPlayer);
+     	        	
+     	        	CCPlayer player = this.nextPlayer;
+     	        	//adding players to array List of opponents
+     	        	for(int j =0; j<4; j++) {
+	     	        	
+	     	        	CCPlayer playerToAdd = player.nextPlayer;
+	     	        	for(int i =0; i < 4 ;i ++) {
+	     	        	
+	     	        		
+	     	        		player.opponents.add(playerToAdd);
+	     	        		playerToAdd = playerToAdd.nextPlayer;
+	     	        	}
+	     	        	player = player.nextPlayer;
+     	        	}
+     	        	
+     	            this.nextPlayer.output.println("MESSAGE your move");
+     	        }
+     		 break;
+        } 	
+        
+      
+        
     }
 
     private void processCommands() {
@@ -99,11 +173,20 @@ public class CCPlayer implements Runnable {
         try {
             sixArmBoardModel.move(xLoc, yLoc, this);
             output.println("VALID_MOVE " + xLoc + " " + yLoc);
-            opponent.output.println("OPPONENT_MOVED " + xLoc + " " + yLoc);
-
+            
+            for(CCPlayer ccplayer: opponents) {
+            
+            	ccplayer.output.println("OPPONENT_MOVED " + xLoc + " " + yLoc);
+            }
+            
             if (sixArmBoardModel.hasWinner()) {
                 output.println("VICTORY");
-                opponent.output.println("DEFEAT");
+                
+                for(CCPlayer ccplayer: opponents) {
+                    
+                	ccplayer.output.println("DEFEAT");
+                }
+               
             }
 
 //            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n"
@@ -124,20 +207,29 @@ public class CCPlayer implements Runnable {
         try {
             sixArmBoardModel.jump(xStart, yStart, xEnd, yEnd, this);
             output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd +" " + yEnd);
-            opponent.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " +xEnd +" " +yEnd);
-
+            
+            
+            for(CCPlayer ccplayer: opponents) {
+                
+            	ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " +xEnd +" " +yEnd);
+            }
             if (sixArmBoardModel.hasWinner()) {
                 output.println("VICTORY");
-                opponent.output.println("DEFEAT");
+                
+                for(CCPlayer ccplayer: opponents) {
+                    
+                	ccplayer.output.println("DEFEAT");
+                }
+               
             }
 
 //            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n"
 //            + Arrays.deepToString(sixArmBoardModel.colors)); // todo finish to check
 
-            HashMap<Coordinates, FieldModel> board = sixArmBoardModel.getHashMap();
-            String btest1 = board.get(new Coordinates(xStart, yStart)).getColor().toString();
-            String btest2 = board.get(new Coordinates(xEnd, yEnd)).getColor().toString();
-            output.println("BOARD " + btest1+ " " +btest2);
+//            HashMap<Coordinates, FieldModel> board = sixArmBoardModel.getHashMap();
+//            String btest1 = board.get(new Coordinates(xStart, yStart)).getColor().toString();
+//            String btest2 = board.get(new Coordinates(xEnd, yEnd)).getColor().toString();
+//            output.println("BOARD " + btest1+ " " +btest2);
 
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
@@ -149,6 +241,7 @@ public class CCPlayer implements Runnable {
             // aks model is that field you have chosen is your
             if (sixArmBoardModel.choose(xStart, yStart, this)) {
                 // yes, chosen field is your so confirm move
+            	
                 output.println("CONFIRM_MOVE " + xStart + " " + yStart);
             }
         } catch (IllegalStateException e) {
@@ -161,8 +254,13 @@ public class CCPlayer implements Runnable {
             sixArmBoardModel.skip(this);
 
             output.println("YOU_SKIPPED");
-            opponent.output.println("OPPONENT_SKIP");
+      
 
+            for(CCPlayer ccplayer: opponents) {
+                
+            	ccplayer.output.println("OPPONENT_SKIP");
+            }
+            
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
         }

@@ -39,9 +39,6 @@ public class CCLient {
             String c = response.substring(8);
 
 
-//            String col[] = response.split(" ");
-
-            //Color opponentColor = color.startsWith("BLUE") ? java.awt.Color.green : java.awt.Color.BLUE;
             Color opponentColor;
             Color noopponentColor;
             

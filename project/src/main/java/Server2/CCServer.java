@@ -2,6 +2,7 @@ package Server2;
 
 import Server.Player;
 import model.ColorsFor2Players;
+import model.ColorsFor4Players;
 import model.SixArmBoardModel;
 import model.State;
 import settings.Board;
@@ -20,12 +21,25 @@ public class CCServer {
             var pool = Executors.newFixedThreadPool(20);
 
             while (true) {
-//                CCGame ccGame = new CCGame();
+//              CCGame ccGame = new CCGame();
                 SixArmBoard sixArmBoard = new SixArmBoard();
                 SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
 
-                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
-                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
+                int numberOfPlayers = sixArmBoardModel.getNumberOfPlayers();
+                
+                switch(numberOfPlayers) {
+                case 2:
+                	 pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
+                     pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
+                     break;
+                case 4:
+                	 pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.CYAN, listener.accept()));
+                     pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.RED, listener.accept()));
+                     pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.YELLOW, listener.accept()));
+                     pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.MAGENTA, listener.accept()));
+                }
+                	
+         
             }
 
         } catch (IOException e) {

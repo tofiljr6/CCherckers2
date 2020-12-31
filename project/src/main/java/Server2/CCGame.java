@@ -7,13 +7,14 @@ import model.State;
 import java.util.HashMap;
 
 public class CCGame {
-    public Color[][] colors = {{Color.NULL, Color.BLUE, Color.NULL},
-            {Color.RED, Color.NULL, Color.NULL},
-            {Color.NULL, Color.NULL, Color.NULL}};
-
-    public State[][] states = {{State.FREE, State.TAKEN, State.FREE},
-                        {State.TAKEN, State.FREE, State.FREE},
-                        {State.FREE, State.FREE, State.FREE}};
+	
+//    public Color[][] colors = {{Color.NULL, Color.BLUE, Color.NULL},
+//            {Color.RED, Color.NULL, Color.NULL},
+//            {Color.NULL, Color.NULL, Color.NULL}};
+//
+//    public State[][] states = {{State.FREE, State.TAKEN, State.FREE},
+//                        {State.TAKEN, State.FREE, State.FREE},
+//                        {State.FREE, State.FREE, State.FREE}};
 
     CCPlayer currentPlayer;
 
@@ -28,7 +29,7 @@ public class CCGame {
     public synchronized void move(int xLoc, int yLoc, CCPlayer ccPlayer) {
         if (ccPlayer != currentPlayer) {
             throw new IllegalStateException("NOT your turn");
-        } else if (ccPlayer.opponent == null) {
+        } else if (ccPlayer.opponents == null) {
             throw new IllegalStateException("You don't have an opponent yet");
         } else if (states[xLoc][yLoc] != State.FREE) {
             throw new IllegalStateException("This cell is ocpcupied by opponent");
