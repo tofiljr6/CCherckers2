@@ -185,7 +185,6 @@ public class SixArmBoardGUI extends BoardGUI {
 
 
 		hashMap.get(new Coordinates(16,4 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(15,5 )).changeColor(Color.BLUE);
 	}
 
 	public void setUpBoardFor4Players(){

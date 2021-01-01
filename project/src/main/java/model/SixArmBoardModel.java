@@ -15,10 +15,13 @@ public class SixArmBoardModel extends BoardModel {
 	private CCPlayer currentPlayer;
 	HashMap<Coordinates,FieldModel> hashMap = new HashMap<Coordinates, FieldModel>();
 	private  int numberOfPlayers;
+	private SixArmBoard board;
 	
 	//add number of players in constructor->solution for problem in fieldModel
 	public SixArmBoardModel(SixArmBoard board, int numberOfPlayers) {
-		
+
+		this.board = board;
+
 		this.numberOfPlayers = numberOfPlayers;
 		for(int i=0;i<board.getYSize(); i++) {
 			for(int j=0; j< board.getXSize(); j++) {
@@ -104,7 +107,6 @@ public class SixArmBoardModel extends BoardModel {
 		hashMap.get(new Coordinates(14,6 )).setFieldColor(ColorsFor2Players.GREEN);
 
 		hashMap.get(new Coordinates(16,4 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(15,5 )).setFieldColor(ColorsFor2Players.GREEN);
 	}
 	
 	
@@ -255,8 +257,6 @@ public class SixArmBoardModel extends BoardModel {
 				hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
 				hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
 			}
-
-
 		}
 
 //		// setting new color
@@ -316,8 +316,8 @@ public class SixArmBoardModel extends BoardModel {
 			throw new IllegalStateException("NOT your turn");
 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)) == null) {
 			return 1;
- 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN &&
-				   hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getColor() != ccPlayer.color) {
+ 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN ) { //&&
+//				   hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getColor() != ccPlayer.color) {
 			if (xDestination == 2 && yDestination == 0) {
 				return 3;
 			} else if (xDestination == -2 && yDestination == 0) {
@@ -347,18 +347,28 @@ public class SixArmBoardModel extends BoardModel {
 		return hashMap;
 	}
 
-	public int getHashMapCordColor(int x, int y) {
-//		try {
+	public synchronized int getHashMapCordColor(int x, int y) {
+//		if (hashMap.get(new Coordinates(x, y)).getColor() != null) {
+//			throw new IllegalStateException("no color");
+//		}
+
+		try {
+
 			if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.GREEN) {
 				return 1; // green
 			} else if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.BLUE) {
 				return 2; // blue
 			} else {
-				return 3;
+				return 3; // black
 			}
-//		} catch (NullPointerException nullPtrExce) {
+
+		} catch (NullPointerException nullPtrExce) {
 //			System.out.println("nullptr" + nullPtrExce);
-//		}
-//		return 0;
+		}
+		return 0;
+	}
+
+	public synchronized void oneMore(CCPlayer ccPlayer){
+		currentPlayer = currentPlayer.nextPlayer;
 	}
 }

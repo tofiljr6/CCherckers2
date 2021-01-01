@@ -155,6 +155,9 @@ public class CCLient {
                     for (int i = 0; i < xList.size(); i++) {
                         g.setColorRe(xList.get(i), yList.get(i), Color.BLACK);
                     }
+                } else if (response.startsWith("ONE_MORE_MOVE")) {
+                    out.println("you have one more move");
+                    g.setMessageLabel("You have one more move");
                 }
             }
         } catch (Exception e) {

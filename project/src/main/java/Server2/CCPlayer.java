@@ -315,7 +315,9 @@ public class CCPlayer implements Runnable {
                         case 7:
                             xm = xStart + xNeighborhood[i] + 1;
                             ym = yStart + yNeighborhood[i] - 1;
-                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+//                            if (3 != sixArmBoardModel.getHashMapCordColor(xm, ym)) { // why it works?
+                                output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+//                            }
                             xList.add(xm);
                             yList.add(ym);
                             break;
