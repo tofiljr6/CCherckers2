@@ -98,6 +98,10 @@ public class SixArmBoardModel extends BoardModel {
 		// easy test for jump through opponent - todo DELETE after
 		hashMap.get(new Coordinates(6,6 )).setFieldColor(ColorsFor2Players.BLUE);
 		hashMap.get(new Coordinates(16,6 )).setFieldColor(ColorsFor2Players.BLUE);
+		hashMap.get(new Coordinates(3,9 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(9,9 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(21,5 )).setFieldColor(ColorsFor2Players.GREEN);
+		hashMap.get(new Coordinates(18,8 )).setFieldColor(ColorsFor2Players.GREEN);
 
 		hashMap.get(new Coordinates(20,6 )).setFieldColor(ColorsFor2Players.BLUE);
 
