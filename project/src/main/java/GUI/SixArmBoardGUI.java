@@ -87,6 +87,11 @@ public class SixArmBoardGUI extends BoardGUI {
 								// resent state
 								counter = 0;
 							}
+							else if (counter == 2) {
+								System.out.println("you should have one more move");
+								out.println("AGAIN " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
+//								counter = 0;
+							}
 							
 						}
 

@@ -165,7 +165,25 @@ public class CCLient {
                 } else if (response.startsWith("ONE_MORE_MOVE")) {
                     out.println("you have one more move");
                     g.setMessageLabel("You have one more move");
+                } else if (response.startsWith("MOVE_AGAIN")) {
+                    g.setMessageLabel("you have extra move");
+                    g.counter = 2;
+                } else if (response.startsWith("NO_MOVE_AGAIN")) {
+                    g.setMessageLabel("dont have extra move");
+                    g.counter = 0;
                 }
+//                else if (response.startsWith("CLEAN_XY")) {
+//                    String cmd[] = response.split(" ");
+//
+//                    // this is coords correct fields
+//                    int xS = Integer.parseInt(cmd[1]);
+//                    int yS = Integer.parseInt(cmd[2]);
+//
+//                    g.setColorRe(xS, yS, Color.BLACK);
+//                    g.re();
+//                } else if (response.startsWith("REPAINT_ME")) {
+//                    g.re();
+//                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -185,7 +203,7 @@ public class CCLient {
             return;
         }
 
-        CCLient ccLient = new CCLient(args[0],4);
+        CCLient ccLient = new CCLient(args[0],2);
         ccLient.play();
 
     }
