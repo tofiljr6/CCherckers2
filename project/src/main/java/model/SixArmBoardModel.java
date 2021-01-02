@@ -160,16 +160,28 @@ public class SixArmBoardModel extends BoardModel {
 		
 		//cyan player
 		
-		hashMap.get(new Coordinates(3,9)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(4,10)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(5,11)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(6,12)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(4,12)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.CYAN);
-		hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.CYAN);
+		//uncomment that!!
+//		hashMap.get(new Coordinates(3,9)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(4,10)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(5,11)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(6,12)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(4,12)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.CYAN);
+//		hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.CYAN);
+		
+		hashMap.get(new Coordinates(3,9)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(4,10)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(5,11)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(8,12)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(4,12)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.RED);
+		hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.RED);
 	}
 	
 	public void setUpBoardFor6Players(){

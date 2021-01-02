@@ -237,16 +237,26 @@ public class SixArmBoardGUI extends BoardGUI {
 		
 		//cyan player
 		
-		hashMap.get(new Coordinates(3,9)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(4,10)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(5,11)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(6,12)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(2,10)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(3,11)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(4,12)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(1,11)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(2,12)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(0,12)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(3,9)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(4,10)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(5,11)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(6,12)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(2,10)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(3,11)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(4,12)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(1,11)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(2,12)).changeColor(Color.cyan);
+//		hashMap.get(new Coordinates(0,12)).changeColor(Color.cyan);
+		hashMap.get(new Coordinates(3,9)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(4,10)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(5,11)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(8,12)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(2,10)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(3,11)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(4,12)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(1,11)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(2,12)).changeColor(Color.RED);
+		hashMap.get(new Coordinates(0,12)).changeColor(Color.RED);
 	}
 	
 	public void setUpBoardFor6Players(){

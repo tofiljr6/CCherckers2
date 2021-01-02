@@ -345,13 +345,28 @@ public class CCPlayer implements Runnable {
                 }
             }
 
-//            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n"
-//            + Arrays.deepToString(sixArmBoardModel.colors)); // todo finish to check
+            // winner case
+          
 
-//            HashMap<Coordinates, FieldModel> board = sixArmBoardModel.getHashMap();
-//            String btest1 = board.get(new Coordinates(xStart, yStart)).getColor().toString();
-//            String btest2 = board.get(new Coordinates(xEnd, yEnd)).getColor().toString();
-//            output.println("BOARD " + btest1+ " " +btest2);
+            if (sixArmBoardModel.playerFinished(this, sixArmBoardModel.getHashMap())) {
+                output.println("CONGRATULATION you've finished "+ " " +sixArmBoardModel.getPlaceOfFinishedPlayer());
+
+
+                //winner is not longer in game,
+                //his next opponent is set as next player of player before winner 
+                for (CCPlayer ccplayer : opponents) {
+                    if(ccplayer.nextPlayer.equals(this)) {
+                    	ccplayer.setNextPlayer(this.nextPlayer);
+                    }
+                }
+
+                //for every opponent delete winner in opponents arraylists of opponents
+                for (CCPlayer ccplayer : opponents) {
+                	ccplayer.opponents.remove(this);
+                }
+            }
+        
+            
 
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());

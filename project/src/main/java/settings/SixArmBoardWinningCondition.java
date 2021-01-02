@@ -53,21 +53,22 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 			return false;
 	}
 	
-	private boolean redFinished() {
+	private boolean cyanFinished() {
 		if(
-		(hashMap.get(new Coordinates(3,9)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(4,10)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(15,11)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(6,12)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(2,10)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(3,11)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(4,12)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(1,11)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(2,12)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(0,12)).getColor()==ColorsFor4Players.CYAN) 
+		(hashMap.get(new Coordinates(18,4)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(20,4)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(22,4)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(24,4)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(19,5)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(21,5)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(23,5)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(20,6)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(22,6)).getColor()==ColorsFor4Players.CYAN) &&
+		(hashMap.get(new Coordinates(21,7)).getColor()==ColorsFor4Players.CYAN) 
 		)
+		
 			return true;
-		else 
+		else
 			return false;
 	}
 	
@@ -91,19 +92,31 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 	
 	
 	
-	private boolean cyanFinished() {
+	private boolean redFinished() {
 		if(
-		(hashMap.get(new Coordinates(18,4)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(20,4)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(22,4)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(24,4)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(19,5)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(21,5)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(23,5)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(20,6)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(22,6)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(21,7)).getColor()==ColorsFor4Players.RED) 
+		(hashMap.get(new Coordinates(3,9)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(4,10)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(5,11)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(6,12)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(2,10)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(3,11)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(4,12)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(1,11)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(2,12)).getColor()==ColorsFor4Players.RED) &&
+		(hashMap.get(new Coordinates(0,12)).getColor()==ColorsFor4Players.RED) 
 		)
+			
+			//uncomment that!!
+//			hashMap.get(new Coordinates(3,9)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(4,10)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(5,11)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(6,12)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(4,12)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.CYAN);
+//			hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.CYAN);
 			return true;
 		else 
 			return false;
