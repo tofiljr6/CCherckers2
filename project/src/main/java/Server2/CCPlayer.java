@@ -620,6 +620,7 @@ public class CCPlayer implements Runnable {
             yList.clear();
             output.println("CLEAR_HINTS");
             output.println("CLEAN_LISTS");
+            output.println("NO_MOVE_AGAIN");
 
             for(CCPlayer ccplayer: opponents) {
                 
