@@ -26,6 +26,8 @@ public class CCPlayer implements Runnable {
     private ArrayList<Integer> xList = new ArrayList<>();
     private ArrayList<Integer> yList = new ArrayList<>();
     private boolean oneMoreMove = false;
+    private int xClicked;
+    private int yClicked;
 
     public CCPlayer(SixArmBoardModel sixArmBoardModel, Colors color, Socket socket) {
         this.sixArmBoardModel = sixArmBoardModel;
@@ -172,6 +174,12 @@ public class CCPlayer implements Runnable {
                 processInfoCommand(xStart, yStart);
             } else if (command.startsWith("SKIP")) {
                 processSkipCommand();
+            } else if (command.startsWith("CLICKED")) {
+                String cmd[] = command.split(" ");
+                int xStart = Integer.parseInt(cmd[1]);
+                int yStart = Integer.parseInt(cmd[2]);
+                xClicked = xStart;
+                yClicked = yStart;
             }
         }
     }
@@ -220,8 +228,48 @@ public class CCPlayer implements Runnable {
                     // jump to destination
                     sixArmBoardModel.jump(xStart, yStart, xEnd, yEnd, this);
 
-                    // sends communication to client - player
-                    output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd);
+
+                    // set next player
+                    if (yStart == yEnd && xEnd - xStart == 4) { // right jump now only
+                        // the same player has more move
+                        output.println("ONE_MORE_MOVE");
+                        // sends communication to client - player
+                        output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " oneMoreMove");
+//                        // new hints - where you can now jump
+//                        processInfoCommand(xEnd, yEnd);
+
+                        // choose and print new fields hints
+                        xList.clear();
+                        yList.clear();
+                        output.println("CLEAR_HINTS");
+                        processInfoCommand(xEnd, yEnd);
+
+
+//                        output.println("CONFIRM_MOVE " + xEnd + " " + yEnd);
+//
+//                        for (int j = 0; j < xList.size(); j++) {
+//                            if (xList.get(j) == xClicked && yList.get(j) == yClicked) {
+//                                processJumpCommand(xEnd, yEnd, xClicked, yClicked);
+//                            }
+//                        }
+
+//                        var command = input.nextLine();
+//                        if (command.startsWith("CHOOSE")) {
+//                            String cmd[] = command.split(" ");
+//                            int xStart2 = Integer.parseInt(cmd[1]);
+//                            int yStart2 = Integer.parseInt(cmd[2]);
+//                            processInfoCommand(xStart2, yStart2);
+//                        }
+
+                    } else {
+                        // set new player, current player dont have more move so it is next player time
+                        sixArmBoardModel.setCurrentPlayer(nextPlayer);
+                        // sends communication to client - player
+                        output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " not");
+                    }
+
+//                    // sends communication to client - player
+//                    output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd);
 
                     // sends communication to client - opponents
                     for (CCPlayer ccplayer : opponents) {
@@ -288,6 +336,14 @@ public class CCPlayer implements Runnable {
                             xm = xStart + xNeighborhood[i] + 2;
                             ym = yStart + yNeighborhood[i];
                             output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+
+//                            xm = xStart + xNeighborhood[i] + 2;
+////                            ym = yStart + yNeighborhood[i];
+//                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+//                            processInfoCommand(xm, ym);
+
+//                            output.println("HINT_TO " + 0 + " " + 12 + " " + sixArmBoardModel.getHashMapCordColor(0 ,12));
+
                             xList.add(xm);
                             yList.add(ym);
                             break;

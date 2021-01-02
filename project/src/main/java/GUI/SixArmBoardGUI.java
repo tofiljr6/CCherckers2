@@ -71,6 +71,7 @@ public class SixArmBoardGUI extends BoardGUI {
 							
 							//out.println("MOVE " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
 							System.out.println("CLICKED " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
+							out.println("CLICKED " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
 
 							if(counter == 0) {
 								msg = "JUMP " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY();

@@ -84,8 +84,13 @@ public class CCLient {
                     xList.clear();
                     yList.clear();
 
-
-                    g.setMessageLabel("Valid move, please wait");
+                    if (cmd[5].equals("oneMoreMove")) {
+                        // one more move
+                        g.setMessageLabel("you have one more move");
+                    } else {
+                        // you have one move
+                        g.setMessageLabel("Valid move, please wait");
+                    }
                 } else if (response.startsWith("OPPONENT_MOVED")) {
                     String cmd[] = response.split(" ");
                     

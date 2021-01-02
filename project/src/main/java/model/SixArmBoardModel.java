@@ -256,6 +256,21 @@ public class SixArmBoardModel extends BoardModel {
 				// setting new color
 				hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
 				hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
+//
+//
+//				if (hashMap.get(new Coordinates(xEnd - 2, yEnd)).getState() == State.TAKEN) {
+//					System.out.println("you should have one more move");
+//				} else {
+//					currentPlayer = currentPlayer.nextPlayer;
+//				}
+
+//				if (2 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
+					// no jump over opponents
+//					currentPlayer = currentPlayer.nextPlayer;
+//				} else {
+//					// case where you jump over opponents
+//					System.out.println("you should have one more move");
+//				}
 			}
 		}
 
@@ -264,7 +279,7 @@ public class SixArmBoardModel extends BoardModel {
 //		hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
 		
 		// setting to next opponent
-		currentPlayer = currentPlayer.nextPlayer;
+//		currentPlayer = currentPlayer.nextPlayer;
 	}
 
 	public synchronized boolean choose(int xStart, int yStart, CCPlayer ccPlayer) {
