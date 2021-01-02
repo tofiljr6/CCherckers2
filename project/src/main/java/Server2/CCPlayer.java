@@ -260,7 +260,12 @@ public class CCPlayer implements Runnable {
                         yList.add(ym);
 
 
-                        output.println("MOVE_AGAIN");
+                        if (3 == sixArmBoardModel.hints(xEnd, 2, yEnd, 0, this)) {
+                            output.println("MOVE_AGAIN");
+                        } else {
+                            output.println("NO_MOVE_AGAIN");
+                            sixArmBoardModel.setCurrentPlayer(nextPlayer);
+                        }
 
                         xRemember = xEnd;
                         yRemember = yEnd;
