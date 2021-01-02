@@ -189,7 +189,7 @@ public class SixArmBoardModel extends BoardModel {
 	}
 
 	public boolean gameFinished() {
-		// todo winner cases
+		
 		return winningConditions.isGameFinished();
 	}
 
@@ -201,6 +201,11 @@ public class SixArmBoardModel extends BoardModel {
 	public int getPlaceOfFinishedPlayer() {
 		return winningConditions.getNumberOfFinishedPlayers();
 	}
+	
+	
+	
+	
+	
 	
 	public synchronized void move(int xLoc, int yLoc, CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {

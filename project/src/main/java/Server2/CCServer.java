@@ -19,7 +19,7 @@ public class CCServer {
         try (var listener = new ServerSocket(59001)) {
             System.out.println("CCServer 2.0 is running...");
             var pool = Executors.newFixedThreadPool(20);
-            	System.out.print(ColorsFor4Players.MAGENTA.toString());
+            System.out.print(ColorsFor4Players.MAGENTA.toString());
             while (true) {
 //                CCGame ccGame = new CCGame();
                 SixArmBoard sixArmBoard = new SixArmBoard();

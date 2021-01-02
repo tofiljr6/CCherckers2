@@ -9,7 +9,7 @@ public class ColorInterpreter {
 	
 	public ColorInterpreter(int numberOfPlayers) {
 		
-		
+		 
 		this.numberOfPlayers = numberOfPlayers;
 	}
 	

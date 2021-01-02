@@ -341,25 +341,7 @@ public class CCPlayer implements Runnable {
                         }
                     }
 
-                    // winner case
-                    if (sixArmBoardModel.playerFinished(this, sixArmBoardModel.getHashMap())) {
-                        output.println("Congratulation you've finished "+ " " +sixArmBoardModel.getPlaceOfFinishedPlayer());
-                        
-                        
-                        //winner is not longer in game,
-                        //his next opponent is set as next player of player before winner 
-                        for (CCPlayer ccplayer : opponents) {
-                            if(ccplayer.nextPlayer.equals(this)) {
-                            	
-                            	ccplayer.setNextPlayer(this.nextPlayer);
-                            }
-                        }
-                                                                 
-                        //for every opponent delete winner in opponents arraylists of opponents
-                        for (CCPlayer ccplayer : opponents) {
-                        	ccplayer.opponents.remove(this);
-                        }
-                    }
+
                 }
             }
 

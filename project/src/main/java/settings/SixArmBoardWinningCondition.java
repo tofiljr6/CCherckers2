@@ -11,7 +11,7 @@ import model.FieldModel;
 
 public class SixArmBoardWinningCondition extends WinningConditions{
 
-	private HashMap<Coordinates,FieldModel> hashMap;
+	private HashMap<Coordinates,FieldModel> hashMap = new HashMap<>();
 	
 	public SixArmBoardWinningCondition(int numberOfPlayers) {
 		super(numberOfPlayers);

@@ -7,13 +7,13 @@ public class WinningConditions {
 	protected int numberOfPlayers;
 	protected int numberOfFinishedPlayers;
 	
-	
+
 	public WinningConditions(int numberOfPlayers) {
 		
-		this.numberOfPlayers = numberOfPlayers;
-		this.numberOfFinishedPlayers = 0;
+			this.numberOfPlayers = numberOfPlayers;
+			this.numberOfFinishedPlayers = 0;
 
-	}
+}
 	
 	
 	public int getNumberOfPlayers() {

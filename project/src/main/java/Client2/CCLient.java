@@ -22,7 +22,7 @@ public class CCLient {
     private ArrayList<Integer> xList = new ArrayList<>();
     private ArrayList<Integer> yList = new ArrayList<>();
 
-
+ 
     private int numberOfPlayers;
     
     public CCLient(String serverAddress, int numberOfPlayers) throws Exception {
@@ -178,6 +178,10 @@ public class CCLient {
                     xList.clear();
                     yList.clear();
 
+                }
+                else if (response.startsWith("CONGRATULATION")) {
+
+                	g.setMessageLabel(response);
                 }
 //                else if (response.startsWith("CLEAN_XY")) {
 //                    String cmd[] = response.split(" ");
