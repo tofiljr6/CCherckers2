@@ -9,6 +9,7 @@ import GUI.Coordinates;
 
 import Server2.CCPlayer;
 import settings.SixArmBoard;
+import settings.SixArmBoardWinningCondition;
 
 public class SixArmBoardModel extends BoardModel {
 
@@ -18,9 +19,13 @@ public class SixArmBoardModel extends BoardModel {
 	private  int numberOfPlayers;
 	private SixArmBoard board;
 	public ArrayList<CCPlayer> players = new ArrayList<>();
+	
+	private SixArmBoardWinningCondition winningConditions;
 	//add number of players in constructor->solution for problem in fieldModel
 	public SixArmBoardModel(SixArmBoard board, int numberOfPlayers) {
 
+		
+		winningConditions = new SixArmBoardWinningCondition(numberOfPlayers);
 		this.board = board;
 
 		this.numberOfPlayers = numberOfPlayers;
@@ -179,12 +184,20 @@ public class SixArmBoardModel extends BoardModel {
 	    return null;
 	}
 
-	public boolean hasWinner() {
+	public boolean gameFinished() {
 		// todo winner cases
-		return (hashMap.get(new Coordinates(14, 8)).getColor() == ColorsFor2Players.GREEN ||
-				hashMap.get(new Coordinates(14, 8)).getColor() == ColorsFor2Players.BLUE);
+		return winningConditions.isGameFinished();
 	}
 
+	public boolean playerFinished(CCPlayer player, HashMap<Coordinates,FieldModel> hashMap) {
+		
+		return winningConditions.playerFinished(player, hashMap);
+	}
+	
+	public int getPlaceOfFinishedPlayer() {
+		return winningConditions.getNumberOfFinishedPlayers();
+	}
+	
 	public synchronized void move(int xLoc, int yLoc, CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");

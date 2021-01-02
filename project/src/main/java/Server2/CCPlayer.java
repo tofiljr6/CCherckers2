@@ -199,15 +199,15 @@ public class CCPlayer implements Runnable {
             	ccplayer.output.println("OPPONENT_MOVED " + xLoc + " " + yLoc);
             }
             
-            if (sixArmBoardModel.hasWinner()) {
-                output.println("VICTORY");
-                
-                for(CCPlayer ccplayer: opponents) {
-                    
-                	ccplayer.output.println("DEFEAT");
-                }
-               
-            }
+//            if (sixArmBoardModel.hasWinner()) {
+//                output.println("VICTORY");
+//                
+//                for(CCPlayer ccplayer: opponents) {
+//                    
+//                	ccplayer.output.println("DEFEAT");
+//                }
+//               
+//            }
 
 //            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n"
 //            + Arrays.deepToString(sixArmBoardModel.colors)); // todo finish to check
@@ -324,11 +324,22 @@ public class CCPlayer implements Runnable {
 
 
                     // winner case
-                    if (sixArmBoardModel.hasWinner()) {
-                        output.println("VICTORY");
-
+                    if (sixArmBoardModel.playerFinished(this, sixArmBoardModel.getHashMap())) {
+                        output.println("Congratulation you've finished "+ " " +sixArmBoardModel.getPlaceOfFinishedPlayer());
+                        
+                        
+                        //winner is not longer in game,
+                        //his next opponent is set as next player of player before winner 
                         for (CCPlayer ccplayer : opponents) {
-                            ccplayer.output.println("DEFEAT");
+                            if(ccplayer.nextPlayer.equals(this)) {
+                            	
+                            	ccplayer.setNextPlayer(this.nextPlayer);
+                            }
+                        }
+                                                                 
+                        //for every opponent delete winner in opponents arraylists of opponents
+                        for (CCPlayer ccplayer : opponents) {
+                        	ccplayer.opponents.remove(this);
                         }
                     }
                 }
