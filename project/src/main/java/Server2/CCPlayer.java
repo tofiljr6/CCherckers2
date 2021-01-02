@@ -184,7 +184,7 @@ public class CCPlayer implements Runnable {
                 int xEnd = Integer.parseInt(cmd[1]);
                 int yEnd = Integer.parseInt(cmd[2]);
                 processJumpCommand(xRemember, yRemember, xEnd, yEnd);
-                output.println("NO_MOVE_AGAIN");
+//                output.println("NO_MOVE_AGAIN"); // unless
             }
         }
     }
@@ -253,13 +253,26 @@ public class CCPlayer implements Runnable {
                         yList.clear();
                         output.println("CLEAR_HINTS");
 
-                        int xm = xEnd + 2 + 2;
-                        int ym = yEnd;
-                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
-                        xList.add(xm);
-                        yList.add(ym);
+//                        int xm = xEnd + 2 + 2;
+//                        int ym = yEnd;
+//                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+//                        xList.add(xm);
+//                        yList.add(ym);
 
-                        if (2 != sixArmBoardModel.hints(xEnd, 2, yEnd, 0, this)) { // 3
+                        boolean surroundings = false;
+
+                        for (int q = 0; q < xNeighborhood.length; q++) {
+                            if (2 != sixArmBoardModel.hints(xEnd, xNeighborhood[q], yEnd, yNeighborhood[q], this)) {
+                                surroundings = true;
+                                int xm = xEnd + (xNeighborhood[q] * 2);
+                                int ym = yEnd + (yNeighborhood[q] * 2);
+                                output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                                xList.add(xm);
+                                yList.add(ym);
+                            }
+                        }
+
+                        if (surroundings) { // 3
                             output.println("MOVE_AGAIN");
                         } else {
                             output.println("NO_MOVE_AGAIN");
@@ -286,13 +299,26 @@ public class CCPlayer implements Runnable {
                         yList.clear();
                         output.println("CLEAR_HINTS");
 
-                        int xm = xEnd + 1 + 1;
-                        int ym = yEnd + 1 + 1;
-                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
-                        xList.add(xm);
-                        yList.add(ym);
+//                        int xm = xEnd + 1 + 1;
+//                        int ym = yEnd + 1 + 1;
+//                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+//                        xList.add(xm);
+//                        yList.add(ym);
 
-                        if (2 != sixArmBoardModel.hints(xEnd, 1, yEnd, 1, this)) { // 6
+                        boolean surroundings = false;
+
+                        for (int q = 0; q < xNeighborhood.length; q++) {
+                            if (2 != sixArmBoardModel.hints(xEnd, xNeighborhood[q], yEnd, yNeighborhood[q], this)) {
+                                surroundings = true;
+                                int xm = xEnd + (xNeighborhood[q] * 2);
+                                int ym = yEnd + (yNeighborhood[q] * 2);
+                                output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                                xList.add(xm);
+                                yList.add(ym);
+                            }
+                        }
+
+                        if (surroundings) { // 6 // 2 != sixArmBoardModel.hints(xEnd, 1, yEnd, 1, this)
                             output.println("MOVE_AGAIN");
                         } else {
                             output.println("NO_MOVE_AGAIN");
@@ -319,13 +345,26 @@ public class CCPlayer implements Runnable {
                         yList.clear();
                         output.println("CLEAR_HINTS");
 
-                        int xm = xEnd - 2 - 2;
-                        int ym = yEnd;
-                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
-                        xList.add(xm);
-                        yList.add(ym);
+//                        int xm = xEnd - 2 - 2;
+//                        int ym = yEnd;
+//                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+//                        xList.add(xm);
+//                        yList.add(ym);
 
-                        if (2 != sixArmBoardModel.hints(xEnd, -2, yEnd, 0, this)) { // 4
+                        boolean surroundings = false;
+
+                        for (int q = 0; q < xNeighborhood.length; q++) {
+                            if (2 != sixArmBoardModel.hints(xEnd, xNeighborhood[q], yEnd, yNeighborhood[q], this)) {
+                                surroundings = true;
+                                int xm = xEnd + (xNeighborhood[q] * 2);
+                                int ym = yEnd + (yNeighborhood[q] * 2);
+                                output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                                xList.add(xm);
+                                yList.add(ym);
+                            }
+                        }
+
+                        if (surroundings) { // 4 // 2 != sixArmBoardModel.hints(xEnd, -2, yEnd, 0, this)
                             output.println("MOVE_AGAIN");
                         } else {
                             output.println("NO_MOVE_AGAIN");
@@ -352,13 +391,26 @@ public class CCPlayer implements Runnable {
                         yList.clear();
                         output.println("CLEAR_HINTS");
 
-                        int xm = xEnd - 1 - 1;
-                        int ym = yEnd - 1 - 1;
-                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
-                        xList.add(xm);
-                        yList.add(ym);
+//                        int xm = xEnd - 1 - 1;
+//                        int ym = yEnd - 1 - 1;
+//                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+//                        xList.add(xm);
+//                        yList.add(ym);
 
-                        if (2 != sixArmBoardModel.hints(xEnd, -1, yEnd, -1, this)) { // 8
+                        boolean surroundings = false;
+
+                        for (int q = 0; q < xNeighborhood.length; q++) {
+                            if (2 != sixArmBoardModel.hints(xEnd, xNeighborhood[q], yEnd, yNeighborhood[q], this)) {
+                                surroundings = true;
+                                int xm = xEnd + (xNeighborhood[q] * 2);
+                                int ym = yEnd + (yNeighborhood[q] * 2);
+                                output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                                xList.add(xm);
+                                yList.add(ym);
+                            }
+                        }
+
+                        if (surroundings) { // 8 // 2 != sixArmBoardModel.hints(xEnd, -1, yEnd, -1, this)
                             output.println("MOVE_AGAIN");
                         } else {
                             output.println("NO_MOVE_AGAIN");
@@ -385,13 +437,26 @@ public class CCPlayer implements Runnable {
                         yList.clear();
                         output.println("CLEAR_HINTS");
 
-                        int xm = xEnd - 1 - 1;
-                        int ym = yEnd + 1 + 1;
-                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
-                        xList.add(xm);
-                        yList.add(ym);
+//                        int xm = xEnd - 1 - 1;
+//                        int ym = yEnd + 1 + 1;
+//                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+//                        xList.add(xm);
+//                        yList.add(ym);
 
-                        if (2 != sixArmBoardModel.hints(xEnd, -1, yEnd, 1, this)) { // 5
+                        boolean surroundings = false;
+
+                        for (int q = 0; q < xNeighborhood.length; q++) {
+                            if (2 != sixArmBoardModel.hints(xEnd, xNeighborhood[q], yEnd, yNeighborhood[q], this)) {
+                                surroundings = true;
+                                int xm = xEnd + (xNeighborhood[q] * 2);
+                                int ym = yEnd + (yNeighborhood[q] * 2);
+                                output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                                xList.add(xm);
+                                yList.add(ym);
+                            }
+                        }
+
+                        if (surroundings) { // 5 // 2 != sixArmBoardModel.hints(xEnd, -1, yEnd, 1, this)
                             output.println("MOVE_AGAIN");
                         } else {
                             output.println("NO_MOVE_AGAIN");
