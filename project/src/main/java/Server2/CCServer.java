@@ -25,18 +25,18 @@ public class CCServer {
                 SixArmBoard sixArmBoard = new SixArmBoard();
 
                 // game to two players
-                SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
-
-                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
-                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
+//               SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
+//
+//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
+//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
 
                 // game to four players
-//                SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,4);
-//
-//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.YELLOW, listener.accept()));
-//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.RED, listener.accept()));
-//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.MAGENTA, listener.accept()));
-//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.CYAN, listener.accept()));
+               SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,4);
+               
+                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.MAGENTA, listener.accept()));
+                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.CYAN, listener.accept()));
+                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.YELLOW, listener.accept()));
+                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.RED, listener.accept()));
 
 
             }

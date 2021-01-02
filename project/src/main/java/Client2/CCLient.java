@@ -15,7 +15,7 @@ public class CCLient {
     private Socket socket;
     private Scanner in;
     private PrintWriter out;
-
+    private ColorInterpreter colorInterpreter;
     public SixArmBoard board = new SixArmBoard(); // signleton pattern ?? xd
     public SixArmBoardGUI g;
     // hints fields coords
@@ -23,16 +23,21 @@ public class CCLient {
     private ArrayList<Integer> yList = new ArrayList<>();
 
 
-
-    public CCLient(String serverAddress) throws Exception {
+    private int numberOfPlayers;
+    
+    public CCLient(String serverAddress, int numberOfPlayers) throws Exception {
         socket = new Socket(serverAddress, 59001);
         in = new Scanner(socket.getInputStream());
         out = new PrintWriter(socket.getOutputStream(), true);
 
+        
+        this.numberOfPlayers = numberOfPlayers;
 //      board = new SixArmBoard();
-        g = new SixArmBoardGUI(board,2,out);
-      
+        g = new SixArmBoardGUI(board,this.numberOfPlayers,out);
+        colorInterpreter = new ColorInterpreter(this.numberOfPlayers);
     }
+    
+   
 
     public void play() throws Exception {
         try {
@@ -43,35 +48,31 @@ public class CCLient {
             String c = response.substring(8);
 
 
-            Color opponentColor;
-            Color noopponentColor;
+            Color currentPlayerColor;
+            Color playerColor;
 
-            if (c.equals("GREEN")) {
-                noopponentColor = Color.green;
-                opponentColor = Color.blue;
-            } else {
-                noopponentColor = Color.blue;
-                opponentColor = Color.green;
-            }
+            playerColor = colorInterpreter.interprateColors(c);
+            currentPlayerColor = Color.magenta;
 
             while (in.hasNextLine()) {
                 response = in.nextLine();
                 if (response.startsWith("VALID_MOVE") ) {
                     // rewrite VALID_MODE signal
                 	
+                
                     String cmd[] = response.split(" ");
                     int xStart = Integer.parseInt(cmd[1]);
                     int yStart = Integer.parseInt(cmd[2]);
                     int xEnd = Integer.parseInt(cmd[3]);
                     int yEnd = Integer.parseInt(cmd[4]);
-
+                    
                     // clean a hints
                     // so gray fields comes to black again
                     for (int i = 0; i < xList.size(); i++) {
                         g.setColorRe(xList.get(i), yList.get(i), Color.BLACK);
                     }
 
-                    g.setColorRe(xEnd , yEnd, noopponentColor);
+                    g.setColorRe(xEnd , yEnd, playerColor);
                     g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
 
@@ -93,13 +94,14 @@ public class CCLient {
                     }
                 } else if (response.startsWith("OPPONENT_MOVED")) {
                     String cmd[] = response.split(" ");
-                    
+                   
                     int xStart = Integer.parseInt(cmd[1]);
                     int yStart = Integer.parseInt(cmd[2]);
                     int xEnd = Integer.parseInt(cmd[3]);
                     int yEnd = Integer.parseInt(cmd[4]);
+                    currentPlayerColor = colorInterpreter.interprateColors(cmd[5]);
                     
-                    g.setColorRe(xEnd , yEnd, opponentColor);
+                    g.setColorRe(xEnd , yEnd, currentPlayerColor);
                     g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
 
@@ -170,6 +172,11 @@ public class CCLient {
         } finally {
             socket.close();
         }
+        
+        
+     
+        
+        
     }
 
     public static void main(String[] args)  throws Exception {
@@ -178,7 +185,7 @@ public class CCLient {
             return;
         }
 
-        CCLient ccLient = new CCLient(args[0]);
+        CCLient ccLient = new CCLient(args[0],4);
         ccLient.play();
 
     }

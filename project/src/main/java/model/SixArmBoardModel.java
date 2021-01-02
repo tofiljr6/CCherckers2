@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Map.Entry;
@@ -16,7 +17,7 @@ public class SixArmBoardModel extends BoardModel {
 	HashMap<Coordinates,FieldModel> hashMap = new HashMap<Coordinates, FieldModel>();
 	private  int numberOfPlayers;
 	private SixArmBoard board;
-	
+	public ArrayList<CCPlayer> players = new ArrayList<>();
 	//add number of players in constructor->solution for problem in fieldModel
 	public SixArmBoardModel(SixArmBoard board, int numberOfPlayers) {
 

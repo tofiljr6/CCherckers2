@@ -88,43 +88,41 @@ public class CCPlayer implements Runnable {
         		 break;
         		 
         	case 4:
-        		 if (color == ColorsFor4Players.CYAN) {
-     	            sixArmBoardModel.setCurrentPlayer(this);
+        		 if (color == ColorsFor4Players.MAGENTA) {
+        			sixArmBoardModel.setCurrentPlayer(this);
+     	            sixArmBoardModel.players.add(this);
      	            this.opponents = new ArrayList<CCPlayer>();
      	            output.println("MESSAGE Waiting for opponent to connect");
-     	        } else if (color == ColorsFor4Players.RED){
+     	        } else if (color == ColorsFor4Players.CYAN){
      	        	
      	        	
-     	        	sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
-     	        	sixArmBoardModel.setCurrentPlayer(this);
-     	        	
+     	        	sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
      	        	 
      	        } else if( color == ColorsFor4Players.YELLOW) {
      	        	
-     	        	sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
-     	        	sixArmBoardModel.setCurrentPlayer(this);
-     	        	
+     	        	sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
      	        	
-        		}else if(color == ColorsFor4Players.MAGENTA) {
+        		}else if(color == ColorsFor4Players.RED) {
         			
-        			sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
-     	        	sixArmBoardModel.setCurrentPlayer(this);
-        			
-     	        	sixArmBoardModel.getCurrentPlayer().nextPlayer.nextPlayer.nextPlayer.nextPlayer=this;
-     	        	
+        			sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
-     	        	this.opponents.add(this.nextPlayer);
-     	        	this.opponents.add(this.nextPlayer.nextPlayer);
-     	        	this.opponents.add(this.nextPlayer.nextPlayer.nextPlayer);
      	        	
-     	        	CCPlayer player = this.nextPlayer;
+     	        	
+     	        	
+     	        	this.setNextPlayer(sixArmBoardModel.players.get(0));
+     	        	this.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(1));
+     	        	this.nextPlayer.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(2));
+     	        	this.nextPlayer.nextPlayer.nextPlayer.setNextPlayer(this);
+     	        	
+     	        	
+     	        	CCPlayer player = this;
      	        	//adding players to array List of opponents
      	        	for(int j =0; j<4; j++) {
 	     	        	
 	     	        	CCPlayer playerToAdd = player.nextPlayer;
-	     	        	for(int i =0; i < 4 ;i ++) {
+	     	        	for(int i =0; i < 3 ;i ++) {
 	     	        	
 	     	        		
 	     	        		player.opponents.add(playerToAdd);
@@ -134,6 +132,7 @@ public class CCPlayer implements Runnable {
      	        	}
      	        	
      	            this.nextPlayer.output.println("MESSAGE your move");
+     	           
      	        }
      		 break;
         } 	
@@ -273,7 +272,7 @@ public class CCPlayer implements Runnable {
 
                     // sends communication to client - opponents
                     for (CCPlayer ccplayer : opponents) {
-                        ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd);
+                        ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
                     }
 
                     // winner case
@@ -303,6 +302,7 @@ public class CCPlayer implements Runnable {
     private void processInfoCommand(int xStart, int yStart) {
         try {
 
+        	
 //            sixArmBoardModel.hints(xStart, yStart, this);
 
             xList.clear();
@@ -311,6 +311,7 @@ public class CCPlayer implements Runnable {
             // aks model is that field you have chosen is your
             if (sixArmBoardModel.choose(xStart, yStart, this)) {
                 // yes, chosen field is your so confirm move
+            	
             	
                 output.println("CONFIRM_MOVE " + xStart + " " + yStart);
 
@@ -409,5 +410,9 @@ public class CCPlayer implements Runnable {
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
         }
+    }
+    
+    private void setNextPlayer(CCPlayer player) {
+    	this.nextPlayer = player;
     }
 }
