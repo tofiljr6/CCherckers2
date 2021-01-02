@@ -241,6 +241,7 @@ public class CCPlayer implements Runnable {
 
                     // set next player
                     if (yStart == yEnd && xEnd - xStart == 4) { // right jump now only
+                        System.out.println("right jump");
                         // the same player has more move
                         output.println("ONE_MORE_MOVE");
                         // sends communication to client - player
@@ -251,7 +252,6 @@ public class CCPlayer implements Runnable {
                         xList.clear();
                         yList.clear();
                         output.println("CLEAR_HINTS");
-//                        processInfoCommand(xEnd, yEnd);
 
                         int xm = xEnd + 2 + 2;
                         int ym = yEnd;
@@ -259,52 +259,154 @@ public class CCPlayer implements Runnable {
                         xList.add(xm);
                         yList.add(ym);
 
-
-                        if (3 == sixArmBoardModel.hints(xEnd, 2, yEnd, 0, this)) {
+                        if (2 != sixArmBoardModel.hints(xEnd, 2, yEnd, 0, this)) { // 3
                             output.println("MOVE_AGAIN");
                         } else {
                             output.println("NO_MOVE_AGAIN");
+                            output.println("CLEAR_HINTS");
                             sixArmBoardModel.setCurrentPlayer(nextPlayer);
                         }
 
                         xRemember = xEnd;
                         yRemember = yEnd;
 
-                        // czy jest jeszcze mozliwosc dalszego skakania?
-                        // wykluczaja ten co juz skoczylismy
-//                        for (int w = 0; w < xNeighborhood.length; w++) {
-//                            if (2 == sixArmBoardModel.hints(xEnd, xNeighborhood[w], yEnd, yNeighborhood[w], this) &&
-//                                    xNeighborhood[w] != -2 && yNeighborhood[w] != 0) { // przeciwienstwo po poprzedni ruch!
-//                                output.println("NO_MOVE_AGAIN");
-//                            }
-//                        }
+                        for (CCPlayer ccplayer : opponents) {
+                            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
+                        }
+                    } else if (yEnd - yStart == 2 && xEnd - xStart == 2) { // bottom right jump
+                        System.out.println("bottom right");
+                        // the same player has more move
+                        output.println("ONE_MORE_MOVE");
+                        // sends communication to client - player
+                        output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " oneMoreMove");
+                        processInfoCommand(xEnd, yEnd);
 
+                        // choose and print new fields hints
+                        xList.clear();
+                        yList.clear();
+                        output.println("CLEAR_HINTS");
+
+                        int xm = xEnd + 1 + 1;
+                        int ym = yEnd + 1 + 1;
+                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                        xList.add(xm);
+                        yList.add(ym);
+
+                        if (2 != sixArmBoardModel.hints(xEnd, 1, yEnd, 1, this)) { // 6
+                            output.println("MOVE_AGAIN");
+                        } else {
+                            output.println("NO_MOVE_AGAIN");
+                            output.println("CLEAR_HINTS");
+                            sixArmBoardModel.setCurrentPlayer(nextPlayer);
+                        }
+
+                        xRemember = xEnd;
+                        yRemember = yEnd;
 
                         for (CCPlayer ccplayer : opponents) {
                             ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
                         }
+                    } else if (yStart == yEnd && xEnd - xStart == -4) { // left jump
+                        System.out.println("left jump");
+                        // the same player has more move
+                        output.println("ONE_MORE_MOVE");
+                        // sends communication to client - player
+                        output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " oneMoreMove");
+                        processInfoCommand(xEnd, yEnd);
 
+                        // choose and print new fields hints
+                        xList.clear();
+                        yList.clear();
+                        output.println("CLEAR_HINTS");
 
+                        int xm = xEnd - 2 - 2;
+                        int ym = yEnd;
+                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                        xList.add(xm);
+                        yList.add(ym);
 
+                        if (2 != sixArmBoardModel.hints(xEnd, -2, yEnd, 0, this)) { // 4
+                            output.println("MOVE_AGAIN");
+                        } else {
+                            output.println("NO_MOVE_AGAIN");
+                            output.println("CLEAR_HINTS");
+                            sixArmBoardModel.setCurrentPlayer(nextPlayer);
+                        }
 
+                        xRemember = xEnd;
+                        yRemember = yEnd;
 
-//                        output.println("CONFIRM_MOVE " + xEnd + " " + yEnd);
-//
-//                        for (int j = 0; j < xList.size(); j++) {
-//                            if (xList.get(j) == xClicked && yList.get(j) == yClicked) {
-//                                processJumpCommand(xEnd, yEnd, xClicked, yClicked);
-//                            }
-//                        }
+                        for (CCPlayer ccplayer : opponents) {
+                            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
+                        }
+                    } else if (yEnd - yStart == -2 && xEnd - xStart == -2) { // upper left jump
+                        System.out.println("upper left");
+                        // the same player has more move
+                        output.println("ONE_MORE_MOVE");
+                        // sends communication to client - player
+                        output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " oneMoreMove");
+                        processInfoCommand(xEnd, yEnd);
 
-//                        var command = input.nextLine();
-//                        if (command.startsWith("CHOOSE")) {
-//                            String cmd[] = command.split(" ");
-//                            int xStart2 = Integer.parseInt(cmd[1]);
-//                            int yStart2 = Integer.parseInt(cmd[2]);
-//                            processInfoCommand(xStart2, yStart2);
-//                        }
+                        // choose and print new fields hints
+                        xList.clear();
+                        yList.clear();
+                        output.println("CLEAR_HINTS");
 
-                    } else {
+                        int xm = xEnd - 1 - 1;
+                        int ym = yEnd - 1 - 1;
+                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                        xList.add(xm);
+                        yList.add(ym);
+
+                        if (2 != sixArmBoardModel.hints(xEnd, -1, yEnd, -1, this)) { // 8
+                            output.println("MOVE_AGAIN");
+                        } else {
+                            output.println("NO_MOVE_AGAIN");
+                            output.println("CLEAR_HINTS");
+                            sixArmBoardModel.setCurrentPlayer(nextPlayer);
+                        }
+
+                        xRemember = xEnd;
+                        yRemember = yEnd;
+
+                        for (CCPlayer ccplayer : opponents) {
+                            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
+                        }
+                    } else if (xStart - xEnd == 2 && yStart - yEnd == -2) { // bottom left jump
+                        System.out.println("Bottom left");
+                        // the same player has more move
+                        output.println("ONE_MORE_MOVE");
+                        // sends communication to client - player
+                        output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " oneMoreMove");
+                        processInfoCommand(xEnd, yEnd);
+
+                        // choose and print new fields hints
+                        xList.clear();
+                        yList.clear();
+                        output.println("CLEAR_HINTS");
+
+                        int xm = xEnd - 1 - 1;
+                        int ym = yEnd + 1 + 1;
+                        output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
+                        xList.add(xm);
+                        yList.add(ym);
+
+                        if (2 != sixArmBoardModel.hints(xEnd, -1, yEnd, 1, this)) { // 5
+                            output.println("MOVE_AGAIN");
+                        } else {
+                            output.println("NO_MOVE_AGAIN");
+                            output.println("CLEAR_HINTS");
+                            sixArmBoardModel.setCurrentPlayer(nextPlayer);
+                        }
+
+                        xRemember = xEnd;
+                        yRemember = yEnd;
+
+                        for (CCPlayer ccplayer : opponents) {
+                            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
+                        }
+                    }
+                    else {
                         output.println("NO_MORE_AGAIN");
                         // set new player, current player dont have more move so it is next player time
                         sixArmBoardModel.setCurrentPlayer(nextPlayer);
@@ -448,7 +550,11 @@ public class CCPlayer implements Runnable {
             sixArmBoardModel.skip(this);
 
             output.println("YOU_SKIPPED");
-      
+
+            xList.clear();
+            yList.clear();
+            output.println("CLEAR_HINTS");
+            output.println("CLEAN_LISTS");
 
             for(CCPlayer ccplayer: opponents) {
                 

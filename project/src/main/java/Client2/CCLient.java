@@ -171,6 +171,13 @@ public class CCLient {
                 } else if (response.startsWith("NO_MOVE_AGAIN")) {
                     g.setMessageLabel("dont have extra move");
                     g.counter = 0;
+                } else if (response.startsWith("CLEAN_LISTS")) {
+
+
+
+                    xList.clear();
+                    yList.clear();
+
                 }
 //                else if (response.startsWith("CLEAN_XY")) {
 //                    String cmd[] = response.split(" ");
@@ -203,7 +210,7 @@ public class CCLient {
             return;
         }
 
-        CCLient ccLient = new CCLient(args[0],4);
+        CCLient ccLient = new CCLient(args[0],2);
         ccLient.play();
 
     }
