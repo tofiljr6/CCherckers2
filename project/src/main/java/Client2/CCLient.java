@@ -203,7 +203,7 @@ public class CCLient {
             return;
         }
 
-        CCLient ccLient = new CCLient(args[0],2);
+        CCLient ccLient = new CCLient(args[0],4);
         ccLient.play();
 
     }

@@ -370,12 +370,11 @@ public class SixArmBoardModel extends BoardModel {
 
 		try {
 
-			if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.GREEN) {
-				return 1; // green
-			} else if (hashMap.get(new Coordinates(x, y)).getColor() == ColorsFor2Players.BLUE) {
-				return 2; // blue
+			if (hashMap.get(new Coordinates(x, y)).getState()== State.TAKEN) {
+				return 1; //taken
+		
 			} else {
-				return 3; // black
+				return 3; // free
 			}
 
 		} catch (NullPointerException nullPtrExce) {
