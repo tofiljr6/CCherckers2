@@ -1,16 +1,13 @@
 package Server2;
 
-import Server.Player;
-import model.ColorsFor2Players;
+
+
 import model.ColorsFor4Players;
 import model.SixArmBoardModel;
-import model.State;
-import settings.Board;
+
 import settings.SixArmBoard;
 
-import java.awt.*;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.util.concurrent.Executors;
 
