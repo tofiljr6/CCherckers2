@@ -21,6 +21,8 @@ public class CCServer {
     public static void main(String[] args) {
         try (var listener = new ServerSocket(59001)) {
             System.out.println("CCServer 2.0 is running...");
+            SixArmBoardModel sixArmBoardModel;
+            int numberOfPlayers = Integer.parseInt(args[1]);
             // upper limit of player is 20 (threads)
             // we will never handle 20 players but it save maybe not optimization
             var pool = Executors.newFixedThreadPool(20);
@@ -28,11 +30,32 @@ public class CCServer {
             while (true) {
                 SixArmBoard sixArmBoard = new SixArmBoard();
 
-                // game to two players
-               SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
+                switch (numberOfPlayers) {
+                    case 2:
+                        // game to two players
+                        sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
 
-                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
-                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        // game to four players
+                        sixArmBoardModel = new SixArmBoardModel(sixArmBoard,4);
+
+                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.MAGENTA, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.CYAN, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.YELLOW, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.RED, listener.accept()));
+
+
+                }
+//                 game to two players
+//               SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
+//
+//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
+//                pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
 
                 // game to four players
 //               SixArmBoardModel sixArmBoardModel = new SixArmBoardModel(sixArmBoard,4);

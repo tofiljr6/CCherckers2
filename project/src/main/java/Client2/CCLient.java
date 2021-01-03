@@ -261,12 +261,14 @@ public class CCLient {
      * @throws Exception the socket server is not run
      */
     public static void main(String[] args)  throws Exception {
-        if (args.length != 1) {
+        if (args.length != 2) {
             System.err.println("Pass the server IP as the sole command line argument");
             return;
         }
 
-        CCLient ccLient = new CCLient(args[0],2);
+        int numberOfPlayers = Integer.parseInt(args[1]);
+
+        CCLient ccLient = new CCLient(args[0],numberOfPlayers);
         ccLient.play();
 
     }
