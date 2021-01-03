@@ -36,7 +36,7 @@ public class SixArmBoard extends Board {
 
 		return fields[0].length;
 	}
-
+	//getting size of array
 	public int getYSize() {
 
 		return fields.length;

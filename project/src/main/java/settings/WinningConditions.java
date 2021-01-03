@@ -1,5 +1,10 @@
 package settings;
-
+/**
+ * 
+ * class which defines winning conditions
+ * @author dim
+ *
+ */
 public class WinningConditions {
 
 	

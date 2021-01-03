@@ -8,51 +8,65 @@ import model.Colors;
 import model.ColorsFor2Players;
 import model.ColorsFor4Players;
 import model.FieldModel;
-
+/**
+ * class for winning conditions for 'normal' six arm board
+ * @author dim
+ *
+ */
 public class SixArmBoardWinningCondition extends WinningConditions{
 
 	private HashMap<Coordinates,FieldModel> hashMap = new HashMap<>();
 	
+	
 	public SixArmBoardWinningCondition(int numberOfPlayers) {
 		super(numberOfPlayers);
 	}
-
+	/**
+	 * condition for green to finish
+	 * @return
+	 */
 	private boolean greenFinished() {
 		if(
-		(hashMap.get(new Coordinates(9,3)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(11,3)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(13,3)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(15,3)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(14,2)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(12,2)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(10,2)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(13,1)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(11,1)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(12,0)).getColor()==ColorsFor2Players.BLUE) 
+		(hashMap.get(new Coordinates(9,3)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(11,3)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(13,3)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(15,3)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(14,2)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(12,2)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(10,2)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(13,1)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(11,1)).getColor()==ColorsFor2Players.GREEN) &&
+		(hashMap.get(new Coordinates(12,0)).getColor()==ColorsFor2Players.GREEN) 
 		)
 			return true;
 		else 
 			return false;
 	}
-	
+	/**
+	 * condition for blue to finish
+	 * @return
+	 */
 	private boolean blueFinished() {
 		if(
-		(hashMap.get(new Coordinates(9,13)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(11,13)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(13,13)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(15,13)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(14,14)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(10,14)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(12,14)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(11,15)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(13,15)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(12,16)).getColor()==ColorsFor2Players.GREEN) 
+		(hashMap.get(new Coordinates(9,13)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(11,13)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(13,13)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(15,13)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(14,14)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(10,14)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(12,14)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(11,15)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(13,15)).getColor()==ColorsFor2Players.BLUE) &&
+		(hashMap.get(new Coordinates(12,16)).getColor()==ColorsFor2Players.BLUE) 
 		)
 			return true;
 		else 
 			return false;
 	}
-	
+	/**
+	 * condition for cyan to finish
+	 * @return
+	 */
 	private boolean cyanFinished() {
 		if(
 		(hashMap.get(new Coordinates(18,4)).getColor()==ColorsFor4Players.CYAN) &&
@@ -71,8 +85,11 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 		else
 			return false;
 	}
-	
-	private boolean magentaFinished() {
+	/**
+	 * condition for yellow to finish
+	 * @return
+	 */
+	private boolean yellowFinished() {
 		if(
 		(hashMap.get(new Coordinates(18,12)).getColor()==ColorsFor4Players.YELLOW) &&
 		(hashMap.get(new Coordinates(20,12)).getColor()==ColorsFor4Players.YELLOW) &&
@@ -91,7 +108,10 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 	}
 	
 	
-	
+	/**
+	 * condition for red to finish
+	 * @return
+	 */
 	private boolean redFinished() {
 		if(
 		(hashMap.get(new Coordinates(3,9)).getColor()==ColorsFor4Players.RED) &&
@@ -106,35 +126,27 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 		(hashMap.get(new Coordinates(0,12)).getColor()==ColorsFor4Players.RED) 
 		)
 			
-			//uncomment that!!
-//			hashMap.get(new Coordinates(3,9)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(4,10)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(5,11)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(6,12)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(4,12)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.CYAN);
-//			hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.CYAN);
 			return true;
 		else 
 			return false;
 	}
 	
-
-	private boolean yellowFinished() {
+	/**
+	 * condition for magenta to finish
+	 * @return
+	 */
+	private boolean magentaFinished() {
 		if(
-		(hashMap.get(new Coordinates(18,12)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(20,12)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(22,12)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(24,12)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(19,11)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(21,11)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(23,11)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(20,10)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(22,10)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(21,9)).getColor()==ColorsFor4Players.MAGENTA) 
+		(hashMap.get(new Coordinates(0,4)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(2,4)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(4,4)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(6,4)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(5,5)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(1,5)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(3,5)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(2,6)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(4,6)).getColor()==ColorsFor4Players.MAGENTA) &&
+		(hashMap.get(new Coordinates(3,7)).getColor()==ColorsFor4Players.MAGENTA) 
 		)
 			return true;
 		else 
@@ -146,10 +158,17 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 		
 		return (numberOfPlayers -1 == numberOfFinishedPlayers);
 	}
-	
+
 	public int getNumberOfFinishedPlayers() {
 		return numberOfFinishedPlayers;
 	}
+	
+	/**
+	 * method which checks if given player finished 
+	 * @param player player to be checked
+	 * @param hashMap hashmap
+	 * @return boolean vlaue
+	 */
 	public boolean playerFinished(CCPlayer player,HashMap<Coordinates,FieldModel> hashMap) {
 		
 		this.hashMap = hashMap;
