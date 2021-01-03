@@ -12,6 +12,27 @@ import GUI.Coordinates;
  */
 public class SixArmBoardPreparer {
 
+	
+	
+	public void setUpBoard(int numberOfPlayers, HashMap<Coordinates, FieldModel> hashMap) {
+		
+		switch (numberOfPlayers) {
+		
+		case 2:
+			setUpBoardFor2Players(hashMap);
+			break;
+		
+		case 4:
+			setUpBoardFor4Players(hashMap);
+			break;
+		
+		case 6:
+			setUpBoardFor6Players(hashMap);
+			break;
+		}
+	}
+	
+	
 	/**
 	 * setting up given fields
 	 * @param hashMap hashmap on which operations are performed

@@ -122,30 +122,7 @@ public class SixArmBoardGUI extends BoardGUI {
 			frame.getContentPane().add(container, BorderLayout.CENTER);
 		}
 		//switching over number of players
-		switch (numberOfPlayers) {
-			case 2:{
-
-				preparer.setUpBoardFor2Players(hashMap);
-				break;
-			}
-			case 4:{
-
-				preparer.setUpBoardFor4Players(hashMap);
-				break;
-			}
-
-			case 6:{
-
-				preparer.setUpBoardFor6Players(hashMap);
-				break;
-			}
-
-			default: {
-
-				System.out.println("Invalid input...");
-				throw new IllegalArgumentException();
-			}
-		}
+		preparer.setUpGUIBoard(numberOfPlayers, hashMap);
 	}
 
 	

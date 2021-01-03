@@ -25,8 +25,8 @@ public class SixArmBoardModel extends BoardModel {
 	private  int numberOfPlayers;
 	private SixArmBoard board;
 	public ArrayList<CCPlayer> players = new ArrayList<>();
-	private SixArmBoardPreparer preparer;
 	
+	private SixArmBoardPreparer preparer;
 	private SixArmBoardWinningCondition winningConditions;
 	
 	/**
@@ -59,31 +59,7 @@ public class SixArmBoardModel extends BoardModel {
 		}
 		
 		//setting board up
-		switch (numberOfPlayers) {
-			
-			case 2:{
-				
-				preparer.setUpBoardFor2Players(hashMap);
-				break;
-			}
-			case 4:{
-				
-				preparer.setUpBoardFor4Players(hashMap);
-				break;
-			}
-			
-			case 6:{
-				
-				preparer.setUpBoardFor6Players(hashMap);
-				break;
-			}
-			
-			default: {
-				
-				System.out.println("Invalid input...");
-	            throw new IllegalArgumentException();
-			}
-		}
+		preparer.setUpBoard(numberOfPlayers, hashMap);
 	}
 	
 	/**
@@ -131,10 +107,7 @@ public class SixArmBoardModel extends BoardModel {
 	public int getPlaceOfFinishedPlayer() {
 		return winningConditions.getNumberOfFinishedPlayers();
 	}
-	
 
-	
-	
 	/**
 	 * @deprecated
 	 * @param xLoc

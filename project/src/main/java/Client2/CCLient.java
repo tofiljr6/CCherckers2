@@ -222,6 +222,9 @@ public class CCLient {
                 	g.setMessageLabel(response);
 //                	break; // HOW I GET WRITE THIS !!
                 }
+                else if(response.startsWith("BEGIN")) {
+                	g.setMessageLabel("You start");
+                }
 //                else if (response.startsWith("CLEAR_FIN")) {
 //                    String cmd[] = response.split(" ");
 //
@@ -263,7 +266,7 @@ public class CCLient {
             return;
         }
 
-        CCLient ccLient = new CCLient(args[0],4);
+        CCLient ccLient = new CCLient(args[0],2);
         ccLient.play();
 
     }

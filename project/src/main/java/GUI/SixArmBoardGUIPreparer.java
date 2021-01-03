@@ -9,11 +9,27 @@ import model.FieldModel;
 
 public class SixArmBoardGUIPreparer {
 
+	
+	public void setUpGUIBoard(int numberOfPlayers, HashMap<Coordinates, FieldGUI> hashMap) {
+		
+		switch(numberOfPlayers) {
+		
+		case 2:
+			setUpBoardFor2Players(hashMap);
+			break;
+		case 4:
+			setUpBoardFor4Players(hashMap);
+			break;
+		case 6:
+			setUpBoardFor6Players(hashMap);
+			break;
+		}
+	}
 	/**
 	 * setting up given fields
 	 * @param hashMap hashmap on which operations are performed
 	 */
-	public void setUpBoardFor2Players(HashMap<Coordinates, FieldGUI> hashMap) {
+	private void setUpBoardFor2Players(HashMap<Coordinates, FieldGUI> hashMap) {
 		//blue player
 	hashMap.get(new Coordinates(9,3)).changeColor(Color.blue);
 	hashMap.get(new Coordinates(11,3)).changeColor(Color.blue);
@@ -66,7 +82,7 @@ public class SixArmBoardGUIPreparer {
 	 * setting up given fields
 	 * @param hashMap hashmap on which operations are performed
 	 */
-	public void setUpBoardFor4Players(HashMap<Coordinates, FieldGUI> hashMap) {
+	private void setUpBoardFor4Players(HashMap<Coordinates, FieldGUI> hashMap) {
 		
 		
 			//yellow player
@@ -135,7 +151,7 @@ public class SixArmBoardGUIPreparer {
 	 * setting up given fields
 	 * @param hashMap hashmap on which operations are performed
 	 */
-	public void setUpBoardFor6Players(HashMap<Coordinates, FieldGUI> hashMap) {
+	private void setUpBoardFor6Players(HashMap<Coordinates, FieldGUI> hashMap) {
 		setUpBoardFor2Players(hashMap);
 		setUpBoardFor4Players(hashMap);
 	}

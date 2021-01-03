@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -31,7 +32,7 @@ public class CCPlayer implements Runnable {
     // reference to connection between client server architecture
     Socket socket;
     Scanner input;
-    PrintWriter output;
+     PrintWriter output;
     // hints fields coords
     private ArrayList<Integer> xList = new ArrayList<>();
     private ArrayList<Integer> yList = new ArrayList<>();
@@ -98,10 +99,12 @@ public class CCPlayer implements Runnable {
         	case 2:
         	    // the blue "player" has first move
         	    if (color == ColorsFor2Players.BLUE) {
+        	    	sixArmBoardModel.players.add(this);
                     sixArmBoardModel.setCurrentPlayer(this);
                     output.println("MESSAGE Waiting for opponent to connect");
                 } else {
         	        // assign the opponents
+                	sixArmBoardModel.players.add(this);
                     sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
                     sixArmBoardModel.getCurrentPlayer().opponents = new ArrayList<CCPlayer>();
                     sixArmBoardModel.getCurrentPlayer().opponents.add(this);
@@ -109,12 +112,15 @@ public class CCPlayer implements Runnable {
                     this.opponents = new ArrayList<CCPlayer>();
                     this.opponents.add(sixArmBoardModel.getCurrentPlayer());
                     this.nextPlayer = sixArmBoardModel.getCurrentPlayer();
-
-                    this.nextPlayer.output.println("MESSAGE your move");
+                  
+                    int random = new Random().nextInt(2);
+                    sixArmBoardModel.setCurrentPlayer(sixArmBoardModel.players.get(random));
+                    sixArmBoardModel.getCurrentPlayer().output.println("BEGIN");
+                    
                 }
         	    break;
         	case 4:
-        	    // the magneta "player" has first move
+        	    
                 if (color == ColorsFor4Players.MAGENTA) {
                     sixArmBoardModel.setCurrentPlayer(this);
                     sixArmBoardModel.players.add(this);
@@ -148,7 +154,9 @@ public class CCPlayer implements Runnable {
 	     	        	}
 	     	        	player = player.nextPlayer;
      	        	}
-     	            this.nextPlayer.output.println("MESSAGE your move");
+     	        	  int random = new Random().nextInt(4);
+                      sixArmBoardModel.setCurrentPlayer(sixArmBoardModel.players.get(random));
+                      sixArmBoardModel.getCurrentPlayer().output.println("BEGIN");
      	        }
      		 break;
         }
