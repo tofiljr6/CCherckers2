@@ -14,109 +14,127 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Class represent single player in server site
+ * You can use nc to play game without gui
+ * The single player represents by thread
+ */
 public class CCPlayer implements Runnable {
+    // reference to game model
     public SixArmBoardModel sixArmBoardModel;
+    // current player color
     public Colors color;
+    // opponents of the current player
     public ArrayList<CCPlayer> opponents;
+    // next player after the current one
     public CCPlayer nextPlayer;
+    // reference to connection between client server architecture
     Socket socket;
     Scanner input;
     PrintWriter output;
     // hints fields coords
     private ArrayList<Integer> xList = new ArrayList<>();
     private ArrayList<Integer> yList = new ArrayList<>();
+    // variable storing info whether the player has on emore move
     private boolean oneMoreMove = false;
+    // last clicked x and y coords
     private int xRemember;
     private int yRemember;
 
+    /**
+     * Constructor, create the player in server side
+     * @param sixArmBoardModel model of board where the game is played
+     * @param color player color
+     * @param socket in which socker the game is played
+     */
     public CCPlayer(SixArmBoardModel sixArmBoardModel, Colors color, Socket socket) {
+        // initialized variables
         this.sixArmBoardModel = sixArmBoardModel;
         this.color = color;
         this.socket = socket;
     }
 
-
+    /**
+     * Run threads
+     */
     @Override
     public void run() {
         try {
+            // setting up game and listen player command
             setup();
             processCommands();
         } catch (Exception e) {
             e.printStackTrace();
        } 
-        //TO-DO
+        // todo - remember about other player left case
 			finally {
 //				if (opponents.get(0) != null && opponents.get(0).output != null) {
 //	            opponents.get(0).output.println("OTHER_PLAYER_LEFT");
 //           }
-
            try {
                socket.close();
            } catch (IOException e) {
-
            }
         }
     }
 
-
+    /**
+     * method setting game for player
+     * @throws IOException if the server socket is not open
+     */
     private void setup() throws IOException {
+        // assign the value in client server architecture
         input = new Scanner(socket.getInputStream());
         output = new PrintWriter(socket.getOutputStream(), true);
+        // greeting player
         output.println("WELCOME " + color.toString());
-        
+
+        // how many player take part in the game
         int numberOfPlayers = sixArmBoardModel.getNumberOfPlayers();
-        
-        
+
+        // depends on number of player take part in game
+        // set the opponents for each player
         switch(numberOfPlayers) {
         	case 2:
-        		
-        		 if (color == ColorsFor2Players.BLUE) {
-        	            sixArmBoardModel.setCurrentPlayer(this);
-        	            output.println("MESSAGE Waiting for opponent to connect");
-        	        } else {
-        	        	sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
-        	        	sixArmBoardModel.getCurrentPlayer().opponents = new ArrayList<CCPlayer>();
-        	        	sixArmBoardModel.getCurrentPlayer().opponents.add(this);
-        	        	
-        	        	
-        	            this.opponents = new ArrayList<CCPlayer>();
-        	            this.opponents.add(sixArmBoardModel.getCurrentPlayer());
-        	            this.nextPlayer = sixArmBoardModel.getCurrentPlayer();
-        	         
-        	            this.nextPlayer.output.println("MESSAGE your move");
-        	        }
-        		 break;
-        		 
+        	    // the blue "player" has first move
+        	    if (color == ColorsFor2Players.BLUE) {
+                    sixArmBoardModel.setCurrentPlayer(this);
+                    output.println("MESSAGE Waiting for opponent to connect");
+                } else {
+        	        // assign the opponents
+                    sixArmBoardModel.getCurrentPlayer().nextPlayer=this;
+                    sixArmBoardModel.getCurrentPlayer().opponents = new ArrayList<CCPlayer>();
+                    sixArmBoardModel.getCurrentPlayer().opponents.add(this);
+
+                    this.opponents = new ArrayList<CCPlayer>();
+                    this.opponents.add(sixArmBoardModel.getCurrentPlayer());
+                    this.nextPlayer = sixArmBoardModel.getCurrentPlayer();
+
+                    this.nextPlayer.output.println("MESSAGE your move");
+                }
+        	    break;
         	case 4:
-        		 if (color == ColorsFor4Players.MAGENTA) {
-        			sixArmBoardModel.setCurrentPlayer(this);
-     	            sixArmBoardModel.players.add(this);
-     	            this.opponents = new ArrayList<CCPlayer>();
-     	            output.println("MESSAGE Waiting for opponent to connect");
+        	    // the magneta "player" has first move
+                if (color == ColorsFor4Players.MAGENTA) {
+                    sixArmBoardModel.setCurrentPlayer(this);
+                    sixArmBoardModel.players.add(this);
+                    this.opponents = new ArrayList<CCPlayer>();
+                    output.println("MESSAGE Waiting for opponent to connect");
      	        } else if (color == ColorsFor4Players.CYAN){
-     	        	
-     	        	
      	        	sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
-     	        	 
      	        } else if( color == ColorsFor4Players.YELLOW) {
-     	        	
      	        	sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
-     	        	
         		}else if(color == ColorsFor4Players.RED) {
-        			
         			sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
-     	        	
-     	        	
-     	        	
+
      	        	this.setNextPlayer(sixArmBoardModel.players.get(0));
      	        	this.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(1));
      	        	this.nextPlayer.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(2));
      	        	this.nextPlayer.nextPlayer.nextPlayer.setNextPlayer(this);
-     	        	
-     	        	
+
      	        	CCPlayer player = this;
      	        	//adding players to array List of opponents
      	        	for(int j =0; j<4; j++) {
@@ -130,94 +148,103 @@ public class CCPlayer implements Runnable {
 	     	        	}
 	     	        	player = player.nextPlayer;
      	        	}
-     	        	
      	            this.nextPlayer.output.println("MESSAGE your move");
-     	           
      	        }
      		 break;
-        } 	
-        
-      
-        
+        }
     }
 
+    /**
+     * Method listener what client choose in input (what GUI sends to us)
+     * Depends what client sends we invoke the method
+     */
     private void processCommands() {
         while (input.hasNextLine()) {
         	
             var command = input.nextLine();
+            // quit -> the game has ended
             if (command.startsWith("QUIT")) {
                 return;
             } else if (command.startsWith("MOVE")) {
-
+                // move -> it is jump 1.0 version, yoou can jump to any destinantion even if it is not correct rules
+                // @deprecated
+                // only for the beginning of game
+                // move command has more params
                 String cmd[] = command.split(" ");
                 int xLoc = Integer.parseInt(cmd[1]);
                 int yLoc = Integer.parseInt(cmd[2]);
+                // invoke move command
                 processMoveCommand(xLoc, yLoc);
             } else if (command.startsWith("JUMP")) {
-
+                // jump -> jump from one field to another one
+                // this jump is common in our game
+                // it is correct with the game rules
                 String cmd[] = command.split(" ");
                 int xStart = Integer.parseInt(cmd[1]);
                 int yStart = Integer.parseInt(cmd[2]);
                 int xEnd = Integer.parseInt(cmd[3]);
                 int yEnd = Integer.parseInt(cmd[4]);
-
+                // invoke jump command
                 processJumpCommand(xStart, yStart,xEnd, yEnd);
             } else if (command.startsWith("CHOOSE")) {
                 // sends to model coords and decided is field is your
                 String cmd[] = command.split(" ");
                 int xStart = Integer.parseInt(cmd[1]);
                 int yStart = Integer.parseInt(cmd[2]);
+                // clear the neighborhood coods becuse we choose another field so we have new one neighborhood
                 xList.clear();
                 yList.clear();
+                // clear hints on gui
                 output.println("CLEAR_HINTS");
+                // invokde info command
                 processInfoCommand(xStart, yStart);
             } else if (command.startsWith("SKIP")) {
+                // player skip move so invoke command which set next player
                 processSkipCommand();
             } else if (command.startsWith("CLICKED")) {
+                // which fields player clicked
+                // x and y coords
                 String cmd[] = command.split(" ");
                 int xStart = Integer.parseInt(cmd[1]);
                 int yStart = Integer.parseInt(cmd[2]);
 //                xClicked = xStart;
 //                yClicked = yStart;
             } else if (command.startsWith("AGAIN")) {
+                // you have one more move,
+                // you previous makcase that decide to hint in to make another one
                 String cmd[] = command.split(" ");
                 int xEnd = Integer.parseInt(cmd[1]);
                 int yEnd = Integer.parseInt(cmd[2]);
+                // invoke jump command with special start coords
+                // this in all diff between jump method
                 processJumpCommand(xRemember, yRemember, xEnd, yEnd);
 //                output.println("NO_MOVE_AGAIN"); // unless
             }
         }
     }
 
+    /**
+     * Method represent move on board
+     * @deprecated we use it only in game 1.0 version
+     * this is not neccesary in current game
+     * @param xLoc x coords where are we moving
+     * @param yLoc y coords where are we moving
+     */
     private void processMoveCommand(int xLoc, int yLoc) {
         try {
-            sixArmBoardModel.move(xLoc, yLoc, this);
+            // sends tcase that decide to hint insixArmBoardModel.move(xLoc, yLoc, this);
+            // we make valid move so sends to the client info
             output.println("VALID_MOVE " + xLoc + " " + yLoc);
-            
+
+            // sends to the oppcase that decide to hint innt player has moved
             for(CCPlayer ccplayer: opponents) {
-            
             	ccplayer.output.println("OPPONENT_MOVED " + xLoc + " " + yLoc);
             }
-            
-//            if (sixArmBoardModel.hasWinner()) {
-//                output.println("VICTORY");
-//                
-//                for(CCPlayer ccplayer: opponents) {
-//                    
-//                	ccplayer.output.println("DEFEAT");
-//                }
-//               
-//            }
-
-//            output.println("BOARD" + Arrays.deepToString(sixArmBoardModel.states) + "\n"
-//            + Arrays.deepToString(sixArmBoardModel.colors)); // todo finish to check
-
-            HashMap<Coordinates, FieldModel> board = sixArmBoardModel.getHashMap();
-            String btest = board.get(new Coordinates(xLoc, yLoc)).getColor().toString();
-
-            output.println("BOARD " + btest);
-
-
+            // for visualization only - it is unless
+//            HashMap<Coordinates, FieldModel> board = sixArmBoardModel.getHashMap();
+//            String btest = board.get(new Coordinates(xLoc, yLoc)).getColor().toString();
+//
+//            output.println("BOARD " + btest);
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
         }
@@ -247,7 +274,7 @@ public class CCPlayer implements Runnable {
         yList.clear();
         output.println("CLEAR_HINTS");
 
-        // ckeck that after jump have we neighborhood
+        //case that decide to hint inp have we neighborhood
         // because we should have one more move
         // this is also allow to back move
         boolean surroundings = false;
@@ -281,7 +308,6 @@ public class CCPlayer implements Runnable {
         xRemember = xEnd;
         yRemember = yEnd;
 
-
         // sends communication to opponents about player movement
         for (CCPlayer ccplayer : opponents) {
             ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
@@ -289,7 +315,7 @@ public class CCPlayer implements Runnable {
     }
 
     /**
-     * the method responsible for the single jumping
+     * the method is responsible to the single jumping
      * @param xStart x coords where we jump from
      * @param yStart y coords where we jump from
      * @param xEnd x coords where we jump to
@@ -368,40 +394,51 @@ public class CCPlayer implements Runnable {
                 	ccplayer.opponents.remove(this);
                 }
             }
-        
-            
 
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
         }
     }
 
+    /**
+     * Method is responsible tocase that decide to hint inield is our field
+     * and sends to the model info and wait where we can move
+     * hints to the current field
+     * @param xStart x coords what we choose
+     * @param yStart y coords what we choose
+     */
     private void processInfoCommand(int xStart, int yStart) {
         try {
-
-        	
 //            sixArmBoardModel.hints(xStart, yStart, this);
-
+            // clear all neighborhood coords
             xList.clear();
             yList.clear();
 
-            // aks model is that field you have chosen is your
+            // aks mocase that decide to hint in have chosen is your
             if (sixArmBoardModel.choose(xStart, yStart, this)) {
                 // yes, chosen field is your so confirm move
-            	
-            	
                 output.println("CONFIRM_MOVE " + xStart + " " + yStart);
 
                 // hints logic starts here
                 int[] xNeighborhood = {-1, 1,  1, -1, 2, -2};
                 int[] yNeighborhood = { 1, 1, -1, -1, 0,  0};
 
+                // for each direction we sends hints
                 for (int i = 0; i < xNeighborhood.length; i++) {
                     // see what hints method returns
                     int decision = sixArmBoardModel.hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], this);
+                    // init var and assign imposbile value (-1 is never reach beacuse the minimimu value is 0)
                     int xm = -1;
                     int ym = -1;
 
+                    // depends what direction we now decide we go to the right case
+                    // 2 -> return true info - > normal move - not jump over opponent
+                    // 3 -> case that decide to hint in right R
+                    // 4 -> case that decide to hint in left L
+                    // 5 -> case that decide to hint in upper right UR
+                    // 6 -> case that decide to hint in bottom right BR
+                    // 7 -> case that decide to hint in bottom left BL
+                    // 8 -> case that decide to hint in upper left UL
                     switch (decision) {
                         case 2:
                             xm = xStart + xNeighborhood[i];
@@ -414,14 +451,6 @@ public class CCPlayer implements Runnable {
                             xm = xStart + xNeighborhood[i] + 2;
                             ym = yStart + yNeighborhood[i];
                             output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
-
-//                            xm = xStart + xNeighborhood[i] + 2;
-////                            ym = yStart + yNeighborhood[i];
-//                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
-//                            processInfoCommand(xm, ym);
-
-//                            output.println("HINT_TO " + 0 + " " + 12 + " " + sixArmBoardModel.getHashMapCordColor(0 ,12));
-
                             xList.add(xm);
                             yList.add(ym);
                             break;
@@ -449,9 +478,7 @@ public class CCPlayer implements Runnable {
                         case 7:
                             xm = xStart + xNeighborhood[i] + 1;
                             ym = yStart + yNeighborhood[i] - 1;
-//                            if (3 != sixArmBoardModel.getHashMapCordColor(xm, ym)) { // why it works?
-                                output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
-//                            }
+                            output.println("HINT_TO " + xm + " " + ym + " " + sixArmBoardModel.getHashMapCordColor(xm ,ym));
                             xList.add(xm);
                             yList.add(ym);
                             break;
@@ -463,7 +490,6 @@ public class CCPlayer implements Runnable {
                             yList.add(ym);
                             break;
                     }
-
                 }
             }
         } catch (IllegalStateException e) {
@@ -471,21 +497,26 @@ public class CCPlayer implements Runnable {
         }
     }
 
-
+    /**
+     * Method is responsible to skip move if the palyer what to skip
+     */
     private void processSkipCommand() {
         try {
+            // sends to model that the current player skip
             sixArmBoardModel.skip(this);
 
+            // sends communication to player that he skipped
             output.println("YOU_SKIPPED");
 
+            // clear its neighborhood coords and sends to gui that repaint is to black again
             xList.clear();
             yList.clear();
             output.println("CLEAR_HINTS");
             output.println("CLEAN_LISTS");
             output.println("NO_MOVE_AGAIN");
 
+            // sends to other player communication that he skipped
             for(CCPlayer ccplayer: opponents) {
-                
             	ccplayer.output.println("OPPONENT_SKIP");
             }
             
@@ -493,7 +524,11 @@ public class CCPlayer implements Runnable {
             output.println("MESSAGE " + e.getMessage());
         }
     }
-    
+
+    /**
+     * set next player
+     * @param player what next player is
+     */
     private void setNextPlayer(CCPlayer player) {
     	this.nextPlayer = player;
     }
