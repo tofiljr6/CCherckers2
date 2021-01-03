@@ -19,12 +19,13 @@ public class SixArmBoardModel extends BoardModel {
 	private  int numberOfPlayers;
 	private SixArmBoard board;
 	public ArrayList<CCPlayer> players = new ArrayList<>();
+	private SixArmBoardPreparer preparer;
 	
 	private SixArmBoardWinningCondition winningConditions;
 	//add number of players in constructor->solution for problem in fieldModel
 	public SixArmBoardModel(SixArmBoard board, int numberOfPlayers) {
 
-		
+		preparer = new SixArmBoardPreparer();
 		winningConditions = new SixArmBoardWinningCondition(numberOfPlayers);
 		this.board = board;
 
@@ -69,126 +70,19 @@ public class SixArmBoardModel extends BoardModel {
 	}
 	
 	public void setUpBoardFor2Players() {
-		
-		//blue player
-		hashMap.get(new Coordinates(9,3)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(11,3)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(13,3)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(15,3)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(14,2)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(12,2)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(10,2)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(13,1)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(11,1)).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(12,0)).setFieldColor(ColorsFor2Players.BLUE);
-		
-		//Green player
-		hashMap.get(new Coordinates(9,13)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(11,13)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(13,13)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(15,13)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(14,14)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(10,14)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(12,14)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(11,15)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(13,15)).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(12,16)).setFieldColor(ColorsFor2Players.GREEN);
-
-
-		// easy test for jump through opponent - todo DELETE after
-		hashMap.get(new Coordinates(6,6 )).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(16,6 )).setFieldColor(ColorsFor2Players.BLUE);
-		hashMap.get(new Coordinates(3,9 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(9,9 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(21,5 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(18,8 )).setFieldColor(ColorsFor2Players.GREEN);
-
-		hashMap.get(new Coordinates(20,6 )).setFieldColor(ColorsFor2Players.BLUE);
-
-
-		hashMap.get(new Coordinates(8,6 )).setFieldColor(ColorsFor2Players.GREEN);
-//		hashMap.get(new Coordinates(10,6 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(7,7 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(5,7 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(4,6 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(5,5 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(7,5 )).setFieldColor(ColorsFor2Players.GREEN);
-
-		hashMap.get(new Coordinates(14,6 )).setFieldColor(ColorsFor2Players.GREEN);
-
-		hashMap.get(new Coordinates(16,4 )).setFieldColor(ColorsFor2Players.GREEN);
+		preparer.setUpBoardFor2Players(hashMap);
 	}
 	
 	
 	public void setUpBoardFor4Players(){
-		
-		//yellow player
-		hashMap.get(new Coordinates(0,4)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(2,4)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(4,4)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(6,4)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(5,5)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(1,5)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(3,5)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(2,6)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(4,6)).setFieldColor(ColorsFor4Players.YELLOW);
-		hashMap.get(new Coordinates(3,7)).setFieldColor(ColorsFor4Players.YELLOW);
-		
-		//red Player
-		hashMap.get(new Coordinates(18,4)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(20,4)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(22,4)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(24,4)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(19,5)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(21,5)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(23,5)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(20,6)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(22,6)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(21,7)).setFieldColor(ColorsFor4Players.RED);
-		
-		//magenta player
-		hashMap.get(new Coordinates(18,12)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(20,12)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(22,12)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(24,12)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(19,11)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(21,11)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(23,11)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(20,10)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(22,10)).setFieldColor(ColorsFor4Players.MAGENTA);
-		hashMap.get(new Coordinates(21,9)).setFieldColor(ColorsFor4Players.MAGENTA);
-		
-		//cyan player
-		
-		//uncomment that!!
-//		hashMap.get(new Coordinates(3,9)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(4,10)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(5,11)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(6,12)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(4,12)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.CYAN);
-//		hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.CYAN);
-		
-		hashMap.get(new Coordinates(3,9)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(4,10)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(5,11)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(8,12)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(2,10)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(3,11)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(4,12)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(1,11)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(2,12)).setFieldColor(ColorsFor4Players.RED);
-		hashMap.get(new Coordinates(0,12)).setFieldColor(ColorsFor4Players.RED);
+		preparer.setUpBoardFor4Players(hashMap);
 	}
 	
 	public void setUpBoardFor6Players(){
 		
-		setUpBoardFor2Players();
-		setUpBoardFor4Players();
+		preparer.setUpBoardFor6Players(hashMap);
 	}
+	
 	
 	//where should be this class located
 	public static <T, E> T getKeyByValue(HashMap<T, E> map, E value) {
@@ -200,6 +94,7 @@ public class SixArmBoardModel extends BoardModel {
 	    return null;
 	}
 
+	
 	public boolean gameFinished() {
 		
 		return winningConditions.isGameFinished();
