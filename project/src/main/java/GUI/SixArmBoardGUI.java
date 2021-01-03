@@ -15,21 +15,30 @@ import java.util.Scanner;
 import javax.swing.*;
 
 import settings.SixArmBoard;
-
+/**
+ * 
+ * 
+ * @author dim
+ *
+ */
 public class SixArmBoardGUI extends BoardGUI {
 
 	
 	//connection variable
 	private PrintWriter out;
+	//message to be sent
 	String msg;
-//	int counter = 0; // in BoardGUI extended class
+	//class which prepare gui board
+	private SixArmBoardGUIPreparer preparer;
+	
 	public SixArmBoardGUI(SixArmBoard board, int numberOfPlayers, PrintWriter out) throws Exception {
+		
+		preparer = new SixArmBoardGUIPreparer();
 		// information about games process
 		messageLabel.setForeground(Color.BLACK);
 		frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
-//
-//		skipButton.add(new JButton("SKIP"));
 
+		//action listener to skip button
 		skipButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
@@ -39,7 +48,7 @@ public class SixArmBoardGUI extends BoardGUI {
 		});
 		frame.getContentPane().add(skipButton, BorderLayout.NORTH);
 
-
+		//setting up and organizing gui
 		frame.getContentPane().setLayout(new GridLayout(board.getYSize() + 2,1));
 		hashMap = new HashMap<Coordinates,FieldGUI>();
 		msg="";
@@ -52,24 +61,17 @@ public class SixArmBoardGUI extends BoardGUI {
 					
 					final FieldGUI field = new FieldGUI();
 					field.setPreferredSize(new Dimension(30,30));
-					
+					//creating coordiantes and putting them in hashmap
 					Coordinates coordinates = new Coordinates(j,i);
 					hashMap.put(coordinates, field);
 
-					//not needed
-//					final int xcor = i;
-//					final int ycor = j;
-				
-					
+
+					//adding mouse listener
 					field.addMouseListener(new MouseListener() {
 
 						public void mouseClicked(MouseEvent arg0) {
 
-							//out.println("MOVE " + getKeyByValue(hashMap, field).toString());
-							//System.out.println("MOVE " + getKeyByValue(hashMap, field).toString());
-//							out.println("MOVE " + xcor + " "+ ycor);
-							
-							//out.println("MOVE " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
+
 							System.out.println("CLICKED " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
 							out.println("CLICKED " + getKeyByValue(hashMap,field).getX() + " "+ getKeyByValue(hashMap,field).getY());
 
@@ -119,22 +121,22 @@ public class SixArmBoardGUI extends BoardGUI {
 			}
 			frame.getContentPane().add(container, BorderLayout.CENTER);
 		}
-		
+		//switching over number of players
 		switch (numberOfPlayers) {
 			case 2:{
 
-				setUpBoardFor2Players();
+				preparer.setUpBoardFor2Players(hashMap);
 				break;
 			}
 			case 4:{
 
-				setUpBoardFor4Players();
+				preparer.setUpBoardFor4Players(hashMap);
 				break;
 			}
 
 			case 6:{
 
-				setUpBoardFor6Players();
+				preparer.setUpBoardFor6Players(hashMap);
 				break;
 			}
 
@@ -145,130 +147,9 @@ public class SixArmBoardGUI extends BoardGUI {
 			}
 		}
 	}
+
 	
-	public void setUpBoardFor2Players() {
-
-		//blue player
-		hashMap.get(new Coordinates(9,3)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(11,3)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(13,3)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(15,3)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(14,2)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(12,2)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(10,2)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(13,1)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(11,1)).changeColor(Color.blue);
-		hashMap.get(new Coordinates(12,0)).changeColor(Color.blue);
-
-		//Green player
-		hashMap.get(new Coordinates(9,13)).changeColor(Color.green);
-		hashMap.get(new Coordinates(11,13)).changeColor(Color.green);
-		hashMap.get(new Coordinates(13,13)).changeColor(Color.green);
-		hashMap.get(new Coordinates(15,13)).changeColor(Color.green);
-		hashMap.get(new Coordinates(14,14)).changeColor(Color.green);
-		hashMap.get(new Coordinates(10,14)).changeColor(Color.green);
-		hashMap.get(new Coordinates(12,14)).changeColor(Color.green);
-		hashMap.get(new Coordinates(11,15)).changeColor(Color.green);
-		hashMap.get(new Coordinates(13,15)).changeColor(Color.green);
-		hashMap.get(new Coordinates(12,16)).changeColor(Color.green);
-
-
-		// easy test for jump through opponent - todo DELETE after
-		hashMap.get(new Coordinates(6,6 )).changeColor(Color.BLUE);
-		hashMap.get(new Coordinates(16,6 )).changeColor(Color.BLUE);
-		hashMap.get(new Coordinates(20,6 )).changeColor(Color.BLUE);
-		hashMap.get(new Coordinates(3,9 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(9,9 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(21,5 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(18,8 )).changeColor(Color.GREEN);
-
-		hashMap.get(new Coordinates(8,6 )).changeColor(Color.GREEN);
-//		hashMap.get(new Coordinates(10,6 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(7,7 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(5,7 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(4,6 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(5,5 )).changeColor(Color.GREEN);
-		hashMap.get(new Coordinates(7,5 )).changeColor(Color.GREEN);
-
-		hashMap.get(new Coordinates(14,6 )).changeColor(Color.GREEN);
-
-
-
-		hashMap.get(new Coordinates(16,4 )).changeColor(Color.GREEN);
-	}
-
-	public void setUpBoardFor4Players(){
-		
-		//yellow player
-		hashMap.get(new Coordinates(0,4)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(2,4)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(4,4)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(6,4)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(5,5)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(1,5)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(3,5)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(2,6)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(4,6)).changeColor(Color.yellow);
-		hashMap.get(new Coordinates(3,7)).changeColor(Color.yellow);
-		
-		//red Player
-		hashMap.get(new Coordinates(18,4)).changeColor(Color.red);
-		hashMap.get(new Coordinates(20,4)).changeColor(Color.red);
-		hashMap.get(new Coordinates(22,4)).changeColor(Color.red);
-		hashMap.get(new Coordinates(24,4)).changeColor(Color.red);
-		hashMap.get(new Coordinates(19,5)).changeColor(Color.red);
-		hashMap.get(new Coordinates(21,5)).changeColor(Color.red);
-		hashMap.get(new Coordinates(23,5)).changeColor(Color.red);
-		hashMap.get(new Coordinates(20,6)).changeColor(Color.red);
-		hashMap.get(new Coordinates(22,6)).changeColor(Color.red);
-		hashMap.get(new Coordinates(21,7)).changeColor(Color.red);
-		
-		//magenta player
-		hashMap.get(new Coordinates(18,12)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(20,12)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(22,12)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(24,12)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(19,11)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(21,11)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(23,11)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(20,10)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(22,10)).changeColor(Color.magenta);
-		hashMap.get(new Coordinates(21,9)).changeColor(Color.magenta);
-		
-		
-		//delete this after
-		hashMap.get(new Coordinates(8,12)).changeColor(Color.magenta);
-		//cyan player
-		
-//		hashMap.get(new Coordinates(3,9)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(4,10)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(5,11)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(6,12)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(2,10)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(3,11)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(4,12)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(1,11)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(2,12)).changeColor(Color.cyan);
-//		hashMap.get(new Coordinates(0,12)).changeColor(Color.cyan);
-		hashMap.get(new Coordinates(3,9)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(4,10)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(5,11)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(10,12)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(2,10)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(3,11)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(4,12)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(1,11)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(2,12)).changeColor(Color.RED);
-		hashMap.get(new Coordinates(0,12)).changeColor(Color.RED);
-	}
 	
-	public void setUpBoardFor6Players(){
-		
-		setUpBoardFor4Players();
-		setUpBoardFor2Players();
-	}
-	
-	//where should be this class located
 	public static <T, E> T getKeyByValue(HashMap<T, E> map, E value) {
 	    for (Entry<T, E> entry : map.entrySet()) {
 	        if (Objects.equals(value, entry.getValue())) {

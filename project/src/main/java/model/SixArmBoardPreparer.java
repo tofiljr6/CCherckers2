@@ -4,9 +4,18 @@ import java.util.HashMap;
 
 import GUI.Coordinates;
 
+/**
+ * 
+ * class which set ups six arm board
+ * @author dim
+ *
+ */
 public class SixArmBoardPreparer {
 
-	
+	/**
+	 * setting up given fields
+	 * @param hashMap hashmap on which operations are performed
+	 */
 	public void setUpBoardFor2Players(HashMap<Coordinates, FieldModel> hashMap) {
 		//blue player
 		hashMap.get(new Coordinates(9,3)).setFieldColor(ColorsFor2Players.BLUE);
@@ -56,7 +65,10 @@ public class SixArmBoardPreparer {
 	
 		hashMap.get(new Coordinates(16,4 )).setFieldColor(ColorsFor2Players.GREEN);
 	}
-	
+	/**
+	 * setting up given fields
+	 * @param hashMap hashmap on which operations are performed
+	 */
 	public void setUpBoardFor4Players(HashMap<Coordinates, FieldModel> hashMap) {
 		
 		//yellow player
@@ -126,7 +138,10 @@ public class SixArmBoardPreparer {
 		//delete this after
 		hashMap.get(new Coordinates(8,12)).setFieldColor(ColorsFor4Players.MAGENTA);
 	}
-	
+	/**
+	 * setting up given fields
+	 * @param hashMap hashmap on which operations are performed
+	 */
 	public void setUpBoardFor6Players(HashMap<Coordinates, FieldModel> hashMap) {
 		setUpBoardFor2Players(hashMap);
 		setUpBoardFor4Players(hashMap);

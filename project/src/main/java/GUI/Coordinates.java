@@ -1,12 +1,21 @@
 package GUI;
-
+/**
+ * class which defines coordinates on board
+ * @author dim
+ *
+ */
 public class Coordinates {
-
+	
 	private int x;
 	private int y;
 	
 	
-	
+	/**
+	 * 
+	 * constructor
+	 * @param x
+	 * @param y
+	 */
 	public Coordinates(int x, int y) {
 		
 		this.x = x;
@@ -20,6 +29,9 @@ public class Coordinates {
 		return y;
 	}
 	
+	/**
+	 * overriding hashcode to be able to put it in hashmap
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -28,6 +40,9 @@ public class Coordinates {
 		result = prime * result + y;
 		return result;
 	}
+	/**
+	 *overrinding equals method
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

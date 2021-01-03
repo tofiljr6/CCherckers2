@@ -10,10 +10,16 @@ import GUI.Coordinates;
 import Server2.CCPlayer;
 import settings.SixArmBoard;
 import settings.SixArmBoardWinningCondition;
-
+/**
+ * class which defines model of six arm board
+ * @author dim
+ *
+ */
 public class SixArmBoardModel extends BoardModel {
 
-
+	/**
+	 
+	 */
 	private CCPlayer currentPlayer;
 	HashMap<Coordinates,FieldModel> hashMap = new HashMap<Coordinates, FieldModel>();
 	private  int numberOfPlayers;
@@ -22,14 +28,24 @@ public class SixArmBoardModel extends BoardModel {
 	private SixArmBoardPreparer preparer;
 	
 	private SixArmBoardWinningCondition winningConditions;
-	//add number of players in constructor->solution for problem in fieldModel
+	
+	/**
+	 * class constructor
+	 * 
+	 * @param board board which is base to built a instance of class
+	 * @param numberOfPlayers - numberOfPlayersInGame
+	 */
+	
 	public SixArmBoardModel(SixArmBoard board, int numberOfPlayers) {
-
+		//class responsible for setting up board
 		preparer = new SixArmBoardPreparer();
+		//class resposible for checking for winning condidtions
 		winningConditions = new SixArmBoardWinningCondition(numberOfPlayers);
 		this.board = board;
 
 		this.numberOfPlayers = numberOfPlayers;
+		
+		//itterating over board and creating model fields
 		for(int i=0;i<board.getYSize(); i++) {
 			for(int j=0; j< board.getXSize(); j++) {
 				if(board.getFields()[i][j] == 1) {
@@ -42,22 +58,23 @@ public class SixArmBoardModel extends BoardModel {
 			}
 		}
 		
+		//setting board up
 		switch (numberOfPlayers) {
 			
 			case 2:{
 				
-				setUpBoardFor2Players();
+				preparer.setUpBoardFor2Players(hashMap);
 				break;
 			}
 			case 4:{
 				
-				setUpBoardFor4Players();
+				preparer.setUpBoardFor4Players(hashMap);
 				break;
 			}
 			
 			case 6:{
 				
-				setUpBoardFor6Players();
+				preparer.setUpBoardFor6Players(hashMap);
 				break;
 			}
 			
@@ -69,22 +86,14 @@ public class SixArmBoardModel extends BoardModel {
 		}
 	}
 	
-	public void setUpBoardFor2Players() {
-		preparer.setUpBoardFor2Players(hashMap);
-	}
-	
-	
-	public void setUpBoardFor4Players(){
-		preparer.setUpBoardFor4Players(hashMap);
-	}
-	
-	public void setUpBoardFor6Players(){
-		
-		preparer.setUpBoardFor6Players(hashMap);
-	}
-	
-	
-	//where should be this class located
+	/**
+	 * method which allows to two way communication between hashmap and key
+	 * @param <T>
+	 * @param <E>
+	 * @param map
+	 * @param value
+	 * @return
+	 */
 	public static <T, E> T getKeyByValue(HashMap<T, E> map, E value) {
 	    for (Entry<T, E> entry : map.entrySet()) {
 	        if (Objects.equals(value, entry.getValue())) {
@@ -94,17 +103,31 @@ public class SixArmBoardModel extends BoardModel {
 	    return null;
 	}
 
-	
+	/**
+	 * 
+	 * @return returns value if game is already finished
+	 */
 	public boolean gameFinished() {
 		
 		return winningConditions.isGameFinished();
 	}
 
+	/**
+	 * 
+	 * @param player
+	 * @param hashMap
+	 * @return boolean value if player already finished
+	 */
 	public boolean playerFinished(CCPlayer player, HashMap<Coordinates,FieldModel> hashMap) {
 		
 		return winningConditions.playerFinished(player, hashMap);
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @return return place of player that finished
+	 */
 	public int getPlaceOfFinishedPlayer() {
 		return winningConditions.getNumberOfFinishedPlayers();
 	}
@@ -112,7 +135,12 @@ public class SixArmBoardModel extends BoardModel {
 
 	
 	
-	
+	/**
+	 * @deprecated
+	 * @param xLoc
+	 * @param yLoc
+	 * @param ccPlayer
+	 */
 	public synchronized void move(int xLoc, int yLoc, CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
@@ -134,6 +162,15 @@ public class SixArmBoardModel extends BoardModel {
 		// setting to next opponent
 		currentPlayer = currentPlayer.nextPlayer;
 	}
+	
+	/**
+	 * method which performs jump on model
+	 * @param xStart- x starting argument
+	 * @param yStart - y starting argument
+	 * @param xEnd - x ending argument
+	 * @param yEnd - y ending argument
+	 * @param ccPlayer - player which performs jump
+	 */
 	
 	public synchronized void jump(int xStart, int yStart, int xEnd, int yEnd, CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {
@@ -185,32 +222,18 @@ public class SixArmBoardModel extends BoardModel {
 				// setting new color
 				hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
 				hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
-//
-//
-//				if (hashMap.get(new Coordinates(xEnd - 2, yEnd)).getState() == State.TAKEN) {
-//					System.out.println("you should have one more move");
-//				} else {
-//					currentPlayer = currentPlayer.nextPlayer;
-//				}
 
-//				if (2 == hints(xStart, xNeighborhood[i], yStart, yNeighborhood[i], ccPlayer)) {
-					// no jump over opponents
-//					currentPlayer = currentPlayer.nextPlayer;
-//				} else {
-//					// case where you jump over opponents
-//					System.out.println("you should have one more move");
-//				}
 			}
 		}
-
-//		// setting new color
-//		hashMap.get(new Coordinates(xEnd, yEnd)).setFieldColor(ccPlayer.color);
-//		hashMap.get((new Coordinates(xStart, yStart))).setFieldFree();
-		
-		// setting to next opponent
-//		currentPlayer = currentPlayer.nextPlayer;
 	}
 
+	/**
+	 * method which returns bool value defing if player can start move on selected coordinates (field must be taken by pawn with same color as player) 
+	 * @param xStart x coordinate
+	 * @param yStart y coordinate
+	 * @param ccPlayer player who performe a move
+	 * @return
+	 */
 	public synchronized boolean choose(int xStart, int yStart, CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
@@ -225,6 +248,11 @@ public class SixArmBoardModel extends BoardModel {
 
 	}
 
+	/**
+	 * 
+	 * method which allows game to skip turn
+	 * @param ccPlayer player which skips turn
+	 */
 	public synchronized void skip(CCPlayer ccPlayer) {
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
@@ -260,8 +288,7 @@ public class SixArmBoardModel extends BoardModel {
 			throw new IllegalStateException("NOT your turn");
 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)) == null) {
 			return 1;
- 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN ) { //&&
-//				   hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getColor() != ccPlayer.color) {
+ 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).getState() == State.TAKEN ) {
 			if (xDestination == 2 && yDestination == 0) {
 				return 3;
 			} else if (xDestination == -2 && yDestination == 0) {
@@ -280,21 +307,25 @@ public class SixArmBoardModel extends BoardModel {
 			return 1;
 		}
 
-		// i don't need it
-//		hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)).setFieldColorHint(ColorsFor2Players.GREEN);
-
 		// no neighborhood
 		return 2;
 	}
-
+/**
+ * getter for hashmap
+ * @return
+ */
 	public HashMap<Coordinates, FieldModel> getHashMap() {
 		return hashMap;
 	}
 
+	/**
+	 * 
+	 * method which returns if field is taken
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @return 1- taken, 3-free
+	 */
 	public synchronized int getHashMapCordColor(int x, int y) {
-//		if (hashMap.get(new Coordinates(x, y)).getColor() != null) {
-//			throw new IllegalStateException("no color");
-//		}
 
 		try {
 
@@ -306,11 +337,11 @@ public class SixArmBoardModel extends BoardModel {
 			}
 
 		} catch (NullPointerException nullPtrExce) {
-//			System.out.println("nullptr" + nullPtrExce);
+
 		}
 		return 0;
 	}
-
+	
 	public synchronized void oneMore(CCPlayer ccPlayer){
 		currentPlayer = currentPlayer.nextPlayer;
 	}

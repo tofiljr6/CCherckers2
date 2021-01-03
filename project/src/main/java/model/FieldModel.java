@@ -1,17 +1,24 @@
 package model;
 
 public class FieldModel {
-
+	// state of field
 	private State state;
+	//field color
 	private Colors color;
 	
+	/**
+	 * construcotr
+	 */
 	public FieldModel() {
 		
 		state= State.FREE;
 		color =null;
 	}
 	
-	
+	/**
+	 * method which tells if field is taken
+	 * @return field state
+	 */
 	public boolean isTaken(){
 		
 		return this.state==State.TAKEN;
@@ -41,7 +48,13 @@ public class FieldModel {
 		return color;
 	}
 
-	//TO DO make it easy to change(diffrent number of players)
+	/**
+	 * 
+	 * method which symnchrnize state and color
+	 * allows avoiding situtations as:
+	 * state=Free
+	 * color= red
+	 */
 	public void synchronizeEnums() {
 		
 		if(state == State.FREE) {

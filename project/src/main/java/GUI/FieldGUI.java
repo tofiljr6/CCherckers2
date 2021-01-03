@@ -7,7 +7,12 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * class which defines field gui
+ * @author dim
+ *
+ */
 public class FieldGUI extends JPanel {
     
     Color currentColor;
