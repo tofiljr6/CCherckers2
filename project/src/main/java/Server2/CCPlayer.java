@@ -340,20 +340,23 @@ public class CCPlayer implements Runnable {
                             ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
                         }
                     }
-
-
                 }
             }
 
             // winner case
-          
-
             if (sixArmBoardModel.playerFinished(this, sixArmBoardModel.getHashMap())) {
                 output.println("CONGRATULATION you've finished "+ " " +sixArmBoardModel.getPlaceOfFinishedPlayer());
 
+                // winner after move dont have any extra move, it is time for next player
+                output.println("CLEAR_HINTS");
+                xList.clear();
+                yList.clear();
+                output.println("CLEAN_LISTS");
+                output.println("NO_MOVE_AGAIN");
+                sixArmBoardModel.skip(this);
 
                 //winner is not longer in game,
-                //his next opponent is set as next player of player before winner 
+                //his next opponent is set as next player of player before winner
                 for (CCPlayer ccplayer : opponents) {
                     if(ccplayer.nextPlayer.equals(this)) {
                     	ccplayer.setNextPlayer(this.nextPlayer);

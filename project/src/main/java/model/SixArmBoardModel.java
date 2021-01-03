@@ -109,8 +109,7 @@ public class SixArmBoardModel extends BoardModel {
 		return winningConditions.getNumberOfFinishedPlayers();
 	}
 	
-	
-	
+
 	
 	
 	

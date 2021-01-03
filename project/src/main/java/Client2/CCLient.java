@@ -182,6 +182,17 @@ public class CCLient {
                 else if (response.startsWith("CONGRATULATION")) {
 
                 	g.setMessageLabel(response);
+                	break;
+                }
+                else if (response.startsWith("CLEAR_FIN")) {
+                    String cmd[] = response.split(" ");
+
+                    // this is coords correct fields
+                    int xS = Integer.parseInt(cmd[1]);
+                    int yS = Integer.parseInt(cmd[2]);
+
+                    g.setColorRe(xS, yS, Color.BLACK);
+
                 }
 //                else if (response.startsWith("CLEAN_XY")) {
 //                    String cmd[] = response.split(" ");
