@@ -1,12 +1,13 @@
 package settings;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import GUI.Coordinates;
 import Server2.CCPlayer;
 import model.Colors;
-import model.ColorsFor2Players;
-import model.ColorsFor4Players;
+
+import model.PawnColors;
 import model.FieldModel;
 /**
  * class for winning conditions for 'normal' six arm board
@@ -15,7 +16,7 @@ import model.FieldModel;
  */
 public class SixArmBoardWinningCondition extends WinningConditions{
 
-	private HashMap<Coordinates,FieldModel> hashMap = new HashMap<>();
+	
 	
 	
 	public SixArmBoardWinningCondition(int numberOfPlayers) {
@@ -25,86 +26,61 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 	 * condition for green to finish
 	 * @return
 	 */
-	private boolean greenFinished() {
-		if(
-		(hashMap.get(new Coordinates(9,3)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(11,3)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(13,3)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(15,3)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(14,2)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(12,2)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(10,2)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(13,1)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(11,1)).getColor()==ColorsFor2Players.GREEN) &&
-		(hashMap.get(new Coordinates(12,0)).getColor()==ColorsFor2Players.GREEN) 
-		)
-			return true;
-		else 
-			return false;
+	private boolean bottomPlayerFinished(HashMap<Coordinates,FieldModel> hashMap,SixArmBoard sixArmBoard, CCPlayer player) {
+		
+		Colors color = player.color;
+		ArrayList<Coordinates> finalFields = sixArmBoard.getTopStartingFields();
+		for(int i=0; i < finalFields.size(); i++ ) {
+			if(!(hashMap.get(finalFields.get(i)).getColor().equals(color))) {
+				return false;
+			}
+		}
+		return true;
 	}
 	/**
 	 * condition for blue to finish
 	 * @return
 	 */
-	private boolean blueFinished() {
-		if(
-		(hashMap.get(new Coordinates(9,13)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(11,13)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(13,13)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(15,13)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(14,14)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(10,14)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(12,14)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(11,15)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(13,15)).getColor()==ColorsFor2Players.BLUE) &&
-		(hashMap.get(new Coordinates(12,16)).getColor()==ColorsFor2Players.BLUE) 
-		)
-			return true;
-		else 
-			return false;
+	private boolean topPlayerFinished(HashMap<Coordinates,FieldModel> hashMap, SixArmBoard sixArmBoard, CCPlayer player) {
+		
+		Colors color = player.color;
+		ArrayList<Coordinates> finalFields = sixArmBoard.getBottomStartingFields();
+		for(int i=0; i < finalFields.size(); i++ ) {
+			if(!(hashMap.get(finalFields.get(i)).getColor().equals(color))) {
+				return false;
+			}
+		}
+		return true;
 	}
 	/**
 	 * condition for cyan to finish
 	 * @return
 	 */
-	private boolean cyanFinished() {
-		if(
-		(hashMap.get(new Coordinates(18,4)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(20,4)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(22,4)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(24,4)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(19,5)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(21,5)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(23,5)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(20,6)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(22,6)).getColor()==ColorsFor4Players.CYAN) &&
-		(hashMap.get(new Coordinates(21,7)).getColor()==ColorsFor4Players.CYAN) 
-		)
+	private boolean bottomLeftPlayerFinished(HashMap<Coordinates,FieldModel> hashMap, SixArmBoard sixArmBoard, CCPlayer player) {
 		
-			return true;
-		else
-			return false;
+		Colors color = player.color;
+		ArrayList<Coordinates> finalFields = sixArmBoard.getUpperRightStartingFields();
+		for(int i=0; i < finalFields.size(); i++ ) {
+			if(!(hashMap.get(finalFields.get(i)).getColor().equals(color))) {
+				return false;
+			}
+		}
+		return true;
 	}
 	/**
 	 * condition for yellow to finish
 	 * @return
 	 */
-	private boolean yellowFinished() {
-		if(
-		(hashMap.get(new Coordinates(18,12)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(20,12)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(22,12)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(24,12)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(19,11)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(21,11)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(23,11)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(20,10)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(22,10)).getColor()==ColorsFor4Players.YELLOW) &&
-		(hashMap.get(new Coordinates(21,9)).getColor()==ColorsFor4Players.YELLOW) 
-		)
-			return true;
-		else 
-			return false;
+	private boolean upperLeftPlayerFinished(HashMap<Coordinates,FieldModel> hashMap, SixArmBoard sixArmBoard, CCPlayer player) {
+	
+		Colors color = player.color;
+		ArrayList<Coordinates> finalFields = sixArmBoard.getBottomRightStartingFields();
+		for(int i=0; i < finalFields.size(); i++ ) {
+			if(!(hashMap.get(finalFields.get(i)).getColor().equals(color))) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	
@@ -112,45 +88,32 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 	 * condition for red to finish
 	 * @return
 	 */
-	private boolean redFinished() {
-		if(
-		(hashMap.get(new Coordinates(3,9)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(4,10)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(5,11)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(6,12)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(2,10)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(3,11)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(4,12)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(1,11)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(2,12)).getColor()==ColorsFor4Players.RED) &&
-		(hashMap.get(new Coordinates(0,12)).getColor()==ColorsFor4Players.RED) 
-		)
-			
-			return true;
-		else 
-			return false;
+	private boolean upperRightPlayerFinished(HashMap<Coordinates,FieldModel> hashMap, SixArmBoard sixArmBoard, CCPlayer player) {
+		
+		Colors color = player.color;
+		ArrayList<Coordinates> finalFields = sixArmBoard.getBottomLeftStartingFields();
+		for(int i=0; i < finalFields.size(); i++ ) {
+			if(!(hashMap.get(finalFields.get(i)).getColor().equals(color))) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
 	 * condition for magenta to finish
 	 * @return
 	 */
-	private boolean magentaFinished() {
-		if(
-		(hashMap.get(new Coordinates(0,4)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(2,4)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(4,4)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(6,4)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(5,5)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(1,5)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(3,5)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(2,6)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(4,6)).getColor()==ColorsFor4Players.MAGENTA) &&
-		(hashMap.get(new Coordinates(3,7)).getColor()==ColorsFor4Players.MAGENTA) 
-		)
-			return true;
-		else 
-			return false;
+	private boolean bottomRightPlayerFinished(HashMap<Coordinates,FieldModel> hashMap, SixArmBoard sixArmBoard, CCPlayer player) {
+		
+		Colors color = player.color;
+		ArrayList<Coordinates> finalFields = sixArmBoard.getUpperLeftStartingFields();
+		for(int i=0; i < finalFields.size(); i++ ) {
+			if(!(hashMap.get(finalFields.get(i)).getColor().equals(color))) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public boolean isGameFinished() {
@@ -169,44 +132,44 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 	 * @param hashMap hashmap
 	 * @return boolean vlaue
 	 */
-	public boolean playerFinished(CCPlayer player,HashMap<Coordinates,FieldModel> hashMap) {
+	public boolean playerFinished(HashMap<Coordinates,FieldModel> hashMap,SixArmBoard sixArmBoard, CCPlayer player) {
 		
-		this.hashMap = hashMap;
-		String playersColor = player.color.toString();
 		
-		switch(playersColor) {
-			case "BLUE":
-				if(blueFinished()) {
+		StartingFieldsPosition playersStartingPositions = player.getStartingFieldPosition();
+		
+		switch(playersStartingPositions) {
+			case TOP:
+				if(topPlayerFinished(hashMap,sixArmBoard,player)) {
 					numberOfFinishedPlayers++;
 					return true;
 				} else
 					return false;
-			case "YELLOW":
-				if(yellowFinished()) {
+			case UPPER_LEFT:
+				if(upperLeftPlayerFinished(hashMap,sixArmBoard,player)) {
 					numberOfFinishedPlayers++;
 					return true;
 				}else
 					return false;
-			case "GREEN":
-				if(greenFinished()) {
+			case BOTTOM:
+				if(bottomPlayerFinished(hashMap,sixArmBoard,player)) {
 					numberOfFinishedPlayers++;
 					return true;
 				}else
 					return false;
-			case "CYAN":
-				if(cyanFinished()) {
+			case BOTTOM_LEFT:
+				if(bottomLeftPlayerFinished(hashMap,sixArmBoard,player)) {
 					numberOfFinishedPlayers++;
 					return true;
 				}else
 					return false;
-			case "RED":
-				if(redFinished()) {
+			case UPPER_RIGHT:
+				if(upperRightPlayerFinished(hashMap,sixArmBoard,player)) {
 					numberOfFinishedPlayers++;
 					return true;
 				}else
 					return false;
-			case "MAGENTA":
-				if(magentaFinished()) {
+			case BOTTOM_RIGHT:
+				if(bottomRightPlayerFinished(hashMap,sixArmBoard,player)) {
 					numberOfFinishedPlayers++;
 					return true;
 				}else

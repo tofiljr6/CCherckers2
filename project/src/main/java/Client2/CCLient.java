@@ -169,7 +169,7 @@ public class CCLient {
                 } else if (response.startsWith("OPPONENT_SKIP")) {
                     // skip command opponents
                     out.println("opponent skipped");
-                    g.setMessageLabel("opponent skipped, your tern");
+                    g.setMessageLabel("opponent skipped, your turn");
                 } else if (response.startsWith("HINT_TO")) {
                     // hints command
                     // colorize the field where you can jump
@@ -220,6 +220,7 @@ public class CCLient {
                 else if (response.startsWith("CONGRATULATION")) {
                     // you are winner - case
                 	g.setMessageLabel(response);
+                	
 //                	break; // HOW I GET WRITE THIS !!
                 }
                 else if(response.startsWith("BEGIN")) {

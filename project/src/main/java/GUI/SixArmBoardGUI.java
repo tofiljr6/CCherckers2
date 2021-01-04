@@ -25,7 +25,7 @@ public class SixArmBoardGUI extends BoardGUI {
 
 	
 	//connection variable
-	private PrintWriter out;
+	public PrintWriter out;
 	//message to be sent
 	String msg;
 	//class which prepare gui board

@@ -1,10 +1,11 @@
 package Server2;
 
-import model.ColorsFor2Players;
-import model.ColorsFor4Players;
+
+import model.PawnColors;
 import model.SixArmBoardModel;
 
 import settings.SixArmBoard;
+import settings.StartingFieldsPosition;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -35,8 +36,8 @@ public class CCServer {
                         // game to two players
                         sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
 
-                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.BLUE, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor2Players.GREEN, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.BLUE, StartingFieldsPosition.TOP, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.GREEN,StartingFieldsPosition.BOTTOM, listener.accept()));
                         break;
                     case 3:
                         break;
@@ -44,10 +45,10 @@ public class CCServer {
                         // game to four players
                         sixArmBoardModel = new SixArmBoardModel(sixArmBoard,4);
 
-                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.MAGENTA, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.CYAN, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.YELLOW, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, ColorsFor4Players.RED, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.GREEN, StartingFieldsPosition.BOTTOM_RIGHT, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.CYAN, StartingFieldsPosition.BOTTOM_LEFT ,listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.YELLOW, StartingFieldsPosition.UPPER_LEFT ,listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.RED, StartingFieldsPosition.UPPER_RIGHT,listener.accept()));
 
 
                 }

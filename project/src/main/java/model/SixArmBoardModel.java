@@ -59,7 +59,7 @@ public class SixArmBoardModel extends BoardModel {
 		}
 		
 		//setting board up
-		preparer.setUpBoard(numberOfPlayers, hashMap);
+		preparer.setUpBoard(numberOfPlayers,hashMap, board);
 	}
 	
 	/**
@@ -95,8 +95,8 @@ public class SixArmBoardModel extends BoardModel {
 	 * @return boolean value if player already finished
 	 */
 	public boolean playerFinished(CCPlayer player, HashMap<Coordinates,FieldModel> hashMap) {
-		
-		return winningConditions.playerFinished(player, hashMap);
+		System.out.print(player.color);
+		return winningConditions.playerFinished(hashMap,board, player);
 	}
 	
 	/**

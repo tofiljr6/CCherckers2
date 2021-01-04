@@ -3,8 +3,8 @@ package GUI;
 import java.awt.Color;
 import java.util.HashMap;
 
-import model.ColorsFor2Players;
-import model.ColorsFor4Players;
+
+import model.PawnColors;
 import model.FieldModel;
 
 public class SixArmBoardGUIPreparer {
@@ -136,6 +136,8 @@ public class SixArmBoardGUIPreparer {
 //			hashMap.get(new Coordinates(1,11)).changeColor(Color.cyan);
 //			hashMap.get(new Coordinates(2,12)).changeColor(Color.cyan);
 //			hashMap.get(new Coordinates(0,12)).changeColor(Color.cyan);
+			
+			
 			hashMap.get(new Coordinates(3,9)).changeColor(Color.RED);
 			hashMap.get(new Coordinates(4,10)).changeColor(Color.RED);
 			hashMap.get(new Coordinates(5,11)).changeColor(Color.RED);
