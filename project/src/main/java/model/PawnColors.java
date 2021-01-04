@@ -5,10 +5,12 @@ package model;
  * @author dim
  *
  */
-public enum ColorsFor4Players implements Colors{
+public enum PawnColors implements Colors{
 
 	RED,
 	YELLOW,
 	MAGENTA,
-	CYAN;
+	CYAN,
+	BLUE,
+	GREEN;
 }

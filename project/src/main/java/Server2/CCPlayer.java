@@ -2,10 +2,11 @@ package Server2;
 
 import GUI.Coordinates;
 import model.Colors;
-import model.ColorsFor2Players;
-import model.ColorsFor4Players;
+
+import model.PawnColors;
 import model.FieldModel;
 import model.SixArmBoardModel;
+import settings.StartingFieldsPosition;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,6 +26,8 @@ public class CCPlayer implements Runnable {
     public SixArmBoardModel sixArmBoardModel;
     // current player color
     public Colors color;
+    //position on board
+    private StartingFieldsPosition startingFieldsPosition;
     // opponents of the current player
     public ArrayList<CCPlayer> opponents;
     // next player after the current one
@@ -48,8 +51,9 @@ public class CCPlayer implements Runnable {
      * @param color player color
      * @param socket in which socker the game is played
      */
-    public CCPlayer(SixArmBoardModel sixArmBoardModel, Colors color, Socket socket) {
+    public CCPlayer(SixArmBoardModel sixArmBoardModel, Colors color,StartingFieldsPosition startingFieldPosition, Socket socket) {
         // initialized variables
+    	this.startingFieldsPosition = startingFieldPosition;
         this.sixArmBoardModel = sixArmBoardModel;
         this.color = color;
         this.socket = socket;
@@ -98,7 +102,7 @@ public class CCPlayer implements Runnable {
         switch(numberOfPlayers) {
         	case 2:
         	    // the blue "player" has first move
-        	    if (color == ColorsFor2Players.BLUE) {
+        	    if (color == PawnColors.BLUE) {
         	    	sixArmBoardModel.players.add(this);
                     sixArmBoardModel.setCurrentPlayer(this);
                     output.println("MESSAGE Waiting for opponent to connect");
@@ -121,18 +125,18 @@ public class CCPlayer implements Runnable {
         	    break;
         	case 4:
         	    
-                if (color == ColorsFor4Players.MAGENTA) {
+                if (color == PawnColors.MAGENTA) {
                     sixArmBoardModel.setCurrentPlayer(this);
                     sixArmBoardModel.players.add(this);
                     this.opponents = new ArrayList<CCPlayer>();
                     output.println("MESSAGE Waiting for opponent to connect");
-     	        } else if (color == ColorsFor4Players.CYAN){
+     	        } else if (color == PawnColors.CYAN){
      	        	sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
-     	        } else if( color == ColorsFor4Players.YELLOW) {
+     	        } else if( color == PawnColors.YELLOW) {
      	        	sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
-        		}else if(color == ColorsFor4Players.RED) {
+        		}else if(color == PawnColors.RED) {
         			sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
 
@@ -377,8 +381,10 @@ public class CCPlayer implements Runnable {
                 }
             }
 
+            
             // winner case
             if (sixArmBoardModel.playerFinished(this, sixArmBoardModel.getHashMap())) {
+            	
                 output.println("CONGRATULATION you've finished "+ " " +sixArmBoardModel.getPlaceOfFinishedPlayer());
 
                 // winner after move dont have any extra move, it is time for next player
@@ -386,7 +392,7 @@ public class CCPlayer implements Runnable {
                 xList.clear();
                 yList.clear();
                 output.println("CLEAN_LISTS");
-                output.println("NO_MOVE_AGAIN");
+                //output.println("NO_MOVE_AGAIN");
                 sixArmBoardModel.skip(this);
 
                 //winner is not longer in game,
@@ -539,5 +545,9 @@ public class CCPlayer implements Runnable {
      */
     private void setNextPlayer(CCPlayer player) {
     	this.nextPlayer = player;
+    }
+    public StartingFieldsPosition getStartingFieldPosition(){
+    	
+    	return startingFieldsPosition;
     }
 }
