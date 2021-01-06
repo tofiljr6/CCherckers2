@@ -16,21 +16,21 @@ public class FieldModelTEST {
     @Test
     public void isTakenTest() {
         assertFalse(fieldModel.isTaken());
-        fieldModel.setFieldColor(ColorsFor2Players.GREEN);
+        fieldModel.setFieldColor(PawnColors.GREEN);
         assertTrue(fieldModel.isTaken());
     }
 
     @Test
     public void setFieldColorTest() {
         assertNull(fieldModel.getColor());
-        fieldModel.setFieldColor(ColorsFor2Players.BLUE);
+        fieldModel.setFieldColor(PawnColors.BLUE);
         assertNotNull(fieldModel.getColor());
-        assertEquals(ColorsFor2Players.BLUE, fieldModel.getColor());
+        assertEquals(PawnColors.BLUE, fieldModel.getColor());
     }
 
     @Test
     public void setFieldFreeTest() {
-        fieldModel.setFieldColor(ColorsFor4Players.YELLOW);
+        fieldModel.setFieldColor(PawnColors.YELLOW);
         assertTrue(fieldModel.isTaken());
         fieldModel.setFieldFree();
         assertFalse(fieldModel.isTaken());
@@ -39,13 +39,13 @@ public class FieldModelTEST {
 
     @Test
     public void getColorTest() {
-        fieldModel.setFieldColor(ColorsFor2Players.BLUE);
-        assertEquals(ColorsFor2Players.BLUE, fieldModel.getColor());
+        fieldModel.setFieldColor(PawnColors.BLUE);
+        assertEquals(PawnColors.BLUE, fieldModel.getColor());
     }
 
     @Test
     public void setFieldColorHintTest() {
-        fieldModel.setFieldColorHint(ColorsFor2Players.GREEN);
+        fieldModel.setFieldColorHint(PawnColors.GREEN);
         // synchronizedEnums - remember
         assertNull(fieldModel.getColor());
     }
