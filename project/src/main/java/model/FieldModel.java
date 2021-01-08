@@ -12,7 +12,7 @@ public class FieldModel {
 	public FieldModel() {
 		
 		state= State.FREE;
-		color =null;
+		color =PawnColors.NULL;
 	}
 	
 	/**
@@ -58,8 +58,8 @@ public class FieldModel {
 	public void synchronizeEnums() {
 		
 		if(state == State.FREE) {
-			color = null;
-		} else if (color == null) {
+			color = PawnColors.NULL;
+		} else if (color == PawnColors.NULL) {
 			state = State.FREE;
 		}
 	}

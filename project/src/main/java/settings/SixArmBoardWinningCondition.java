@@ -89,7 +89,6 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 	 * @return
 	 */
 	private boolean upperRightPlayerFinished(HashMap<Coordinates,FieldModel> hashMap, SixArmBoard sixArmBoard, CCPlayer player) {
-		try {
 			Colors color = player.color;
 			ArrayList<Coordinates> finalFields = sixArmBoard.getBottomLeftStartingFields();
 			for (int i = 0; i < finalFields.size(); i++) {
@@ -98,9 +97,7 @@ public class SixArmBoardWinningCondition extends WinningConditions{
 				}
 			}
 			return true;
-		} catch (NullPointerException e) {
-			throw new IllegalStateException(e);
-		}
+		
 	}
 	
 	/**

@@ -12,5 +12,6 @@ public enum PawnColors implements Colors{
 	MAGENTA,
 	CYAN,
 	BLUE,
-	GREEN;
+	GREEN,
+	NULL;
 }
