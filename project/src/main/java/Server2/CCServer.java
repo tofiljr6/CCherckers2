@@ -54,11 +54,11 @@ public class CCServer {
                         sixArmBoardModel = new SixArmBoardModel(sixArmBoard,6);
 
                         pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.BLUE, StartingFieldsPosition.TOP, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.GREEN,StartingFieldsPosition.BOTTOM, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.RED, StartingFieldsPosition.UPPER_RIGHT,listener.accept()));
                         pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.MAGENTA, StartingFieldsPosition.BOTTOM_RIGHT, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.GREEN,StartingFieldsPosition.BOTTOM, listener.accept()));
                         pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.CYAN, StartingFieldsPosition.BOTTOM_LEFT ,listener.accept()));
                         pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.YELLOW, StartingFieldsPosition.UPPER_LEFT ,listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.RED, StartingFieldsPosition.UPPER_RIGHT,listener.accept()));
 
 
                 }
