@@ -298,21 +298,13 @@ public class SixArmBoardModel extends BoardModel {
 	 * @param y coordinate
 	 * @return 1- taken, 3-free
 	 */
-	public synchronized int getHashMapCordColor(int x, int y) {
-
+	public synchronized boolean getHashMapCordColor(int x, int y) {
 		try {
-
-			if (hashMap.get(new Coordinates(x, y)).getState()== State.TAKEN) {
-				return 1; //taken
-		
-			} else {
-				return 3; // free
-			}
-
-		} catch (NullPointerException nullPtrExce) {
+			return hashMap.get(new Coordinates(x, y)).getState() != State.TAKEN; //taken
+		} catch (NullPointerException ignored) {
 
 		}
-		return 0;
+		return false;
 	}
 	
 	public synchronized void oneMore(CCPlayer ccPlayer){

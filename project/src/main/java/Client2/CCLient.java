@@ -179,11 +179,12 @@ public class CCLient {
                     // this is coords correct fields
                     int xS = Integer.parseInt(cmd[1]);
                     int yS = Integer.parseInt(cmd[2]);
-                    int col = Integer.parseInt(cmd[3]);
+//                    int col = Integer.parseInt(cmd[3]);
+                    boolean col = Boolean.parseBoolean(cmd[3]);
 
                     // @see what hint return
                     // the field is balck color so it is not taken
-                    if (col == 3) {
+                    if (col) {
                         // append to list
                         xList.add(xS);
                         yList.add(yS);
