@@ -24,7 +24,10 @@ public class FieldGUI extends JPanel {
     	setBackground(Color.WHITE);
     }
 
-    
+    public Color getCurrentColor() {
+        return currentColor;
+    }
+
     public void changeColor(Color color) {
     	
     	currentColor = color;
