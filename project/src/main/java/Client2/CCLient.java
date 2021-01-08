@@ -48,7 +48,7 @@ public class CCLient {
         // set gui , depends how many players take part in game
         g = new SixArmBoardGUI(board,this.numberOfPlayers,out);
         // set current color
-        colorInterpreter = new ColorInterpreter(this.numberOfPlayers);
+        colorInterpreter = new ColorInterpreter();
     }
 
     /**
@@ -67,7 +67,7 @@ public class CCLient {
             Color playerColor;
 
             playerColor = colorInterpreter.interprateColors(c);
-            currentPlayerColor = Color.magenta;
+            
 
             while (in.hasNextLine()) {
                 response = in.nextLine();
