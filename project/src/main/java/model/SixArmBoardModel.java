@@ -100,8 +100,7 @@ public class SixArmBoardModel extends BoardModel {
 	}
 	
 	/**
-	 * 
-	 * 
+	 * Getter
 	 * @return return place of player that finished
 	 */
 	public int getPlaceOfFinishedPlayer() {
@@ -234,29 +233,50 @@ public class SixArmBoardModel extends BoardModel {
 		// setting to next opponent
 		currentPlayer = currentPlayer.nextPlayer;
 	}
-	
+
+	/**
+	 * getter number of players
+	 * @return return nuumber of players take part in the game
+	 */
 	public int getNumberOfPlayers() {
 		return numberOfPlayers;
 	}
-	
+
+	/**
+	 * getter current player
+	 * @return return current player
+	 */
 	public CCPlayer getCurrentPlayer() {
 		return currentPlayer;
 	}
-	
+
+	/**
+	 * Setter current player
+	 * @param ccplayer player to choose the current one
+	 */
 	public void setCurrentPlayer(CCPlayer ccplayer) {
 		this.currentPlayer = ccplayer;
 	}
 
+	/**
+	 * method give you prompt which fields you can choose
+	 * decides if you can move in a given direction
+	 * @param xStart x cord where you stay
+	 * @param xDestination in which direction you go
+	 * @param yStart x cord where you stay
+	 * @param yDestination in which direction you go
+	 * @param ccPlayer player you have move
+	 * @return return in what direction we go
+	 * 		 1 -> return false info
+	 * 		 2 -> return true info - > normal move - not jump over opponent
+	 * 		 3 -> return that you jump over opponent in direction right R
+	 * 		 4 -> return that you jump over opponent in direction left L
+	 * 		 5 -> return that you jump over opponent in direction upper right UR
+	 * 		 6 -> return that you jump over opponent in direction bottom right BR
+	 * 		 7 -> return that you jump over opponent in direction bottom left BL
+	 * 		 8 -> return that you jump over opponent in direction upper left UL
+	 */
 	public synchronized int hints(int xStart, int xDestination, int yStart, int yDestination, CCPlayer ccPlayer) {
-		// 1 -> return false info
-		// 2 -> return true info - > normal move - not jump over opponent
-		// 3 -> return that recursion right R
-		// 4 -> return that recursion left L
-		// 5 -> return that recursion upper right UR
-		// 6 -> return that recursion bottom right BR
-		// 7 -> return that recursion bottom left BL
-		// 8 -> return that recursion upper left UL
-
 		if (ccPlayer != currentPlayer) {
 			throw new IllegalStateException("NOT your turn");
 		} else if (hashMap.get(new Coordinates(xStart + xDestination, yStart + yDestination)) == null) {
@@ -283,10 +303,11 @@ public class SixArmBoardModel extends BoardModel {
 		// no neighborhood
 		return 2;
 	}
-/**
- * getter for hashmap
- * @return
- */
+
+	/**
+	 * getter for hashmap
+	 * @return the current hashmap
+	 */
 	public HashMap<Coordinates, FieldModel> getHashMap() {
 		return hashMap;
 	}
@@ -296,7 +317,7 @@ public class SixArmBoardModel extends BoardModel {
 	 * method which returns if field is taken
 	 * @param x coordinate
 	 * @param y coordinate
-	 * @return 1- taken, 3-free
+	 * @return that this field is taken
 	 */
 	public synchronized boolean getHashMapCordColor(int x, int y) {
 		try {
@@ -305,9 +326,5 @@ public class SixArmBoardModel extends BoardModel {
 
 		}
 		return false;
-	}
-	
-	public synchronized void oneMore(CCPlayer ccPlayer){
-		currentPlayer = currentPlayer.nextPlayer;
 	}
 }
