@@ -102,7 +102,7 @@ public class CCPlayer implements Runnable {
         switch(numberOfPlayers) {
         	case 2:
         	    // the blue "player" has first move
-        	    if (color == PawnColors.BLUE) {
+        	    if (startingFieldsPosition == StartingFieldsPosition.TOP) {
         	    	sixArmBoardModel.players.add(this);
                     sixArmBoardModel.setCurrentPlayer(this);
                     output.println("MESSAGE Waiting for opponent to connect");
@@ -125,18 +125,18 @@ public class CCPlayer implements Runnable {
         	    break;
         	case 4:
         	    
-                if (color == PawnColors.MAGENTA) {
+                if (startingFieldsPosition == StartingFieldsPosition.BOTTOM_RIGHT) {
                     sixArmBoardModel.setCurrentPlayer(this);
                     sixArmBoardModel.players.add(this);
                     this.opponents = new ArrayList<CCPlayer>();
                     output.println("MESSAGE Waiting for opponent to connect");
-     	        } else if (color == PawnColors.CYAN){
+     	        } else if (startingFieldsPosition == StartingFieldsPosition.BOTTOM_LEFT){
      	        	sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
-     	        } else if( color == PawnColors.YELLOW) {
+     	        } else if( startingFieldsPosition == StartingFieldsPosition.UPPER_LEFT) {
      	        	sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
-        		}else if(color == PawnColors.RED) {
+        		}else if(startingFieldsPosition == StartingFieldsPosition.UPPER_RIGHT) {
         			sixArmBoardModel.players.add(this);
      	        	this.opponents = new ArrayList<CCPlayer>();
 
@@ -393,6 +393,7 @@ public class CCPlayer implements Runnable {
                 yList.clear();
                 output.println("CLEAN_LISTS");
                 //output.println("NO_MOVE_AGAIN");
+             
                 sixArmBoardModel.skip(this);
 
                 //winner is not longer in game,
@@ -412,6 +413,7 @@ public class CCPlayer implements Runnable {
         } catch (IllegalStateException e) {
             output.println("MESSAGE " + e.getMessage());
         }
+      
     }
 
     /**

@@ -30,10 +30,12 @@ public class SixArmBoardGUI extends BoardGUI {
 	String msg;
 	//class which prepare gui board
 	private SixArmBoardGUIPreparer preparer;
-	
+	private SixArmBoard board;
 	public SixArmBoardGUI(SixArmBoard board, int numberOfPlayers, PrintWriter out) throws Exception {
 		
 		preparer = new SixArmBoardGUIPreparer();
+		
+		this.board = board;
 		// information about games process
 		messageLabel.setForeground(Color.BLACK);
 		frame.getContentPane().add(messageLabel, BorderLayout.SOUTH);
@@ -122,7 +124,7 @@ public class SixArmBoardGUI extends BoardGUI {
 			frame.getContentPane().add(container, BorderLayout.CENTER);
 		}
 		//switching over number of players
-		preparer.setUpGUIBoard(numberOfPlayers, hashMap);
+		preparer.setUpGUIBoard(numberOfPlayers, hashMap, board);
 	}
 
 	
