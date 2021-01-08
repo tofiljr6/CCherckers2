@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import model.PawnColors;
 import settings.SixArmBoard;
+import settings.StartingFieldsPosition;
 import model.FieldModel;
 
 public class SixArmBoardGUIPreparer {
@@ -33,14 +34,15 @@ public class SixArmBoardGUIPreparer {
 	 */
 	private void setUpBoardFor2Players(HashMap<Coordinates, FieldGUI> hashMap,SixArmBoard sixArmBoard) {
 		//blue player
-		ArrayList<Coordinates> topPlayerStartingFields = sixArmBoard.getTopStartingFields();
+		ArrayList<Coordinates> topPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.TOP);
+		
 		for(int i=0; i< topPlayerStartingFields.size(); i++) {
 			hashMap.get(topPlayerStartingFields.get(i)).changeColor(Color.blue);
 		}
 
 
 	//Green player
-		ArrayList<Coordinates> bottomPlayerStartingFields = sixArmBoard.getBottomStartingFields();
+		ArrayList<Coordinates> bottomPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM);
 		for(int i=0; i< bottomPlayerStartingFields.size(); i++) {
 			hashMap.get(bottomPlayerStartingFields.get(i)).changeColor(Color.GREEN);
 		}
@@ -77,19 +79,19 @@ public class SixArmBoardGUIPreparer {
 		
 		
 			//yellow player
-		ArrayList<Coordinates> upperLeftPlayerStartingFields = sixArmBoard.getUpperLeftStartingFields();
+		ArrayList<Coordinates> upperLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.UPPER_LEFT);;
 		for(int i=0; i< upperLeftPlayerStartingFields.size(); i++) {
 			hashMap.get(upperLeftPlayerStartingFields.get(i)).changeColor(Color.YELLOW);
 		}
 			
 			//red Player
-			ArrayList<Coordinates> upperRightPlayerStartingFields = sixArmBoard.getUpperRightStartingFields();
+			ArrayList<Coordinates> upperRightPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.UPPER_RIGHT);
 			for(int i=0; i< upperRightPlayerStartingFields.size(); i++) {
 				hashMap.get(upperRightPlayerStartingFields.get(i)).changeColor(Color.RED);
 			}
 			
 			//magenta player
-			ArrayList<Coordinates> bottomRightPlayerStartingFields = sixArmBoard.getBottomRightStartingFields();
+			ArrayList<Coordinates> bottomRightPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_RIGHT);
 			for(int i=0; i< bottomRightPlayerStartingFields.size(); i++) {
 				hashMap.get(bottomRightPlayerStartingFields.get(i)).changeColor(Color.MAGENTA);
 			}
@@ -98,7 +100,7 @@ public class SixArmBoardGUIPreparer {
 			//delete this after
 			hashMap.get(new Coordinates(8,12)).changeColor(Color.magenta);
 			//cyan player
-//			ArrayList<Coordinates> bottomLeftPlayerStartingFields = sixArmBoard.getBottomLeftStartingFields();
+//			ArrayList<Coordinates> bottomLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_LEFT);
 //			for(int i=0; i< bottomLeftPlayerStartingFields.size(); i++) {
 //				hashMap.get(bottomLeftPlayerStartingFields.get(i)).changeColor(Color.CYAN);
 //			}
