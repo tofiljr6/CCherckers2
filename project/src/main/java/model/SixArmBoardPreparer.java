@@ -56,28 +56,28 @@ public class SixArmBoardPreparer {
 		}
 	
 	
-		// easy test for jump through opponent - todo DELETE after
-		hashMap.get(new Coordinates(6,6 )).setFieldColor(PawnColors.BLUE);
-		hashMap.get(new Coordinates(16,6 )).setFieldColor(PawnColors.BLUE);
-		hashMap.get(new Coordinates(3,9 )).setFieldColor(PawnColors.GREEN);
-		hashMap.get(new Coordinates(9,9 )).setFieldColor(PawnColors.GREEN);
-		hashMap.get(new Coordinates(21,5 )).setFieldColor(PawnColors.GREEN);
-		hashMap.get(new Coordinates(18,8 )).setFieldColor(PawnColors.GREEN);
-	
-		hashMap.get(new Coordinates(20,6 )).setFieldColor(PawnColors.BLUE);
-	
-	
-		hashMap.get(new Coordinates(8,6 )).setFieldColor(PawnColors.GREEN);
-		//hashMap.get(new Coordinates(10,6 )).setFieldColor(ColorsFor2Players.GREEN);
-		hashMap.get(new Coordinates(7,7 )).setFieldColor(PawnColors.GREEN);
-		hashMap.get(new Coordinates(5,7 )).setFieldColor(PawnColors.GREEN);
-		hashMap.get(new Coordinates(4,6 )).setFieldColor(PawnColors.GREEN);
-		hashMap.get(new Coordinates(5,5 )).setFieldColor(PawnColors.GREEN);
-		hashMap.get(new Coordinates(7,5 )).setFieldColor(PawnColors.GREEN);
-	
-		hashMap.get(new Coordinates(14,6 )).setFieldColor(PawnColors.GREEN);
-	
-		hashMap.get(new Coordinates(16,4 )).setFieldColor(PawnColors.GREEN);
+//		// easy test for jump through opponent - todo DELETE after
+//		hashMap.get(new Coordinates(6,6 )).setFieldColor(PawnColors.BLUE);
+//		hashMap.get(new Coordinates(16,6 )).setFieldColor(PawnColors.BLUE);
+//		hashMap.get(new Coordinates(3,9 )).setFieldColor(PawnColors.GREEN);
+//		hashMap.get(new Coordinates(9,9 )).setFieldColor(PawnColors.GREEN);
+//		hashMap.get(new Coordinates(21,5 )).setFieldColor(PawnColors.GREEN);
+//		hashMap.get(new Coordinates(18,8 )).setFieldColor(PawnColors.GREEN);
+//
+//		hashMap.get(new Coordinates(20,6 )).setFieldColor(PawnColors.BLUE);
+//
+//
+//		hashMap.get(new Coordinates(8,6 )).setFieldColor(PawnColors.GREEN);
+//		//hashMap.get(new Coordinates(10,6 )).setFieldColor(ColorsFor2Players.GREEN);
+//		hashMap.get(new Coordinates(7,7 )).setFieldColor(PawnColors.GREEN);
+//		hashMap.get(new Coordinates(5,7 )).setFieldColor(PawnColors.GREEN);
+//		hashMap.get(new Coordinates(4,6 )).setFieldColor(PawnColors.GREEN);
+//		hashMap.get(new Coordinates(5,5 )).setFieldColor(PawnColors.GREEN);
+//		hashMap.get(new Coordinates(7,5 )).setFieldColor(PawnColors.GREEN);
+//
+//		hashMap.get(new Coordinates(14,6 )).setFieldColor(PawnColors.GREEN);
+//
+//		hashMap.get(new Coordinates(16,4 )).setFieldColor(PawnColors.GREEN);
 	}
 	/**
 	 * setting up given fields
@@ -110,25 +110,25 @@ public class SixArmBoardPreparer {
 		//cyan player
 		
 		//uncomment that!!
-//		ArrayList<Coordinates> bottomLeftStartingFields = board.getBottomLeftStartingFields();
-//		for(int i =0 ;i< bottomLeftStartingFields.size();i++) {
-//		hashMap.get(bottomLeftStartingFields.get(i)).setFieldColor(ColorsFor4Players.CYAN);
-//		}
+		ArrayList<Coordinates> bottomLeftStartingFields = board.getBottomLeftStartingFields();
+		for(int i =0 ;i< bottomLeftStartingFields.size();i++) {
+		hashMap.get(bottomLeftStartingFields.get(i)).setFieldColor(PawnColors.CYAN);
+		}
 		
 		
-		hashMap.get(new Coordinates(3,9)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(4,10)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(5,11)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(10,12)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(2,10)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(3,11)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(4,12)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(1,11)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(2,12)).setFieldColor(PawnColors.RED);
-		hashMap.get(new Coordinates(0,12)).setFieldColor(PawnColors.RED);
-		
-		//delete this after
-		hashMap.get(new Coordinates(8,12)).setFieldColor(PawnColors.MAGENTA);
+//		hashMap.get(new Coordinates(3,9)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(4,10)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(5,11)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(10,12)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(2,10)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(3,11)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(4,12)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(1,11)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(2,12)).setFieldColor(PawnColors.RED);
+//		hashMap.get(new Coordinates(0,12)).setFieldColor(PawnColors.RED);
+//
+//		//delete this after
+//		hashMap.get(new Coordinates(8,12)).setFieldColor(PawnColors.MAGENTA);
 	}
 	/**
 	 * setting up given fields

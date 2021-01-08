@@ -1,11 +1,8 @@
 package Server2;
 
 import GUI.Coordinates;
-import model.Colors;
+import model.*;
 
-import model.PawnColors;
-import model.FieldModel;
-import model.SixArmBoardModel;
 import settings.StartingFieldsPosition;
 
 import java.io.IOException;
@@ -124,7 +121,6 @@ public class CCPlayer implements Runnable {
                 }
         	    break;
         	case 4:
-        	    
                 if (startingFieldsPosition == StartingFieldsPosition.BOTTOM_RIGHT) {
                     sixArmBoardModel.setCurrentPlayer(this);
                     sixArmBoardModel.players.add(this);
@@ -158,11 +154,56 @@ public class CCPlayer implements Runnable {
 	     	        	}
 	     	        	player = player.nextPlayer;
      	        	}
-     	        	  int random = new Random().nextInt(4);
-                      sixArmBoardModel.setCurrentPlayer(sixArmBoardModel.players.get(random));
-                      sixArmBoardModel.getCurrentPlayer().output.println("BEGIN");
+
+                    int random = new Random().nextInt(4);
+                    sixArmBoardModel.setCurrentPlayer(sixArmBoardModel.players.get(random));
+                    sixArmBoardModel.getCurrentPlayer().output.println("BEGIN");
      	        }
-     		 break;
+                break;
+            case 6:
+                if (startingFieldsPosition == StartingFieldsPosition.TOP) {
+                    sixArmBoardModel.setCurrentPlayer(this);
+                    sixArmBoardModel.players.add(this);
+                    this.opponents = new ArrayList<CCPlayer>();
+                    output.append("MESSAGE waiting for opponent to connect");
+                } else if (startingFieldsPosition == StartingFieldsPosition.UPPER_RIGHT) {
+                    sixArmBoardModel.players.add(this);
+                    this.opponents = new ArrayList<CCPlayer>();
+                } else if (startingFieldsPosition == StartingFieldsPosition.BOTTOM_RIGHT) {
+                    sixArmBoardModel.players.add(this);
+                    this.opponents = new ArrayList<CCPlayer>();
+                } else if (startingFieldsPosition == StartingFieldsPosition.BOTTOM) {
+                    sixArmBoardModel.players.add(this);
+                    this.opponents = new ArrayList<CCPlayer>();
+                } else if (startingFieldsPosition == StartingFieldsPosition.BOTTOM_LEFT) {
+                    sixArmBoardModel.players.add(this);
+                    this.opponents = new ArrayList<CCPlayer>();
+                } else if (startingFieldsPosition == StartingFieldsPosition.UPPER_LEFT) {
+                    sixArmBoardModel.players.add(this);
+                    this.opponents = new ArrayList<CCPlayer>();
+
+                    this.setNextPlayer(sixArmBoardModel.players.get(0));
+                    this.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(1));
+                    this.nextPlayer.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(2));
+                    this.nextPlayer.nextPlayer.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(3));
+                    this.nextPlayer.nextPlayer.nextPlayer.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(4));
+                    this.nextPlayer.nextPlayer.nextPlayer.nextPlayer.nextPlayer.setNextPlayer(this);
+
+                    CCPlayer player = this;
+                    for (int j = 0; j < 6; j++) {
+                        CCPlayer playerToAdd = player.nextPlayer;
+                        for (int i = 0; i < 5; i++) {
+                            player.opponents.add(playerToAdd);
+                            playerToAdd = playerToAdd.nextPlayer;
+                        }
+                        player = player.nextPlayer;
+                    }
+
+                    int random = new Random().nextInt(6);
+                    sixArmBoardModel.setCurrentPlayer(sixArmBoardModel.players.get(random));
+                    sixArmBoardModel.getCurrentPlayer().output.println("BEGIN");
+                }
+
         }
     }
 
