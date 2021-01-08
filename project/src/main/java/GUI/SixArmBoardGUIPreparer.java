@@ -48,28 +48,28 @@ public class SixArmBoardGUIPreparer {
 		}
 
 
-	// easy test for jump through opponent - todo DELETE after
-	hashMap.get(new Coordinates(6,6 )).changeColor(Color.BLUE);
-	hashMap.get(new Coordinates(16,6 )).changeColor(Color.BLUE);
-	hashMap.get(new Coordinates(20,6 )).changeColor(Color.BLUE);
-	hashMap.get(new Coordinates(3,9 )).changeColor(Color.GREEN);
-	hashMap.get(new Coordinates(9,9 )).changeColor(Color.GREEN);
-	hashMap.get(new Coordinates(21,5 )).changeColor(Color.GREEN);
-	hashMap.get(new Coordinates(18,8 )).changeColor(Color.GREEN);
-
-	hashMap.get(new Coordinates(8,6 )).changeColor(Color.GREEN);
-//	hashMap.get(new Coordinates(10,6 )).changeColor(Color.GREEN);
-	hashMap.get(new Coordinates(7,7 )).changeColor(Color.GREEN);
-	hashMap.get(new Coordinates(5,7 )).changeColor(Color.GREEN);
-	hashMap.get(new Coordinates(4,6 )).changeColor(Color.GREEN);
-	hashMap.get(new Coordinates(5,5 )).changeColor(Color.GREEN);
-	hashMap.get(new Coordinates(7,5 )).changeColor(Color.GREEN);
-
-	hashMap.get(new Coordinates(14,6 )).changeColor(Color.GREEN);
-
-
-
-	hashMap.get(new Coordinates(16,4 )).changeColor(Color.GREEN);
+//	// easy test for jump through opponent - todo DELETE after
+//	hashMap.get(new Coordinates(6,6 )).changeColor(Color.BLUE);
+//	hashMap.get(new Coordinates(16,6 )).changeColor(Color.BLUE);
+//	hashMap.get(new Coordinates(20,6 )).changeColor(Color.BLUE);
+//	hashMap.get(new Coordinates(3,9 )).changeColor(Color.GREEN);
+//	hashMap.get(new Coordinates(9,9 )).changeColor(Color.GREEN);
+//	hashMap.get(new Coordinates(21,5 )).changeColor(Color.GREEN);
+//	hashMap.get(new Coordinates(18,8 )).changeColor(Color.GREEN);
+//
+//	hashMap.get(new Coordinates(8,6 )).changeColor(Color.GREEN);
+////	hashMap.get(new Coordinates(10,6 )).changeColor(Color.GREEN);
+//	hashMap.get(new Coordinates(7,7 )).changeColor(Color.GREEN);
+//	hashMap.get(new Coordinates(5,7 )).changeColor(Color.GREEN);
+//	hashMap.get(new Coordinates(4,6 )).changeColor(Color.GREEN);
+//	hashMap.get(new Coordinates(5,5 )).changeColor(Color.GREEN);
+//	hashMap.get(new Coordinates(7,5 )).changeColor(Color.GREEN);
+//
+//	hashMap.get(new Coordinates(14,6 )).changeColor(Color.GREEN);
+//
+//
+//
+//	hashMap.get(new Coordinates(16,4 )).changeColor(Color.GREEN);
 }
 	/**
 	 * setting up given fields
@@ -98,24 +98,24 @@ public class SixArmBoardGUIPreparer {
 			
 			
 			//delete this after
-			hashMap.get(new Coordinates(8,12)).changeColor(Color.magenta);
+//			hashMap.get(new Coordinates(8,12)).changeColor(Color.magenta);
 			//cyan player
-//			ArrayList<Coordinates> bottomLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_LEFT);
-//			for(int i=0; i< bottomLeftPlayerStartingFields.size(); i++) {
-//				hashMap.get(bottomLeftPlayerStartingFields.get(i)).changeColor(Color.CYAN);
-//			}
+			ArrayList<Coordinates> bottomLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_LEFT);
+			for(int i=0; i< bottomLeftPlayerStartingFields.size(); i++) {
+				hashMap.get(bottomLeftPlayerStartingFields.get(i)).changeColor(Color.CYAN);
+			}
 //			
-			
-			hashMap.get(new Coordinates(3,9)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(4,10)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(5,11)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(10,12)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(2,10)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(3,11)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(4,12)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(1,11)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(2,12)).changeColor(Color.RED);
-			hashMap.get(new Coordinates(0,12)).changeColor(Color.RED);
+//
+//			hashMap.get(new Coordinates(3,9)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(4,10)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(5,11)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(10,12)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(2,10)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(3,11)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(4,12)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(1,11)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(2,12)).changeColor(Color.RED);
+//			hashMap.get(new Coordinates(0,12)).changeColor(Color.RED);
 		}
 	/**
 	 * setting up given fields
