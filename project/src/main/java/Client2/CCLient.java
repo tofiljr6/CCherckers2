@@ -1,6 +1,7 @@
 package Client2;
 
 import GUI.SixArmBoardGUI;
+import model.Colors;
 import settings.SixArmBoard;
 
 import javax.swing.*;
@@ -71,6 +72,7 @@ public class CCLient {
 
             while (in.hasNextLine()) {
                 response = in.nextLine();
+                
                 if (response.startsWith("VALID_MOVE") ) {
                 	// we make good move/jump so repaint all necessary graphics to be up-to-date board
 
@@ -118,15 +120,15 @@ public class CCLient {
                     int xEnd = Integer.parseInt(cmd[3]);
                     int yEnd = Integer.parseInt(cmd[4]);
                     currentPlayerColor = colorInterpreter.interprateColors(cmd[5]);
-
+                    String nextPlayerColor = cmd[6];
                     // OPPONENT_MOVE command sends with params
                     // we convert it to integer and set to graphics
                     g.setColorRe(xEnd , yEnd, currentPlayerColor);
                     g.setColorRe(xStart, yStart, Color.BLACK);
                     g.re();
-
+                  
                     // set good label
-                    g.setMessageLabel("Opponent moved, your turn");
+                    g.setMessageLabel("Opponent moved, " + nextPlayerColor + " turn");
                 } else if (response.startsWith("MESSAGE")) {
                     // this coomand handle all warings. start from 8 char
                     out.println(response.substring(8));
@@ -168,8 +170,10 @@ public class CCLient {
                     g.setMessageLabel("you skipped");
                 } else if (response.startsWith("OPPONENT_SKIP")) {
                     // skip command opponents
+                	String cmd[] = response.split(" ");
                     out.println("opponent skipped");
-                    g.setMessageLabel("opponent skipped, your turn");
+                    
+                    g.setMessageLabel("opponent finished move, "+ cmd[1] + " turn");
                 } else if (response.startsWith("HINT_TO")) {
                     // hints command
                     // colorize the field where you can jump

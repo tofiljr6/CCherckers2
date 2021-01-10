@@ -8,7 +8,7 @@ import java.util.HashMap;
 import model.PawnColors;
 import settings.SixArmBoard;
 import settings.StartingFieldsPosition;
-import model.FieldModel;
+
 
 public class SixArmBoardGUIPreparer {
 
@@ -36,18 +36,22 @@ public class SixArmBoardGUIPreparer {
 	 * @param hashMap hashmap on which operations are performed
 	 */
 	private void setUpBoardFor2Players(HashMap<Coordinates, FieldGUI> hashMap,SixArmBoard sixArmBoard) {
-		//blue player
+		//top player
+		PawnColors topPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.TOP);
+		Color topFieldColor = pawnColorToGUIColor(topPawnColor);
 		ArrayList<Coordinates> topPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.TOP);
 		
 		for(int i=0; i< topPlayerStartingFields.size(); i++) {
-			hashMap.get(topPlayerStartingFields.get(i)).changeColor(Color.blue);
+			hashMap.get(topPlayerStartingFields.get(i)).changeColor(topFieldColor);
 		}
 
 
-	//Green player
+	//bottom player
+		PawnColors bottomPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.BOTTOM);
+		Color bottomFieldColor = pawnColorToGUIColor(bottomPawnColor);
 		ArrayList<Coordinates> bottomPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM);
 		for(int i=0; i< bottomPlayerStartingFields.size(); i++) {
-			hashMap.get(bottomPlayerStartingFields.get(i)).changeColor(Color.GREEN);
+			hashMap.get(bottomPlayerStartingFields.get(i)).changeColor(bottomFieldColor);
 		}
 
 
@@ -76,22 +80,29 @@ public class SixArmBoardGUIPreparer {
 	}
 	
 	private void setUpBoardFor3Players(HashMap<Coordinates, FieldGUI> hashMap,SixArmBoard sixArmBoard) {
-		//blue player
+		//top player
+		PawnColors topPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.TOP);
+		Color topFieldColor = pawnColorToGUIColor(topPawnColor);
 		ArrayList<Coordinates> topPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.TOP);
 		
 		for(int i=0; i< topPlayerStartingFields.size(); i++) {
-			hashMap.get(topPlayerStartingFields.get(i)).changeColor(Color.blue);
+			hashMap.get(topPlayerStartingFields.get(i)).changeColor(topFieldColor);
 		}
 
-		//magenta player
+		//bottom right player
+		PawnColors bottomRightPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.BOTTOM_RIGHT);
+		Color bottomRightFieldColor = pawnColorToGUIColor(bottomRightPawnColor);
 		ArrayList<Coordinates> bottomRightPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_RIGHT);
 		for(int i=0; i< bottomRightPlayerStartingFields.size(); i++) {
-			hashMap.get(bottomRightPlayerStartingFields.get(i)).changeColor(Color.MAGENTA);
+			hashMap.get(bottomRightPlayerStartingFields.get(i)).changeColor(bottomRightFieldColor);
 		}
 	
+		//bottom left player
+		PawnColors bottomLeftPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.BOTTOM_LEFT);
+		Color bottomLeftFieldColor = pawnColorToGUIColor(bottomLeftPawnColor);
 		ArrayList<Coordinates> bottomLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_LEFT);
 		for(int i=0; i< bottomLeftPlayerStartingFields.size(); i++) {
-			hashMap.get(bottomLeftPlayerStartingFields.get(i)).changeColor(Color.CYAN);
+			hashMap.get(bottomLeftPlayerStartingFields.get(i)).changeColor(bottomLeftFieldColor);
 		}
 	}
 	/**
@@ -101,30 +112,39 @@ public class SixArmBoardGUIPreparer {
 	private void setUpBoardFor4Players(HashMap<Coordinates, FieldGUI> hashMap, SixArmBoard sixArmBoard) {
 		
 		
-			//yellow player
-		ArrayList<Coordinates> upperLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.UPPER_LEFT);;
-		for(int i=0; i< upperLeftPlayerStartingFields.size(); i++) {
-			hashMap.get(upperLeftPlayerStartingFields.get(i)).changeColor(Color.YELLOW);
-		}
-			
-			//red Player
+			//upper left player
+			PawnColors upperLeftPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.UPPER_LEFT);
+			Color upperLeftFieldColor = pawnColorToGUIColor(upperLeftPawnColor);
+			ArrayList<Coordinates> upperLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.UPPER_LEFT);;
+			for(int i=0; i< upperLeftPlayerStartingFields.size(); i++) {
+				hashMap.get(upperLeftPlayerStartingFields.get(i)).changeColor(upperLeftFieldColor);
+			}
+				
+			//upper right Player
+			PawnColors upperRightPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.UPPER_RIGHT);
+			Color upperRightFieldColor = pawnColorToGUIColor(upperRightPawnColor);
 			ArrayList<Coordinates> upperRightPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.UPPER_RIGHT);
 			for(int i=0; i< upperRightPlayerStartingFields.size(); i++) {
-				hashMap.get(upperRightPlayerStartingFields.get(i)).changeColor(Color.RED);
+				hashMap.get(upperRightPlayerStartingFields.get(i)).changeColor(upperRightFieldColor);
 			}
 			
-			//magenta player
+			//bottom right player
+			PawnColors bottomRightPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.BOTTOM_RIGHT);
+			Color bottomRightFieldColor = pawnColorToGUIColor(bottomRightPawnColor);
 			ArrayList<Coordinates> bottomRightPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_RIGHT);
 			for(int i=0; i< bottomRightPlayerStartingFields.size(); i++) {
-				hashMap.get(bottomRightPlayerStartingFields.get(i)).changeColor(Color.MAGENTA);
+				hashMap.get(bottomRightPlayerStartingFields.get(i)).changeColor(bottomRightFieldColor);
 			}
 			
 			
 
-			//cyan player
+			
+			//bottom left player
+			PawnColors bottomLeftPawnColor = sixArmBoard.getColorFromStartingPosition(StartingFieldsPosition.BOTTOM_LEFT);
+			Color bottomLeftFieldColor = pawnColorToGUIColor(bottomLeftPawnColor);
 			ArrayList<Coordinates> bottomLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_LEFT);
 			for(int i=0; i< bottomLeftPlayerStartingFields.size(); i++) {
-				hashMap.get(bottomLeftPlayerStartingFields.get(i)).changeColor(Color.CYAN);
+				hashMap.get(bottomLeftPlayerStartingFields.get(i)).changeColor(bottomLeftFieldColor);
 			}
 
 			//commentted stuff co check win condition
@@ -148,5 +168,28 @@ public class SixArmBoardGUIPreparer {
 	private void setUpBoardFor6Players(HashMap<Coordinates, FieldGUI> hashMap,SixArmBoard sixArmBoard) {
 		setUpBoardFor2Players(hashMap,sixArmBoard);
 		setUpBoardFor4Players(hashMap,sixArmBoard);
+	}
+	
+	private Color pawnColorToGUIColor(PawnColors pawnColor) {
+		
+		switch(pawnColor) {
+		
+		case RED:
+			return Color.red;
+		case YELLOW:
+			return Color.yellow;
+		case GREEN:
+			return Color.green;
+		case BLUE:
+			return Color.blue;
+		case MAGENTA:
+			return Color.magenta;
+		case CYAN:
+			return Color.cyan;
+		case NULL:
+			return Color.black;
+		}
+		return null;
+		
 	}
 }

@@ -208,7 +208,7 @@ public class CCPlayer implements Runnable {
                     sixArmBoardModel.setCurrentPlayer(this);
                     sixArmBoardModel.players.add(this);
                     this.opponents = new ArrayList<CCPlayer>();
-                    output.append("MESSAGE waiting for opponent to connect");
+                    output.println("MESSAGE waiting for opponent to connect");
                 } else if (startingFieldsPosition == StartingFieldsPosition.UPPER_RIGHT) {
                     sixArmBoardModel.players.add(this);
                     this.opponents = new ArrayList<CCPlayer>();
@@ -245,6 +245,8 @@ public class CCPlayer implements Runnable {
                     int random = new Random().nextInt(6);
                     sixArmBoardModel.setCurrentPlayer(sixArmBoardModel.players.get(random));
                     sixArmBoardModel.getCurrentPlayer().output.println("BEGIN");
+
+                    
                 }
 
         }
@@ -406,7 +408,7 @@ public class CCPlayer implements Runnable {
 
         // sends communication to opponents about player movement
         for (CCPlayer ccplayer : opponents) {
-            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
+            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color+ " "+ this.nextPlayer.color);
         }
     }
 
@@ -456,10 +458,11 @@ public class CCPlayer implements Runnable {
 
                         // sends communication to client - player
                         output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " not");
-
+                      
                         // sends communication to client - opponents
                         for (CCPlayer ccplayer : opponents) {
-                            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color);
+                            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color + " "+ this.nextPlayer.color);
+                            System.out.print(ccplayer.color);
                         }
                     }
                 }
@@ -617,7 +620,7 @@ public class CCPlayer implements Runnable {
 
             // sends to other player communication that he skipped
             for(CCPlayer ccplayer: opponents) {
-            	ccplayer.output.println("OPPONENT_SKIP");
+            	ccplayer.output.println("OPPONENT_SKIP " + this.nextPlayer.color);
             }
             
         } catch (IllegalStateException e) {
