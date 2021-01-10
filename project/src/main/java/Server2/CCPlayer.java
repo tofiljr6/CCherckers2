@@ -120,6 +120,49 @@ public class CCPlayer implements Runnable {
                     
                 }
         	    break;
+        	case 3:
+        		
+        		if (startingFieldsPosition == StartingFieldsPosition.TOP) {
+        	    	sixArmBoardModel.players.add(this);
+                    sixArmBoardModel.setCurrentPlayer(this);
+                    this.opponents = new ArrayList<CCPlayer>();
+                    output.println("MESSAGE Waiting for opponent to connect");
+        		}else if (startingFieldsPosition == StartingFieldsPosition.BOTTOM_RIGHT){
+        			sixArmBoardModel.players.add(this);
+        			this.opponents = new ArrayList<CCPlayer>();
+                    sixArmBoardModel.setCurrentPlayer(this);
+                } else if(startingFieldsPosition == StartingFieldsPosition.BOTTOM_LEFT){
+        	        // assign the opponents
+                	sixArmBoardModel.players.add(this);
+     	        	this.opponents = new ArrayList<CCPlayer>();
+
+     	        	this.setNextPlayer(sixArmBoardModel.players.get(0));
+     	        	this.nextPlayer.setNextPlayer(sixArmBoardModel.players.get(1));
+     	        	
+     	        	this.nextPlayer.nextPlayer.setNextPlayer(this);
+
+     	        	CCPlayer player = this;
+     	        	//adding players to array List of opponents
+     	        	for(int j =0; j<3; j++) {
+	     	        	
+	     	        	CCPlayer playerToAdd = player.nextPlayer;
+	     	        	for(int i =0; i < 2 ;i ++) {
+	     	        	
+	     	        		
+	     	        		player.opponents.add(playerToAdd);
+	     	        		playerToAdd = playerToAdd.nextPlayer;
+	     	        	}
+	     	        	player = player.nextPlayer;
+     	        	}
+
+                    int random = new Random().nextInt(3);
+                    sixArmBoardModel.setCurrentPlayer(sixArmBoardModel.players.get(random));
+                    sixArmBoardModel.getCurrentPlayer().output.println("BEGIN");
+                    
+                }
+        	    break;
+        		
+        		
         	case 4:
                 if (startingFieldsPosition == StartingFieldsPosition.BOTTOM_RIGHT) {
                     sixArmBoardModel.setCurrentPlayer(this);

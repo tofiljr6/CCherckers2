@@ -27,6 +27,9 @@ public class SixArmBoardPreparer {
 			setUpBoardFor2Players(hashMap, board);
 			break;
 		
+		case 3:
+			setUpBoardFor3Players(hashMap,board);
+			break;
 		case 4:
 			setUpBoardFor4Players(hashMap, board);
 			break;
@@ -83,6 +86,36 @@ public class SixArmBoardPreparer {
 //	
 //		hashMap.get(new Coordinates(16,4 )).setFieldColor(PawnColors.GREEN);
 	}
+	
+	public void setUpBoardFor3Players(HashMap<Coordinates, FieldModel> hashMap, SixArmBoard board) {
+		//blue player
+		
+		ArrayList<Coordinates> topStartingFields = board.getStartingFields(StartingFieldsPosition.TOP);
+		PawnColors topColor = board.getColorFromStartingPosition(StartingFieldsPosition.TOP);
+		
+		for(int i =0 ;i< topStartingFields.size();i++) {
+			hashMap.get(topStartingFields.get(i)).setFieldColor(topColor);
+		}
+		
+		//magenta player
+		ArrayList<Coordinates> bottomRightStartingFields = board.getStartingFields(StartingFieldsPosition.BOTTOM_RIGHT);
+		PawnColors bottomRightColor = board.getColorFromStartingPosition(StartingFieldsPosition.BOTTOM_RIGHT);
+		for(int i =0 ;i< bottomRightStartingFields.size();i++) {
+			hashMap.get(bottomRightStartingFields.get(i)).setFieldColor(bottomRightColor);
+		}
+		
+		
+		//cyan player
+		
+		
+		ArrayList<Coordinates> bottomLeftStartingFields = board.getStartingFields(StartingFieldsPosition.BOTTOM_LEFT);
+		PawnColors bottomLeftColor = board.getColorFromStartingPosition(StartingFieldsPosition.BOTTOM_LEFT);
+		for(int i =0 ;i< bottomLeftStartingFields.size();i++) {
+		hashMap.get(bottomLeftStartingFields.get(i)).setFieldColor(bottomLeftColor);
+		}
+	
+	}
+	
 	/**
 	 * setting up given fields
 	 * @param hashMap hashmap on which operations are performed
