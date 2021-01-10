@@ -124,7 +124,7 @@ public class SixArmBoardPreparer {
 		hashMap.get(bottomLeftStartingFields.get(i)).setFieldColor(bottomLeftColor);
 		}
 		
-		
+		//commented stuff to check winning condition
 //		hashMap.get(new Coordinates(3,9)).setFieldColor(PawnColors.RED);
 //		hashMap.get(new Coordinates(4,10)).setFieldColor(PawnColors.RED);
 //		hashMap.get(new Coordinates(5,11)).setFieldColor(PawnColors.RED);
@@ -135,8 +135,8 @@ public class SixArmBoardPreparer {
 //		hashMap.get(new Coordinates(1,11)).setFieldColor(PawnColors.RED);
 //		hashMap.get(new Coordinates(2,12)).setFieldColor(PawnColors.RED);
 //		hashMap.get(new Coordinates(0,12)).setFieldColor(PawnColors.RED);
-		
-		//delete this after
+//		
+//	
 //		hashMap.get(new Coordinates(8,12)).setFieldColor(PawnColors.MAGENTA);
 	}
 	/**

@@ -97,15 +97,16 @@ public class SixArmBoardGUIPreparer {
 			}
 			
 			
-			//delete this after
-//			hashMap.get(new Coordinates(8,12)).changeColor(Color.magenta);
+
 			//cyan player
 			ArrayList<Coordinates> bottomLeftPlayerStartingFields = sixArmBoard.getStartingFields(StartingFieldsPosition.BOTTOM_LEFT);
 			for(int i=0; i< bottomLeftPlayerStartingFields.size(); i++) {
 				hashMap.get(bottomLeftPlayerStartingFields.get(i)).changeColor(Color.CYAN);
 			}
-//			
-//
+
+			//commentted stuff co check win condition
+			
+//			hashMap.get(new Coordinates(8,12)).changeColor(Color.magenta);
 //			hashMap.get(new Coordinates(3,9)).changeColor(Color.RED);
 //			hashMap.get(new Coordinates(4,10)).changeColor(Color.RED);
 //			hashMap.get(new Coordinates(5,11)).changeColor(Color.RED);

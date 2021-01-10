@@ -221,7 +221,7 @@ public class CCLient {
                 else if (response.startsWith("CONGRATULATION")) {
                     // you are winner - case
                 	g.setMessageLabel(response);
-                	
+                	g.counter=3;
 //                	break; // HOW I GET WRITE THIS !!
                 }
                 else if(response.startsWith("BEGIN")) {
