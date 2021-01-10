@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="586.5" y="0.0">GUI.SixArmBoardGUI</node>
+    <node x="147.05208333333337" y="0.0">Server2.CCPlayer</node>
+    <node x="0.0" y="308.0">model.SixArmBoardModel</node>
+    <node x="295.75" y="704.0">Server2.CCServer</node>
+    <node x="645.5" y="110.0">Client2.CCLient</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Client2.CCLient" target="GUI.SixArmBoardGUI">
+      <point x="41.5" y="-41.0" />
+      <point x="770.0" y="85.0" />
+      <point x="799.5" y="85.0" />
+      <point x="71.0" y="30.0" />
+    </edge>
+    <edge source="model.SixArmBoardModel" target="Server2.CCPlayer">
+      <point x="0.0" y="-173.0" />
+      <point x="252.5" y="288.0" />
+      <point x="293.71875" y="288.0" />
+      <point x="-29.333333333333343" y="129.0" />
+    </edge>
+    <edge source="Server2.CCServer" target="model.SixArmBoardModel">
+      <point x="-55.33333333333337" y="-30.0" />
+      <point x="323.41666666666663" y="679.0" />
+      <point x="126.25" y="679.0" />
+      <point x="-126.25" y="173.0" />
+    </edge>
+    <edge source="Server2.CCServer" target="Server2.CCPlayer">
+      <point x="55.333333333333314" y="-30.0" />
+      <point x="434.08333333333337" y="679.0" />
+      <point x="515.5" y="679.0" />
+      <point x="515.5" y="288.0" />
+      <point x="469.71874999999994" y="288.0" />
+      <point x="146.66666666666657" y="129.0" />
+    </edge>
+    <edge source="Server2.CCPlayer" target="model.SixArmBoardModel">
+      <point x="87.99999999999994" y="129.0" />
+      <point x="411.0520833333333" y="288.0" />
+      <point x="454.5" y="288.0" />
+      <point x="202.0" y="-173.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.6000000000000005" x="473.9374999999998" y="399.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
