@@ -36,34 +36,34 @@ public class CCServer {
                         // game to two players
                         sixArmBoardModel = new SixArmBoardModel(sixArmBoard,2);
 
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.BLUE, StartingFieldsPosition.TOP, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.GREEN,StartingFieldsPosition.BOTTOM, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.TOP, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.BOTTOM, listener.accept()));
                         break;
                     case 3:
                     	sixArmBoardModel = new SixArmBoardModel(sixArmBoard,3);
-                    	pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.BLUE, StartingFieldsPosition.TOP, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.MAGENTA, StartingFieldsPosition.BOTTOM_RIGHT, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.CYAN, StartingFieldsPosition.BOTTOM_LEFT ,listener.accept()));
+                    	pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.TOP, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.BOTTOM_RIGHT, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.BOTTOM_LEFT ,listener.accept()));
                         break;
                     case 4:
                         // game to four players
                         sixArmBoardModel = new SixArmBoardModel(sixArmBoard,4);
 
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.MAGENTA, StartingFieldsPosition.BOTTOM_RIGHT, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.CYAN, StartingFieldsPosition.BOTTOM_LEFT ,listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.YELLOW, StartingFieldsPosition.UPPER_LEFT ,listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.RED, StartingFieldsPosition.UPPER_RIGHT,listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.BOTTOM_RIGHT, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.BOTTOM_LEFT ,listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.UPPER_LEFT ,listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel, StartingFieldsPosition.UPPER_RIGHT,listener.accept()));
                         break;
                     case 6:
                         // game to six players
                         sixArmBoardModel = new SixArmBoardModel(sixArmBoard,6);
 
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.BLUE, StartingFieldsPosition.TOP, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.RED, StartingFieldsPosition.UPPER_RIGHT,listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.MAGENTA, StartingFieldsPosition.BOTTOM_RIGHT, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.GREEN,StartingFieldsPosition.BOTTOM, listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.CYAN, StartingFieldsPosition.BOTTOM_LEFT ,listener.accept()));
-                        pool.execute(new CCPlayer(sixArmBoardModel, PawnColors.YELLOW, StartingFieldsPosition.UPPER_LEFT ,listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel,StartingFieldsPosition.TOP, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel,StartingFieldsPosition.UPPER_RIGHT,listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel,StartingFieldsPosition.BOTTOM_RIGHT, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel,StartingFieldsPosition.BOTTOM, listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel,StartingFieldsPosition.BOTTOM_LEFT ,listener.accept()));
+                        pool.execute(new CCPlayer(sixArmBoardModel,StartingFieldsPosition.UPPER_LEFT ,listener.accept()));
                         break;
 
 

@@ -311,7 +311,10 @@ public class SixArmBoardModel extends BoardModel {
 	public HashMap<Coordinates, FieldModel> getHashMap() {
 		return hashMap;
 	}
-
+	public SixArmBoard getBoard() {
+		return board;
+	}
+	
 	/**
 	 * 
 	 * method which returns if field is taken

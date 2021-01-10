@@ -48,11 +48,12 @@ public class CCPlayer implements Runnable {
      * @param color player color
      * @param socket in which socker the game is played
      */
-    public CCPlayer(SixArmBoardModel sixArmBoardModel, Colors color,StartingFieldsPosition startingFieldPosition, Socket socket) {
+    public CCPlayer(SixArmBoardModel sixArmBoardModel, StartingFieldsPosition startingFieldPosition, Socket socket) {
         // initialized variables
+    	
     	this.startingFieldsPosition = startingFieldPosition;
         this.sixArmBoardModel = sixArmBoardModel;
-        this.color = color;
+        this.color = sixArmBoardModel.getBoard().getColorFromStartingPosition(startingFieldPosition);
         this.socket = socket;
     }
 

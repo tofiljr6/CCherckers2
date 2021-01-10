@@ -62,7 +62,7 @@ public class CCLient {
             var response = in.nextLine();
 //          var color = response.substring(6);
             String c = response.substring(8);
-
+            g.frame.setTitle(c);
             // current player color
             Color currentPlayerColor;
             Color playerColor;
