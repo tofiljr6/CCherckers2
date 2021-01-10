@@ -121,6 +121,7 @@ public class CCLient {
                     int yEnd = Integer.parseInt(cmd[4]);
                     currentPlayerColor = colorInterpreter.interprateColors(cmd[5]);
                     String nextPlayerColor = cmd[6];
+                    boolean moveAgain = Boolean.parseBoolean(cmd[7]);
                     // OPPONENT_MOVE command sends with params
                     // we convert it to integer and set to graphics
                     g.setColorRe(xEnd , yEnd, currentPlayerColor);
@@ -128,7 +129,11 @@ public class CCLient {
                     g.re();
                   
                     // set good label
-                    g.setMessageLabel("Opponent moved, " + nextPlayerColor + " turn");
+                    if (!moveAgain) {
+                        g.setMessageLabel("Opponent moved, " + nextPlayerColor + " turn");
+                    } else {
+                        g.setMessageLabel("Opponent moved");
+                    }
                 } else if (response.startsWith("MESSAGE")) {
                     // this coomand handle all warings. start from 8 char
                     out.println(response.substring(8));

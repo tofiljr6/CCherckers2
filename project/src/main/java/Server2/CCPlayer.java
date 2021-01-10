@@ -394,13 +394,16 @@ public class CCPlayer implements Runnable {
             }
         }
 
+        boolean moveAgain = false;
         if (surroundings) {
             output.println("MOVE_AGAIN");
+            moveAgain = true;
         } else {
             // set that we dont have one more move, clear previous hints and set next player
             output.println("NO_MOVE_AGAIN");
             output.println("CLEAR_HINTS");
             sixArmBoardModel.setCurrentPlayer(nextPlayer);
+            moveAgain = false;
         }
 
         // remember x and y coords to next move
@@ -409,7 +412,7 @@ public class CCPlayer implements Runnable {
 
         // sends communication to opponents about player movement
         for (CCPlayer ccplayer : opponents) {
-            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color+ " "+ this.nextPlayer.color);
+            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color+ " "+ this.nextPlayer.color + " " + moveAgain);
         }
     }
 
@@ -459,10 +462,12 @@ public class CCPlayer implements Runnable {
 
                         // sends communication to client - player
                         output.println("VALID_MOVE " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " not");
-                      
+
+                        boolean moveAgain = false;
+
                         // sends communication to client - opponents
                         for (CCPlayer ccplayer : opponents) {
-                            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color + " "+ this.nextPlayer.color);
+                            ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color + " "+ this.nextPlayer.color + " "+ moveAgain);
                             System.out.print(ccplayer.color);
                         }
                     }
