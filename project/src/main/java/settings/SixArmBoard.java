@@ -132,10 +132,10 @@ public class SixArmBoard extends Board {
 		opponents.put(StartingFieldsPosition.BOTTOM_RIGHT,StartingFieldsPosition.UPPER_LEFT);
 		
 		colorsForPosition = new HashMap<>();
-		colorsForPosition.put(StartingFieldsPosition.TOP, PawnColors.BLUE);
+		colorsForPosition.put(StartingFieldsPosition.TOP, PawnColors.RED);
 		colorsForPosition.put(StartingFieldsPosition.UPPER_RIGHT, PawnColors.RED);
 		colorsForPosition.put(StartingFieldsPosition.BOTTOM_RIGHT, PawnColors.CYAN);
-		colorsForPosition.put(StartingFieldsPosition.BOTTOM, PawnColors.GREEN);
+		colorsForPosition.put(StartingFieldsPosition.BOTTOM, PawnColors.BLUE);
 		colorsForPosition.put(StartingFieldsPosition.BOTTOM_LEFT, PawnColors.MAGENTA);
 		colorsForPosition.put(StartingFieldsPosition.UPPER_LEFT, PawnColors.YELLOW);
 	}

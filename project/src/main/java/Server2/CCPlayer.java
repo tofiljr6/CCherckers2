@@ -468,7 +468,7 @@ public class CCPlayer implements Runnable {
                         // sends communication to client - opponents
                         for (CCPlayer ccplayer : opponents) {
                             ccplayer.output.println("OPPONENT_MOVED " + xStart + " " + yStart + " " + xEnd + " " + yEnd + " " +this.color + " "+ this.nextPlayer.color + " "+ moveAgain);
-                            System.out.print(ccplayer.color);
+              
                         }
                     }
                 }
